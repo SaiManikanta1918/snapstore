@@ -1,3 +1,3 @@
 # Fullstack Snapstore
 
-### Built With React, Firebase && Chakra UI
+### Built With React, Firebase and Chakra UI
