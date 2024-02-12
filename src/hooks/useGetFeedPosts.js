@@ -16,11 +16,11 @@ const useGetFeedPosts = () => {
   useEffect(() => {
     const getFeedPosts = async () => {
       setIsLoading(true);
-      if (authUser.following.length === 0) {
-        setIsLoading(false);
-        setPosts([]);
-        return;
-      }
+      // if (authUser.following.length === 0) {
+      //   setIsLoading(false);
+      //   setPosts([]);
+      //   return;
+      // }
       // const q = query(collection(firestore, "posts"), where("createdBy", "in", authUser.following));
       const q = query(collection(firestore, "posts"));
 
@@ -48,6 +48,7 @@ const useGetFeedPosts = () => {
 };
 
 export default useGetFeedPosts;
+
 
 
 

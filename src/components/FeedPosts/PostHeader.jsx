@@ -1,22 +1,15 @@
 import {
   Avatar,
   Box,
-  Button,
   Flex,
   Skeleton,
   SkeletonCircle,
   Text,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import useFollowUser from "../../hooks/useFollowUser";
 import { timeAgo } from "../../utils/timeAgo";
 
 const PostHeader = ({ post, isProfilePage, creatorProfile }) => {
-  const { handleFollowUser, isFollowing, isUpdating, authUser } = useFollowUser(
-    post.createdBy
-  );
-  console.log("creatorProfile", authUser?.uid, post?.createdBy);
-
   return (
     <>
       <Flex
@@ -30,6 +23,7 @@ const PostHeader = ({ post, isProfilePage, creatorProfile }) => {
             <Link to={`/${creatorProfile.username}`}>
               <Avatar
                 src={creatorProfile.profilePicURL}
+                name={creatorProfile.fullName}
                 alt="user profile pic"
                 size={"sm"}
               />
@@ -50,7 +44,7 @@ const PostHeader = ({ post, isProfilePage, creatorProfile }) => {
             <Box color={"gray.500"}>• {timeAgo(post.createdAt)}</Box>
           </Flex>
         </Flex>
-        {authUser?.uid !== post?.createdBy && (
+        {/* {authUser?.uid !== post?.createdBy && (
           <Box cursor={"pointer"}>
             <Button
               size={"xs"}
@@ -68,7 +62,7 @@ const PostHeader = ({ post, isProfilePage, creatorProfile }) => {
               {isFollowing ? "Unfollow" : "Follow"}
             </Button>
           </Box>
-        )}
+        )} */}
       </Flex>
       {!isProfilePage && (
         <Box py={2}>
@@ -82,4 +76,8 @@ const PostHeader = ({ post, isProfilePage, creatorProfile }) => {
 };
 
 export default PostHeader;
+
+
+
+
 

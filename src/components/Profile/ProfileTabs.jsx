@@ -43,7 +43,7 @@ const ProfileTabs = () => {
     </Flex>
   );
   return (
-    <Tabs variant="enclosed" defaultIndex={1}>
+    <Tabs variant="enclosed" defaultIndex={0}>
       <TabList>
         <Tab>
           <PostsTab />
@@ -67,4 +67,5 @@ const ProfileTabs = () => {
 };
 
 export default ProfileTabs;
+
 

@@ -6,7 +6,7 @@ const FeedPosts = () => {
   const { isLoading, posts } = useGetFeedPosts();
 
   return (
-    <Container maxW={"container.sm"} px={10}>
+    <Container maxW={"container.sm"} px={{ md: 10 }}>
       {isLoading &&
         [0, 1, 2].map((_, idx) => (
           <VStack key={idx} gap={4} alignItems={"flex-start"} mb={10}>
@@ -28,10 +28,9 @@ const FeedPosts = () => {
         posts.map((post) => <FeedPost key={post.id} post={post} />)}
       {!isLoading && posts.length === 0 && (
         <>
-          <Text fontSize={"md"} color={"red.400"}>
-            Dayuum. Looks like you don&apos;t have any friends.
+          <Text fontSize={"md"} color={"white.400"}>
+            No Posts found, please start by creating posts.
           </Text>
-          <Text color={"red.400"}>Stop coding and go make some!!</Text>
         </>
       )}
     </Container>
@@ -39,6 +38,8 @@ const FeedPosts = () => {
 };
 
 export default FeedPosts;
+
+
 
 
 
