@@ -20,7 +20,7 @@ const PostHeader = ({ post, isProfilePage, creatorProfile }) => {
       >
         <Flex alignItems={"center"} gap={2}>
           {creatorProfile ? (
-            <Link to={`/${creatorProfile.username}`}>
+            <Link to={`/user/${creatorProfile.uid}`}>
               <Avatar
                 src={creatorProfile.profilePicURL}
                 name={creatorProfile.fullName}
@@ -34,7 +34,7 @@ const PostHeader = ({ post, isProfilePage, creatorProfile }) => {
 
           <Flex fontSize={12} fontWeight={"bold"} gap="2">
             {creatorProfile ? (
-              <Link to={`/${creatorProfile.username}`}>
+              <Link to={`/user/${creatorProfile.uid}`}>
                 {creatorProfile.username}
               </Link>
             ) : (
@@ -76,6 +76,9 @@ const PostHeader = ({ post, isProfilePage, creatorProfile }) => {
 };
 
 export default PostHeader;
+
+
+
 
 
 

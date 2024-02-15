@@ -4,7 +4,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { firestore } from "../firebase/firebase";
 import useUserProfileStore from "../store/userProfileStore";
 
-const useGetUserProfileByUsername = (username) => {
+const useGetUserProfileByUserId = (userId) => {
   const [isLoading, setIsLoading] = useState(true);
   const showToast = useShowToast();
   const { userProfile, setUserProfile } = useUserProfileStore();
@@ -15,7 +15,7 @@ const useGetUserProfileByUsername = (username) => {
       try {
         const q = query(
           collection(firestore, "users"),
-          where("username", "==", username)
+          where("uid", "==", userId)
         );
         const querySnapshot = await getDocs(q);
 
@@ -35,11 +35,17 @@ const useGetUserProfileByUsername = (username) => {
     };
 
     getUserProfile();
-  }, [setUserProfile, username, showToast]);
+  }, [setUserProfile, userId, showToast]);
 
   return { isLoading, userProfile };
 };
 
-export default useGetUserProfileByUsername;
+export default useGetUserProfileByUserId;
+
+
+
+
+
+
 
 

@@ -8,7 +8,7 @@ const Caption = ({ post }) => {
 
   return (
     <Flex gap={4}>
-      <Link to={`/${userProfile.username}`}>
+      <Link to={`/user/${userProfile.uid}`}>
         <Avatar
           src={userProfile.profilePicURL}
           name={userProfile.fullName}
@@ -17,7 +17,7 @@ const Caption = ({ post }) => {
       </Link>
       <Flex direction={"column"}>
         <Flex gap={2} alignItems={"center"}>
-          <Link to={`/${userProfile.username}`}>
+          <Link to={`/user/${userProfile.uid}`}>
             <Text fontWeight={"bold"} fontSize={12}>
               {userProfile.username}
             </Text>
@@ -33,6 +33,9 @@ const Caption = ({ post }) => {
 };
 
 export default Caption;
+
+
+
 
 
 

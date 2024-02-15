@@ -72,19 +72,37 @@ const ProfileHeader = () => {
           )}
         </Flex>
         <Flex alignItems={"center"} gap={{ base: 2, sm: 4 }}>
-          <Text fontSize={{ base: "xs", md: "sm" }}>
+          <Text
+            p={2}
+            borderRadius={6}
+            fontSize={{ base: "xs", md: "sm" }}
+            cursor="pointer"
+            _hover={{ bg: "whiteAlpha.400" }}
+          >
             <Text as="span" fontWeight={"bold"} mr={1}>
               {userProfile.posts.length}
             </Text>
             Posts
           </Text>
-          <Text fontSize={{ base: "xs", md: "sm" }}>
+          <Text
+            p={2}
+            borderRadius={6}
+            fontSize={{ base: "xs", md: "sm" }}
+            cursor="pointer"
+            _hover={{ bg: "whiteAlpha.400" }}
+          >
             <Text as="span" fontWeight={"bold"} mr={1}>
               {userProfile.followers.length}
             </Text>
             Followers
           </Text>
-          <Text fontSize={{ base: "xs", md: "sm" }}>
+          <Text
+            p={2}
+            borderRadius={6}
+            fontSize={{ base: "xs", md: "sm" }}
+            cursor="pointer"
+            _hover={{ bg: "whiteAlpha.400" }}
+          >
             <Text as="span" fontWeight={"bold"} mr={1}>
               {userProfile.following.length}
             </Text>
@@ -104,6 +122,23 @@ const ProfileHeader = () => {
 };
 
 export default ProfileHeader;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

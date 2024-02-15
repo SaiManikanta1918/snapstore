@@ -5,7 +5,7 @@ import SuggestedUsers from "../../components/SuggestedUsers/SuggestedUsers";
 const HomePage = () => {
   return (
     <Box>
-      <Flex gap={20}>
+      <Flex>
         <Box
           flex={1}
           py={5}
@@ -14,7 +14,7 @@ const HomePage = () => {
         >
           <FeedPosts />
         </Box>
-        <Box flex={3} display={{ base: "none", lg: "block" }} maxW={"300px"}>
+        <Box flex={3} display={{ base: "none", lg: "block" }} maxW={"400px"}>
           <SuggestedUsers />
         </Box>
       </Flex>
@@ -22,5 +22,5 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
 
+export default HomePage;

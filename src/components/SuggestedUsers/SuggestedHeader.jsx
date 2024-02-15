@@ -4,22 +4,22 @@ import useAuthStore from "../../store/authStore";
 import { Link } from "react-router-dom";
 
 const SuggestedHeader = () => {
-	const { handleLogout, isLoggingOut } = useLogout();
-	const authUser = useAuthStore((state) => state.user);
+  const { handleLogout, isLoggingOut } = useLogout();
+  const authUser = useAuthStore((state) => state.user);
 
-	if (!authUser) return null;
+  if (!authUser) return null;
 
-	return (
+  return (
     <Flex justifyContent={"space-between"} alignItems={"center"} w={"full"}>
       <Flex alignItems={"center"} gap={2}>
-        <Link to={`${authUser.username}`}>
+        <Link to={`/user/${authUser.uid}`}>
           <Avatar
             size={"lg"}
             src={authUser.profilePicURL}
             name={authUser.fullName}
           />
         </Link>
-        <Link to={`${authUser.username}`}>
+        <Link to={`/user/${authUser.uid}`}>
           <Text fontSize={12} fontWeight={"bold"}>
             {authUser.username}
           </Text>
@@ -43,5 +43,10 @@ const SuggestedHeader = () => {
 };
 
 export default SuggestedHeader;
+
+
+
+
+
 
 

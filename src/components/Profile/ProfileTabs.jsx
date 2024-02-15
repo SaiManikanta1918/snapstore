@@ -20,13 +20,13 @@ import { PROFILE_TABS } from "../../constants";
 
 const ProfileTabs = () => {
   const navigate = useNavigate();
-  const { selectedTab, username } = useParams();
+  const { selectedTab, userId } = useParams();
   const tabIndex = PROFILE_TABS.findIndex((tab) => tab.name === selectedTab);
   const [selectedTabIndex, setSelectedTabIndex] = useState(
     tabIndex > -1 ? tabIndex : 0
   );
   function onTabChage(index) {
-    navigate(`/${username}/${PROFILE_TABS[index].name}`);
+    navigate(`/user/${userId}/${PROFILE_TABS[index].name}`);
     setSelectedTabIndex(index);
   }
   const userProfile = useUserProfileStore((state) => state.userProfile);
@@ -98,6 +98,11 @@ const ProfileTabs = () => {
     </Tabs>
   );
 };
+
+
+
+
+
 
 
 export default ProfileTabs;
