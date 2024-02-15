@@ -10,8 +10,15 @@ import {
 } from "@chakra-ui/react";
 import { BsBookmark, BsGrid3X3, BsSuitHeart } from "react-icons/bs";
 import ProfilePosts from "./ProfilePosts";
+import LikedPosts from "./LikedPosts";
+import SavedPosts from "./SavedPosts";
+import useUserProfileStore from "../../store/userProfileStore";
+import useAuthStore from "../../store/authStore";
 
 const ProfileTabs = () => {
+  const userProfile = useUserProfileStore((state) => state.userProfile);
+  const authUser = useAuthStore((state) => state.user);
+  console.log("userProfile", userProfile, authUser);
   const PostsTab = () => (
     <Flex alignItems={"center"} p="3" gap={4} cursor={"pointer"}>
       <Box fontSize={20}>
@@ -48,24 +55,33 @@ const ProfileTabs = () => {
         <Tab>
           <PostsTab />
         </Tab>
-        <Tab>
-          <SavesTab />
-        </Tab>
-        <Tab>
-          <LikesTab />
-        </Tab>
+        {authUser?.uid === userProfile.uid && (
+          <Tab>
+            <LikesTab />
+          </Tab>
+        )}
+        {authUser?.uid === userProfile.uid && (
+          <Tab>
+            <SavesTab />
+          </Tab>
+        )}
       </TabList>
       <TabPanels>
         <TabPanel>
           <ProfilePosts />
         </TabPanel>
-        <TabPanel>Tab2</TabPanel>
-        <TabPanel>Tab3</TabPanel>
+        <TabPanel>
+          <LikedPosts />
+        </TabPanel>
+        <TabPanel>
+          <SavedPosts />
+        </TabPanel>
       </TabPanels>
     </Tabs>
   );
 };
 
 export default ProfileTabs;
+
 
 

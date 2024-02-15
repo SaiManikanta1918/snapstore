@@ -43,3 +43,4 @@ const useGetUserPosts = () => {
 };
 
 export default useGetUserPosts;
+

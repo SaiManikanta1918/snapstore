@@ -5,7 +5,6 @@ import { doc, getDoc } from "firebase/firestore";
 import useAuthStore from "../store/authStore";
 
 const useLogin = () => {
-  console.log("use login", auth, firestore);
   const showToast = useShowToast();
   const [signInWithEmailAndPassword, , loading, error] =
     useSignInWithEmailAndPassword(auth);
@@ -20,13 +19,10 @@ const useLogin = () => {
         inputs.email,
         inputs.password
       );
-      console.log("userCred", userCred);
       if (userCred) {
         const docRef = doc(firestore, "users", userCred.user.uid);
-        console.log("docRef", docRef);
 
         const docSnap = await getDoc(docRef);
-        console.log("docSnap", docSnap);
 
         localStorage.setItem("user-info", JSON.stringify(docSnap.data()));
         loginUser(docSnap.data());
@@ -40,6 +36,7 @@ const useLogin = () => {
 };
 
 export default useLogin;
+
 
 
 

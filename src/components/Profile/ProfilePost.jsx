@@ -30,7 +30,6 @@ import usePostStore from "../../store/postStore";
 import Caption from "../Comment/Caption";
 
 const ProfilePost = ({ post }) => {
-  console.log("post", post.id);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const userProfile = useUserProfileStore((state) => state.userProfile);
   const authUser = useAuthStore((state) => state.user);
@@ -202,6 +201,7 @@ const ProfilePost = ({ post }) => {
 };
 
 export default ProfilePost;
+
 
 
 
