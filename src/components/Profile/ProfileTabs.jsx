@@ -1,6 +1,7 @@
 import {
   Box,
   Flex,
+  Spinner,
   Tab,
   TabList,
   TabPanel,
@@ -49,18 +50,20 @@ const ProfileTabs = () => {
       </Text>
     </Flex>
   );
-  return (
+  return !userProfile || !authUser ? (
+    <Spinner />
+  ) : (
     <Tabs variant="enclosed" defaultIndex={0}>
       <TabList>
         <Tab>
           <PostsTab />
         </Tab>
-        {authUser?.uid === userProfile.uid && (
+        {authUser?.uid === userProfile?.uid && (
           <Tab>
             <LikesTab />
           </Tab>
         )}
-        {authUser?.uid === userProfile.uid && (
+        {authUser?.uid === userProfile?.uid && (
           <Tab>
             <SavesTab />
           </Tab>
@@ -82,6 +85,8 @@ const ProfileTabs = () => {
 };
 
 export default ProfileTabs;
+
+
 
 
 
