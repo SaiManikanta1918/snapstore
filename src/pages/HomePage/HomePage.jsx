@@ -1,10 +1,10 @@
-import { Box, Container, Flex } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import FeedPosts from "../../components/FeedPosts/FeedPosts";
 import SuggestedUsers from "../../components/SuggestedUsers/SuggestedUsers";
 
 const HomePage = () => {
   return (
-    <Container maxW={"container.xl"}>
+    <Box>
       <Flex gap={20}>
         <Box
           flex={1}
@@ -18,19 +18,9 @@ const HomePage = () => {
           <SuggestedUsers />
         </Box>
       </Flex>
-    </Container>
+    </Box>
   );
 };
 
 export default HomePage;
-
-
-
-
-
-
-
-
-
-
 

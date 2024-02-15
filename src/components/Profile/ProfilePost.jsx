@@ -1,22 +1,20 @@
 import {
-	Avatar,
-	Button,
-	Divider,
-	Flex,
-	GridItem,
-	Image,
-	Modal,
-	ModalBody,
-	ModalCloseButton,
-	ModalContent,
-	ModalOverlay,
-	Text,
-	VStack,
-	useDisclosure,
+  Avatar,
+  Divider,
+  Flex,
+  GridItem,
+  Image,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalOverlay,
+  Text,
+  VStack,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { AiFillHeart } from "react-icons/ai";
 import { FaComment } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
 import Comment from "../Comment/Comment";
 import PostFooter from "../FeedPosts/PostFooter";
 import useUserProfileStore from "../../store/userProfileStore";
@@ -28,6 +26,7 @@ import { firestore, storage } from "../../firebase/firebase";
 import { arrayRemove, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import usePostStore from "../../store/postStore";
 import Caption from "../Comment/Caption";
+import DeleteAlert from "../common/DeleteAlert";
 
 const ProfilePost = ({ post }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -39,8 +38,7 @@ const ProfilePost = ({ post }) => {
   const decrementPostsCount = useUserProfileStore((state) => state.deletePost);
 
   const handleDeletePost = async () => {
-    if (!window.confirm("Are you sure you want to delete this post?")) return;
-    if (isDeleting) return;
+    setIsDeleting(true);
 
     try {
       const imageRef = ref(storage, `posts/${post.id}`);
@@ -160,17 +158,10 @@ const ProfilePost = ({ post }) => {
                   </Flex>
 
                   {authUser?.uid === userProfile.uid && (
-                    <Button
-                      size={"sm"}
-                      bg={"transparent"}
-                      _hover={{ bg: "whiteAlpha.300", color: "red.600" }}
-                      borderRadius={4}
-                      p={1}
-                      onClick={handleDeletePost}
-                      isLoading={isDeleting}
-                    >
-                      <MdDelete size={20} cursor="pointer" />
-                    </Button>
+                    <DeleteAlert
+                      deleteItem={handleDeletePost}
+                      isDeleting={isDeleting}
+                    />
                   )}
                 </Flex>
                 <Divider my={4} bg={"gray.500"} />
@@ -181,9 +172,7 @@ const ProfilePost = ({ post }) => {
                   maxH={"350px"}
                   overflowY={"auto"}
                 >
-                  {/* CAPTION */}
                   {post.caption && <Caption post={post} />}
-                  {/* COMMENTS */}
                   {post.comments.map((comment) => (
                     <Comment key={comment.id} comment={comment} />
                   ))}
@@ -201,6 +190,9 @@ const ProfilePost = ({ post }) => {
 };
 
 export default ProfilePost;
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, Skeleton, Text, VStack } from "@chakra-ui/react";
+import { Box, Flex, Grid, Spinner, Text } from "@chakra-ui/react";
 import ProfilePost from "./ProfilePost";
 import useGetSavedPosts from "../../hooks/useGetSavedPosts";
 
@@ -7,6 +7,14 @@ const SavedPosts = () => {
 
   const noPostsFound = !isLoading && savedPosts.length === 0;
   if (noPostsFound) return <NoPostsFound />;
+
+  if (isLoading) {
+    return (
+      <Box textAlign="center">
+        <Spinner />
+      </Box>
+    );
+  }
 
   return (
     <Grid
@@ -17,22 +25,18 @@ const SavedPosts = () => {
       gap={10}
       columnGap={10}
     >
-      {isLoading &&
+      {/* {isLoading &&
         [0, 1, 2].map((_, idx) => (
           <VStack key={idx} alignItems={"flex-start"} gap={4}>
             <Skeleton w={"full"}>
               <Box h="300px">contents wrapped</Box>
             </Skeleton>
           </VStack>
-        ))}
+        ))} */}
 
-      {!isLoading && (
-        <>
-          {savedPosts.map((post) => (
-            <ProfilePost post={post} key={post.id} />
-          ))}
-        </>
-      )}
+      {savedPosts.map((post) => (
+        <ProfilePost post={post} key={post.id} />
+      ))}
     </Grid>
   );
 };

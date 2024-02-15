@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, Skeleton, Text, VStack } from "@chakra-ui/react";
+import { Box, Flex, Grid, Spinner, Text } from "@chakra-ui/react";
 import ProfilePost from "./ProfilePost";
 import useGetLikedPosts from "../../hooks/useGetLikedPosts";
 
@@ -7,6 +7,13 @@ const LikedPosts = () => {
 
   const noPostsFound = !isLoading && likedPosts.length === 0;
   if (noPostsFound) return <NoPostsFound />;
+  if (isLoading) {
+    return (
+      <Box textAlign="center">
+        <Spinner />
+      </Box>
+    );
+  }
 
   return (
     <Grid
@@ -17,7 +24,7 @@ const LikedPosts = () => {
       gap={10}
       columnGap={10}
     >
-      {isLoading &&
+      {/* {isLoading &&
         [0, 1, 2].map((_, idx) => (
           <VStack key={idx} alignItems={"flex-start"} gap={4}>
             <Skeleton w={"full"}>
@@ -27,12 +34,12 @@ const LikedPosts = () => {
         ))}
 
       {!isLoading && (
-        <>
-          {likedPosts.map((post) => (
-            <ProfilePost post={post} key={post.id} />
-          ))}
-        </>
-      )}
+        <> */}
+      {likedPosts.map((post) => (
+        <ProfilePost post={post} key={post.id} />
+      ))}
+      {/* </>
+      )} */}
     </Grid>
   );
 };

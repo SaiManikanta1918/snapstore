@@ -1,7 +1,6 @@
 import {
   Box,
   Flex,
-  Spinner,
   Tab,
   TabList,
   TabPanel,
@@ -15,8 +14,21 @@ import LikedPosts from "./LikedPosts";
 import SavedPosts from "./SavedPosts";
 import useUserProfileStore from "../../store/userProfileStore";
 import useAuthStore from "../../store/authStore";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import { PROFILE_TABS } from "../../constants";
 
 const ProfileTabs = () => {
+  const navigate = useNavigate();
+  const { selectedTab, username } = useParams();
+  const tabIndex = PROFILE_TABS.findIndex((tab) => tab.name === selectedTab);
+  const [selectedTabIndex, setSelectedTabIndex] = useState(
+    tabIndex > -1 ? tabIndex : 0
+  );
+  function onTabChage(index) {
+    navigate(`/${username}/${PROFILE_TABS[index].name}`);
+    setSelectedTabIndex(index);
+  }
   const userProfile = useUserProfileStore((state) => state.userProfile);
   const authUser = useAuthStore((state) => state.user);
   console.log("userProfile", userProfile, authUser);
@@ -50,10 +62,13 @@ const ProfileTabs = () => {
       </Text>
     </Flex>
   );
-  return !userProfile || !authUser ? (
-    <Spinner />
-  ) : (
-    <Tabs variant="enclosed" defaultIndex={0}>
+  return (
+    <Tabs
+      variant="enclosed"
+      defaultIndex={selectedTabIndex}
+      onChange={(index) => onTabChage(index)}
+      isLazy
+    >
       <TabList>
         <Tab>
           <PostsTab />
@@ -84,9 +99,5 @@ const ProfileTabs = () => {
   );
 };
 
+
 export default ProfileTabs;
-
-
-
-
-
