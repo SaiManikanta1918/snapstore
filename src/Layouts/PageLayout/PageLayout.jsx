@@ -17,9 +17,9 @@ const PageLayout = ({ children }) => {
   if (checkingUserIsAuth) return <PageLayoutSpinner />;
 
   return (
-    <div className="flex" style={{ width: "100%", height: "inherit" }}>
+    <div style={{ width: "100%" }}>
       {user && <Topbar />}
-      <section style={{ height: "inherit" }}>
+      <section>
         <Flex flexDir={canRenderNavbar ? "column" : "row"}>
           {canRenderSidebar ? (
             <Box
@@ -58,7 +58,5 @@ const PageLayoutSpinner = () => {
       <Spinner size="xl" />
     </Flex>
   );
-
-
 
 };
