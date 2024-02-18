@@ -29,7 +29,7 @@ const FeedPosts = () => {
       {!isLoading && posts.length === 0 && (
         <>
           <Text fontSize={"md"} color={"white.400"}>
-            No Posts found, please start by creating posts.
+            No Posts found, please stop coding and start by creating posts.
           </Text>
         </>
       )}
@@ -38,6 +38,10 @@ const FeedPosts = () => {
 };
 
 export default FeedPosts;
+
+
+
+
 
 
 

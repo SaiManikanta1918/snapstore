@@ -5,8 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/firebase";
 import Navbar from "../../components/Navbar/Navbar";
 import Bottombar from "../../components/Bottombar/Bottombar";
-
-// instead of adding the Sidebar component to every page, we can add it only once to the PageLayout component and wrap the children with it. This way, we can have a sidebar on every page except the AuthPage.
+import Topbar from "../../components/Topbar/Topbar";
 
 const PageLayout = ({ children }) => {
   const { pathname } = useLocation();
@@ -18,30 +17,31 @@ const PageLayout = ({ children }) => {
   if (checkingUserIsAuth) return <PageLayoutSpinner />;
 
   return (
-    <>
-      <Flex flexDir={canRenderNavbar ? "column" : "row"}>
-        {/* sidebar on the left */}
-        {canRenderSidebar ? (
+    <div className="flex" style={{ width: "100%", height: "inherit" }}>
+      {user && <Topbar />}
+      <section style={{ height: "inherit" }}>
+        <Flex flexDir={canRenderNavbar ? "column" : "row"}>
+          {canRenderSidebar ? (
+            <Box
+              w={{ base: "70px", md: "240px" }}
+              display={{ base: "none", md: "block" }}
+            >
+              <Sidebar />
+            </Box>
+          ) : null}
+          {/* Navbar */}
+          {canRenderNavbar ? <Navbar /> : null}
           <Box
-            w={{ base: "70px", md: "240px" }}
-            display={{ base: "none", md: "block" }}
+            flex={1}
+            w={{ base: "calc(100% - 70px)", md: "calc(100% - 240px)" }}
+            mx={"auto"}
           >
-            <Sidebar />
+            {children}
           </Box>
-        ) : null}
-        {/* Navbar */}
-        {canRenderNavbar ? <Navbar /> : null}
-        {/* the page content on the right */}
-        <Box
-          flex={1}
-          w={{ base: "calc(100% - 70px)", md: "calc(100% - 240px)" }}
-          mx={"auto"}
-        >
-          {children}
-        </Box>
-      </Flex>
-      <Bottombar />
-    </>
+        </Flex>
+      </section>
+      {user && <Bottombar />}
+    </div>
   );
 };
 
@@ -58,10 +58,7 @@ const PageLayoutSpinner = () => {
       <Spinner size="xl" />
     </Flex>
   );
+
+
+
 };
-
-
-
-
-
-

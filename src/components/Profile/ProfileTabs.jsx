@@ -64,7 +64,6 @@ const ProfileTabs = () => {
   );
   return (
     <Tabs
-      variant="enclosed"
       defaultIndex={selectedTabIndex}
       onChange={(index) => onTabChage(index)}
       isLazy
@@ -98,10 +97,6 @@ const ProfileTabs = () => {
     </Tabs>
   );
 };
-
-
-
-
 
 
 
