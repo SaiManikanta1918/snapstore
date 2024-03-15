@@ -90,6 +90,3 @@ const useFollowUser = (userId) => {
 };
 
 export default useFollowUser;
-
-
-

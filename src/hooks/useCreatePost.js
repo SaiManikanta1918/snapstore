@@ -25,7 +25,6 @@ const useCreatePost = () => {
   const { pathname } = useLocation();
 
   const handleCreatePost = async (post) => {
-    console.log("post", post);
     if (isLoading) return;
     if (!post.file) throw new Error("Please select an image");
     setIsLoading(true);
@@ -45,7 +44,6 @@ const useCreatePost = () => {
       const imageRef = ref(storage, `posts/${postDocRef.id}`);
 
       await updateDoc(userDocRef, { posts: arrayUnion(postDocRef.id) });
-      console.log("post", post);
 
       await uploadString(imageRef, post.file, "data_url");
 

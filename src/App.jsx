@@ -6,6 +6,7 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./firebase/firebase";
 import CreatePost from "./components/Sidebar/CreatePost";
+import { Explore } from "./components/Sidebar/Explore";
 
 function App() {
   const [authUser] = useAuthState(auth);
@@ -22,6 +23,9 @@ function App() {
             path="/auth"
             element={!authUser ? <AuthPage /> : <Navigate to="/" />}
           />
+          {/* <Route path="/search" element={<Search />} /> */}
+          <Route path="/explore/:selectedTab?" element={<Explore />} />
+          {/* <Route path="/notifications" element={<Notifications />} /> */}
           <Route path="/user/:userId/:selectedTab?" element={<ProfilePage />} />
           <Route path="/create-post" element={<CreatePost />} />
         </Routes>
@@ -29,5 +33,11 @@ function App() {
     </main>
   );
 }
+
+
+
+
+
+
 
 export default App;

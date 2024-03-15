@@ -69,6 +69,13 @@ const PostHeader = ({ post, isProfilePage, creatorProfile }) => {
           <Text as="span" fontWeight={400}>
             {post.caption}
           </Text>
+          <br />
+          {post.tags &&
+            post.tags.map((tag, index) => (
+              <Text color={"gray"} key={index} as="span" fontWeight={400}>
+                #{tag}
+              </Text>
+            ))}
         </Box>
       )}
     </>
@@ -76,6 +83,7 @@ const PostHeader = ({ post, isProfilePage, creatorProfile }) => {
 };
 
 export default PostHeader;
+
 
 
 

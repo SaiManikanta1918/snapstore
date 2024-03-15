@@ -12,7 +12,12 @@ const ProfilePage = () => {
   const userNotFound = !isLoading && !userProfile;
   if (userNotFound) return <UserNotFound />;
 
-  return (
+  const renderTextOnly = true;
+  return renderTextOnly ? (
+    <Text fontSize={"5xl"} color={"blue.500"}>
+      This page is under construction
+    </Text>
+  ) : (
     <Container maxW="container.lg" py={{ base: 0, md: 5 }}>
       <Flex
         p={{ base: 0, md: 4 }}
@@ -74,6 +79,8 @@ const UserNotFound = () => {
     </Flex>
   );
 };
+
+
 
 
 

@@ -31,7 +31,6 @@ const ProfileTabs = () => {
   }
   const userProfile = useUserProfileStore((state) => state.userProfile);
   const authUser = useAuthStore((state) => state.user);
-  console.log("userProfile", userProfile, authUser);
   const PostsTab = () => (
     <Flex alignItems={"center"} p="3" gap={4} cursor={"pointer"}>
       <Box fontSize={20}>
@@ -97,6 +96,7 @@ const ProfileTabs = () => {
     </Tabs>
   );
 };
+
 
 
 

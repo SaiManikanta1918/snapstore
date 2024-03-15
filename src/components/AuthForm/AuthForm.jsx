@@ -19,8 +19,6 @@ const AuthForm = () => {
           />
 
           {isLogin ? <Login /> : <Signup />}
-
-          {/* ---------------- OR -------------- */}
           <Flex
             alignItems={"center"}
             justifyContent={"center"}
@@ -58,6 +56,7 @@ const AuthForm = () => {
 };
 
 export default AuthForm;
+
 
 
 

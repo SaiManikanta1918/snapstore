@@ -16,6 +16,7 @@ const useEditProfile = () => {
 	const showToast = useShowToast();
 
 	const editProfile = async (inputs, selectedFile) => {
+		console.log('inputs',inputs)
 		if (isUpdating || !authUser) return;
 		setIsUpdating(true);
 
@@ -34,6 +35,7 @@ const useEditProfile = () => {
 				fullName: inputs.fullName || authUser.fullName,
 				username: inputs.username || authUser.username,
 				bio: inputs.bio || authUser.bio,
+				isPrivate: inputs.isPrivate,
 				profilePicURL: URL || authUser.profilePicURL,
 			};
 

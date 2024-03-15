@@ -35,27 +35,29 @@ const SuggestedUser = ({ user, setUser }) => {
           </Box>
         </VStack>
       </Flex>
-      {authUser.uid !== user.uid && (
-        <Button
-          fontSize={13}
-          bg={"transparent"}
-          p={0}
-          h={"max-content"}
-          fontWeight={"medium"}
-          color={"blue.400"}
-          cursor={"pointer"}
-          _hover={{ color: "white" }}
-          onClick={onFollowUser}
-          isLoading={isUpdating}
-        >
-          {isFollowing ? "Unfollow" : "Follow"}
-        </Button>
-      )}
+      {/* {authUser.uid !== user.uid && ( */}
+      <Button
+        fontSize={13}
+        bg={"transparent"}
+        p={0}
+        h={"max-content"}
+        fontWeight={"medium"}
+        color={"blue.300"}
+        cursor={"pointer"}
+        _hover={{ color: "white" }}
+        onClick={onFollowUser}
+        isLoading={isUpdating}
+      >
+        {isFollowing ? "Unfollow" : "Follow"}
+      </Button>
+      {/* )} */}
     </Flex>
   );
 };
 
 export default SuggestedUser;
+
+
 
 
 

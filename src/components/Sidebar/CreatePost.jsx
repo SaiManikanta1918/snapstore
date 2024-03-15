@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Container,
   Flex,
@@ -6,6 +7,7 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
+  Text,
   VStack,
 } from "@chakra-ui/react";
 import useShowToast from "../../hooks/useShowToast";
@@ -30,7 +32,6 @@ const CreatePost = ({ post }) => {
   });
 
   const handlePostCreation = async (values) => {
-    console.log("values", values);
     try {
       values.file = selectedFile;
       await handleCreatePost(values);
@@ -39,8 +40,18 @@ const CreatePost = ({ post }) => {
     }
   };
 
-  return (
+  const renderTextOnly = true;
+  return renderTextOnly ? (
+    <Text fontSize={"5xl"} color={"blue.500"}>
+      This page is under construction
+    </Text>
+  ) : (
     <Container py={{ base: 0, md: 10 }} maxW={"container.lg"}>
+      <Box>
+        <Text my={4} color={"white"} fontSize={"4xl"}>
+          Create Post
+        </Text>
+      </Box>
       <Formik
         initialValues={formik.initialValues}
         onSubmit={(values) => handlePostCreation(values)}
@@ -60,7 +71,6 @@ const CreatePost = ({ post }) => {
                   name="tags"
                   validate={(value) => {
                     let error;
-
                     console.log("value", value);
 
                     return error;
@@ -98,6 +108,10 @@ const CreatePost = ({ post }) => {
 };
 
 export default CreatePost;
+
+
+
+
 
 
 

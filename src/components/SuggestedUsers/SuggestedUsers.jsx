@@ -16,16 +16,16 @@ const SuggestedUsers = () => {
       {suggestedUsers.length !== 0 && (
         <Flex alignItems={"center"} justifyContent={"space-between"} w={"full"}>
           <Text fontSize={12} fontWeight={"bold"} color={"gray.500"}>
-            Suggested for you
+            Snappies for you
           </Text>
-          <Text
+          {/* <Text
             fontSize={12}
             fontWeight={"bold"}
             _hover={{ color: "gray.400" }}
             cursor={"pointer"}
           >
             See All
-          </Text>
+          </Text> */}
         </Flex>
       )}
 
@@ -38,7 +38,7 @@ const SuggestedUsers = () => {
         <Link
           href="https://www.linkedin.com/in/sai-manikanta-karnati-9a62601b1"
           target="_blank"
-          color="blue.500"
+          color="blue.300"
           fontSize={14}
         >
           Sai Manikanta
@@ -49,8 +49,3 @@ const SuggestedUsers = () => {
 };
 
 export default SuggestedUsers;
-
-
-
-
-

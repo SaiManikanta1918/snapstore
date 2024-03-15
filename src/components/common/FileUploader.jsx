@@ -9,7 +9,6 @@ const FileUploader = ({ fieldChange, mediaUrl }) => {
     (acceptedFiles) => {
       setFile(acceptedFiles);
       fieldChange(acceptedFiles);
-      console.log("acceptedFiles", acceptedFiles);
       setFileUrl(URL.createObjectURL(acceptedFiles[0]));
     },
     [file]
@@ -46,4 +45,5 @@ const FileUploader = ({ fieldChange, mediaUrl }) => {
 };
 
 export default FileUploader;
+
 

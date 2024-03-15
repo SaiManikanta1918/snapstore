@@ -13,6 +13,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Stack,
+  Switch,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import useAuthStore from "../../store/authStore";
@@ -21,12 +22,14 @@ import useEditProfile from "../../hooks/useEditProfile";
 import useShowToast from "../../hooks/useShowToast";
 
 const EditProfile = ({ isOpen, onClose }) => {
-  const [inputs, setInputs] = useState({
-    fullName: "",
-    username: "",
-    bio: "",
-  });
   const authUser = useAuthStore((state) => state.user);
+  const [inputs, setInputs] = useState({
+    fullName: authUser.fullName,
+    username: authUser.username,
+    bio: authUser.bio,
+    isPrivate: authUser.isPrivate
+  });
+  console.log('inputs compo ',inputs)
   const fileRef = useRef(null);
   const { handleImageChange, selectedFile, setSelectedFile } = usePreviewImg();
   const { isUpdating, editProfile } = useEditProfile();
@@ -114,6 +117,12 @@ const EditProfile = ({ isOpen, onClose }) => {
                 value={inputs.bio || authUser.bio}
                 onChange={(e) => setInputs({ ...inputs, bio: e.target.value })}
               />
+            </FormControl>
+            <FormControl display='flex' alignItems='center' mt={8}>
+              <FormLabel htmlFor='email-alerts' mb='0'>
+                Private Account
+              </FormLabel>
+              <Switch colorScheme="blue" size={'md'} id='email-alerts' isChecked={inputs.isPrivate} onChange={(e) => setInputs({ ...inputs, isPrivate: e.target.checked })}/>
             </FormControl>
           </ModalBody>
           <ModalFooter>

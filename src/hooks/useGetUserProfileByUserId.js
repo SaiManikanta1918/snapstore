@@ -25,7 +25,6 @@ const useGetUserProfileByUserId = (userId) => {
         querySnapshot.forEach((doc) => {
           userDoc = doc.data();
         });
-
         setUserProfile(userDoc);
       } catch (error) {
         showToast("Error", error.message, "error");
@@ -41,6 +40,12 @@ const useGetUserProfileByUserId = (userId) => {
 };
 
 export default useGetUserProfileByUserId;
+
+
+
+
+
+
 
 
 

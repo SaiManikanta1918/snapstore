@@ -14,7 +14,7 @@ const SuggestedHeader = () => {
       <Flex alignItems={"center"} gap={2}>
         <Link to={`/user/${authUser.uid}`}>
           <Avatar
-            size={"lg"}
+            size={"md"}
             src={authUser.profilePicURL}
             name={authUser.fullName}
           />
@@ -31,7 +31,7 @@ const SuggestedHeader = () => {
         _hover={{ background: "transparent" }}
         fontSize={14}
         fontWeight={"medium"}
-        color={"blue.400"}
+        color={"blue.300"}
         onClick={handleLogout}
         isLoading={isLoggingOut}
         cursor={"pointer"}
@@ -43,6 +43,8 @@ const SuggestedHeader = () => {
 };
 
 export default SuggestedHeader;
+
+
 
 
 
