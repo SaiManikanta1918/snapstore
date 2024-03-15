@@ -37,6 +37,7 @@ const Login = () => {
         colorScheme="blue"
         size={"sm"}
         fontSize={14}
+        mt={4}
         isLoading={loading}
         onClick={() => login(inputs)}
       >
@@ -47,6 +48,9 @@ const Login = () => {
 };
 
 export default Login;
+
+
+
 
 
 

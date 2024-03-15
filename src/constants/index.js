@@ -9,6 +9,11 @@ export const EXPLORE_TABS = [
   { label: "People", name: "people" },
 ];
 
+export const PROFILE_STAT_TABS = [
+  { label: "Followers", name: "followers" },
+  { label: "Following", name: "following" },
+];
+
 export const SIDEBAR_TABS = [
   {
     label: "Home",
@@ -26,6 +31,7 @@ export const SIDEBAR_TABS = [
     route: "/create-post",
   },
 ];
+
 
 
 

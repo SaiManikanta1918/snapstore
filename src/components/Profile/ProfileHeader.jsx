@@ -12,10 +12,13 @@ import useAuthStore from "../../store/authStore";
 import EditProfile from "./EditProfile";
 import useFollowUser from "../../hooks/useFollowUser";
 import ProfileStatsDrawer from "./ProfileStatsDrawer";
+import { useState } from "react";
+import { PROFILE_STAT_TABS } from "../../constants";
 
 const ProfileHeader = () => {
-  const { userProfile } = useUserProfileStore();
+  const [selectedProfileStat, setSelectedProfileStat] = useState(null);
   const authUser = useAuthStore((state) => state.user);
+  const { userProfile } = useUserProfileStore();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     isOpen: isDrawerOpen,
@@ -29,6 +32,16 @@ const ProfileHeader = () => {
     authUser && authUser.username === userProfile.username;
   const visitingAnotherProfileAndAuth =
     authUser && authUser.username !== userProfile.username;
+
+  function showFollowersList() {
+    setSelectedProfileStat(PROFILE_STAT_TABS[0].name);
+    onDrawerOpen();
+  }
+
+  function showFollowingList() {
+    setSelectedProfileStat(PROFILE_STAT_TABS[1].name);
+    onDrawerOpen();
+  }
 
   return (
     <>
@@ -82,10 +95,10 @@ const ProfileHeader = () => {
               fontSize={{ base: "xs", md: "sm" }}
               cursor="pointer"
               _hover={{ bg: "whiteAlpha.400" }}
-              onClick={onDrawerOpen}
+              onClick={showFollowersList}
             >
               <Text as="span" fontWeight={"bold"} mr={1}>
-                {userProfile.followers.length} Followers
+                {`${userProfile.followers.length} ${PROFILE_STAT_TABS[0].label}`}
               </Text>
             </Text>
             <Text
@@ -94,10 +107,10 @@ const ProfileHeader = () => {
               fontSize={{ base: "xs", md: "sm" }}
               cursor="pointer"
               _hover={{ bg: "whiteAlpha.400" }}
-              onClick={onDrawerOpen}
+              onClick={showFollowingList}
             >
               <Text as="span" fontWeight={"bold"} mr={1}>
-                {userProfile.following.length} Following
+                {`${userProfile.following.length} ${PROFILE_STAT_TABS[1].label}`}
               </Text>
             </Text>
           </Flex>
@@ -138,6 +151,7 @@ const ProfileHeader = () => {
         <ProfileStatsDrawer
           userProfile={userProfile}
           isDrawerOpen={isDrawerOpen}
+          selectedProfileStat={selectedProfileStat}
           onClose={onDrawerClose}
         />
       )}
@@ -145,5 +159,5 @@ const ProfileHeader = () => {
   );
 };
 
-export default ProfileHeader;
 
+export default ProfileHeader;

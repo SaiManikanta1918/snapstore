@@ -42,7 +42,7 @@ const CreatePost = ({ post }) => {
 
   const renderTextOnly = true;
   return renderTextOnly ? (
-    <Text fontSize={"5xl"} color={"blue.500"}>
+    <Text fontSize={"5xl"} color={"blue.300"}>
       This page is under construction
     </Text>
   ) : (
@@ -108,6 +108,7 @@ const CreatePost = ({ post }) => {
 };
 
 export default CreatePost;
+
 
 
 

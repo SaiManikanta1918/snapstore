@@ -31,7 +31,7 @@ export const Explore = () => {
 
   const renderTextOnly = true;
   return renderTextOnly ? (
-    <Text fontSize={"5xl"} color={"blue.500"}>
+    <Text fontSize={"5xl"} color={"blue.300"}>
       This page is under construction
     </Text>
   ) : (
@@ -77,4 +77,5 @@ export const Explore = () => {
     </Container>
   );
 };
+
 

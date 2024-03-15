@@ -21,6 +21,7 @@ import {
 import useGetUsers from "../../hooks/useGetUsers";
 import { Link } from "react-router-dom";
 import useAuthStore from "../../store/authStore";
+import { PROFILE_STAT_TABS } from "../../constants";
 
 const FollowersList = ({ user }) => {
   const { isLoading, users } = useGetUsers(user.followers);
@@ -126,7 +127,15 @@ const FollowingList = ({ user }) => {
   ));
 };
 
-const ProfileStatsDrawer = ({ userProfile, isDrawerOpen, onClose }) => {
+const ProfileStatsDrawer = ({
+  userProfile,
+  isDrawerOpen,
+  onClose,
+  selectedProfileStat,
+}) => {
+  const tabIndex = PROFILE_STAT_TABS.findIndex(
+    (tab) => tab.name === selectedProfileStat
+  );
   return (
     <Drawer
       onClose={onClose}
@@ -138,10 +147,10 @@ const ProfileStatsDrawer = ({ userProfile, isDrawerOpen, onClose }) => {
         <DrawerCloseButton />
         <DrawerHeader>{userProfile.username}</DrawerHeader>
         <DrawerBody p={0}>
-          <Tabs defaultIndex={0} isLazy>
+          <Tabs defaultIndex={tabIndex} isLazy>
             <TabList justifyContent="space-around">
-              <Tab>Followers</Tab>
-              <Tab>Following</Tab>
+              <Tab>{PROFILE_STAT_TABS[0].label}</Tab>
+              <Tab>{PROFILE_STAT_TABS[1].label}</Tab>
             </TabList>
             <TabPanels>
               <TabPanel>
@@ -163,4 +172,10 @@ const ProfileStatsDrawer = ({ userProfile, isDrawerOpen, onClose }) => {
   );
 };
 export default ProfileStatsDrawer;
+
+
+
+
+
+
 
