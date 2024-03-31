@@ -7,6 +7,7 @@ import {
   TabPanel,
   TabPanels,
   Tabs,
+  Text,
 } from "@chakra-ui/react";
 import ExplorePeople from "../explore/ExplorePeople";
 import ExplorePosts from "../explore/ExplorePosts";
@@ -28,14 +29,14 @@ export const Explore = () => {
     setSelectedTabIndex(index);
   }
 
-  // const renderTextOnly = true;
-  // if (renderTextOnly) {
-  //   return (
-  //     <Text fontSize={"5xl"} color={"blue.300"}>
-  //       This page is under development
-  //     </Text>
-  //   );
-  // }
+  const renderTextOnly = true;
+  if (renderTextOnly) {
+    return (
+      <Text fontSize={"5xl"} color={"blue.300"}>
+        This page is under development
+      </Text>
+    );
+  }
   return (
     <Container maxW="container.xl" py={{ base: 0, md: 10 }}>
       <Flex
@@ -79,6 +80,7 @@ export const Explore = () => {
     </Container>
   );
 };
+
 
 
 
