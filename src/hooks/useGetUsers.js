@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useShowToast from "./useShowToast";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { firestore } from "../firebase/firebase";
+import UserModel from "../models/UserModel";
 
 const useGetUsers = (userIds = []) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -22,7 +23,7 @@ const useGetUsers = (userIds = []) => {
         const users = [];
 
         querySnapshot.forEach((doc) => {
-          users.push({ ...doc.data(), id: doc.id });
+          users.push(UserModel.mapModel({ id: doc.id, ...doc.data() }));
         });
 
         setUsers(users);
@@ -39,6 +40,8 @@ const useGetUsers = (userIds = []) => {
 };
 
 export default useGetUsers;
+
+
 
 
 

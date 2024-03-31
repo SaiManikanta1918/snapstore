@@ -5,7 +5,7 @@ import useAuthStore from "../../store/authStore";
 const ProfileLink = () => {
   const { pathname } = useLocation();
   const authUser = useAuthStore((state) => state.user);
-  const isProfileTabActive = pathname.split("/").includes(authUser.uid);
+  const isProfileTabActive = pathname.split("/").includes(authUser?.uid);
 
   return (
     <Link
@@ -34,6 +34,7 @@ const ProfileLink = () => {
 };
 
 export default ProfileLink;
+
 
 
 

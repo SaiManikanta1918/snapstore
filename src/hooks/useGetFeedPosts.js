@@ -5,6 +5,7 @@ import useShowToast from "./useShowToast";
 import useUserProfileStore from "../store/userProfileStore";
 import { collection, getDocs, query } from "firebase/firestore";
 import { firestore } from "../firebase/firebase";
+import PostModel from "../models/PostModel";
 
 const useGetFeedPosts = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,7 +30,7 @@ const useGetFeedPosts = () => {
         const feedPosts = [];
 
         querySnapshot.forEach((doc) => {
-          feedPosts.push({ id: doc.id, ...doc.data() });
+          feedPosts.push(PostModel.mapModel({ id: doc.id, ...doc.data() }));
         });
 
         feedPosts.sort((a, b) => b.createdAt - a.createdAt);
@@ -48,6 +49,8 @@ const useGetFeedPosts = () => {
 };
 
 export default useGetFeedPosts;
+
+
 
 
 

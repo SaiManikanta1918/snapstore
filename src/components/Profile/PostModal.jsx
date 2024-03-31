@@ -14,7 +14,6 @@ import {
 import useAuthStore from "../../store/authStore";
 import useUserProfileStore from "../../store/userProfileStore";
 import DeleteAlert from "../common/DeleteAlert";
-import Caption from "../Comment/Caption";
 import PostFooter from "../FeedPosts/PostFooter";
 import Comment from "../Comment/Comment";
 import { deleteObject, ref } from "firebase/storage";
@@ -25,7 +24,6 @@ import { useState } from "react";
 import usePostStore from "../../store/postStore";
 
 function PostModal({ isOpen, onClose, post }) {
-  console.log("isOpen, onClose, post", isOpen, onClose, post);
   const authUser = useAuthStore((state) => state.user);
   const showToast = useShowToast();
   const [isDeleting, setIsDeleting] = useState(false);
@@ -117,7 +115,7 @@ function PostModal({ isOpen, onClose, post }) {
                 maxH={"350px"}
                 overflowY={"auto"}
               >
-                {post.caption && <Caption post={post} />}
+                {/* {post.caption && <Caption post={post} />} */}
                 {post.comments.map((comment) => (
                   <Comment key={comment.id} comment={comment} />
                 ))}
@@ -132,6 +130,7 @@ function PostModal({ isOpen, onClose, post }) {
     </Modal>
   );
 }
+
 
 
 export default PostModal;

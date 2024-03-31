@@ -23,12 +23,12 @@ const useSavePost = (post) => {
     try {
       const postRef = doc(firestore, "posts", post.id);
       const newSaves = isSaved
-        ? post.saves.filter((userId) => userId !== authUser.uid)
+        ? post.savesExceptUser(authUser.uid)
         : [...post.saves, authUser.uid];
       await updateDoc(postRef, {
         saves: isSaved ? arrayRemove(authUser.uid) : arrayUnion(authUser.uid),
       });
-      post.saves = newSaves;
+      post.setSaves(newSaves);
       setIsSaved(!isSaved);
     } catch (error) {
       showToast("Error", error.message, "error");
@@ -41,6 +41,7 @@ const useSavePost = (post) => {
 };
 
 export default useSavePost;
+
 
 
 

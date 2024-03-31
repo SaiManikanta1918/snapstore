@@ -57,10 +57,19 @@ const Post = ({ post }) => {
           objectFit={"cover"}
         />
       </GridItem>
-      {isOpen && <PostModal post={post} isOpen={isOpen} onClose={onClose} />}
+      {isOpen && (
+        <PostModal
+          post={post}
+          isOpen={isOpen}
+          onClose={onClose}
+          key={`post-modal-${post.id}`}
+        />
+      )}
     </>
   );
 };
 
 export default Post;
+
+
 

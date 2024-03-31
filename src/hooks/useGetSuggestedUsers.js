@@ -3,6 +3,7 @@ import useAuthStore from "../store/authStore";
 import useShowToast from "./useShowToast";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { firestore } from "../firebase/firebase";
+import UserModel from "../models/UserModel";
 
 const useGetSuggestedUsers = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -25,7 +26,7 @@ const useGetSuggestedUsers = () => {
         const users = [];
 
         querySnapshot.forEach((doc) => {
-          users.push({ ...doc.data(), id: doc.id });
+          users.push(UserModel.mapModel({ id: doc.id, ...doc.data() }));
         });
 
         setSuggestedUsers(users);
@@ -41,6 +42,8 @@ const useGetSuggestedUsers = () => {
 
   return { isLoading, suggestedUsers };
 };
+
+
 
 
 export default useGetSuggestedUsers;

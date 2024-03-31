@@ -4,6 +4,11 @@ export default class UserModel extends BaseModel {
   /**
    * @var {String}
    */
+  id;
+
+  /**
+   * @var {String}
+   */
   bio;
 
   /**
@@ -54,6 +59,7 @@ export default class UserModel extends BaseModel {
 
   constructor(model = {}) {
     super();
+    this.id = model.id;
     this.bio = model.bio;
     this.createdAt = model.createdAt;
     this.email = model.email;
@@ -65,5 +71,5 @@ export default class UserModel extends BaseModel {
     this.uid = model.uid;
     this.username = model.username;
   }
-}
 
+}

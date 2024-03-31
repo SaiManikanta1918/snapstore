@@ -29,7 +29,6 @@ const useGetUserProfileByUserId = (userId) => {
         showToast("Error", error.message, "error");
       } finally {
         setIsLoading(false);
-        console.log("getUserProfile", isLoading);
       }
     };
 
@@ -38,5 +37,6 @@ const useGetUserProfileByUserId = (userId) => {
 
   return { isLoading, userProfile };
 };
+
 
 export default useGetUserProfileByUserId;
