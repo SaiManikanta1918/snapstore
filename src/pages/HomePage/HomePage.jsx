@@ -14,13 +14,14 @@ const HomePage = () => {
         >
           <FeedPosts />
         </Box>
-        <Box flex={3} display={{ base: "none", lg: "block" }} maxW={"400px"}>
+        <Box flex={3} display={{ base: "none", xl: "block" }} maxW={"400px"}>
           <SuggestedUsers />
         </Box>
       </Flex>
     </Box>
   );
 };
+
 
 
 export default HomePage;

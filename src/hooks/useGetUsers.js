@@ -3,7 +3,7 @@ import useShowToast from "./useShowToast";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { firestore } from "../firebase/firebase";
 
-const useGetUsers = (userIds) => {
+const useGetUsers = (userIds = []) => {
   const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState([]);
   const showToast = useShowToast();
@@ -12,6 +12,9 @@ const useGetUsers = (userIds) => {
     const getUsers = async () => {
       setIsLoading(true);
       try {
+        if (!userIds.length) {
+          return;
+        }
         const usersRef = collection(firestore, "users");
         const q = query(usersRef, where("uid", "in", userIds), orderBy("uid"));
 
@@ -23,7 +26,6 @@ const useGetUsers = (userIds) => {
         });
 
         setUsers(users);
-        console.log("users", users);
       } catch (error) {
         showToast("Error", error.message, "error");
       } finally {
@@ -37,4 +39,6 @@ const useGetUsers = (userIds) => {
 };
 
 export default useGetUsers;
+
+
 

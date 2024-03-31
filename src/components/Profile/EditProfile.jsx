@@ -27,9 +27,8 @@ const EditProfile = ({ isOpen, onClose }) => {
     fullName: authUser.fullName,
     username: authUser.username,
     bio: authUser.bio,
-    isPrivate: authUser.isPrivate
+    isPrivate: authUser.isPrivate,
   });
-  console.log('inputs compo ',inputs)
   const fileRef = useRef(null);
   const { handleImageChange, selectedFile, setSelectedFile } = usePreviewImg();
   const { isUpdating, editProfile } = useEditProfile();
@@ -142,5 +141,6 @@ const EditProfile = ({ isOpen, onClose }) => {
     </>
   );
 };
+
 
 export default EditProfile;

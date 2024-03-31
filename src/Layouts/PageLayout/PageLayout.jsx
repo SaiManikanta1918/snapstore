@@ -10,8 +10,8 @@ import Topbar from "../../components/Topbar/Topbar";
 const PageLayout = ({ children }) => {
   const { pathname } = useLocation();
   const [user, loading] = useAuthState(auth);
-  const canRenderSidebar = pathname !== "/auth" && user;
-  const canRenderNavbar = !user && !loading && pathname !== "/auth";
+  const canRenderSidebar = pathname !== "/login" && user;
+  const canRenderNavbar = !user && !loading && pathname !== "/login";
 
   const checkingUserIsAuth = !user && loading;
   if (checkingUserIsAuth) return <PageLayoutSpinner />;
@@ -58,6 +58,5 @@ const PageLayoutSpinner = () => {
       <Spinner size="xl" />
     </Flex>
   );
-
 
 };

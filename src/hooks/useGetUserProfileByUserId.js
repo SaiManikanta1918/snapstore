@@ -5,7 +5,7 @@ import { firestore } from "../firebase/firebase";
 import useUserProfileStore from "../store/userProfileStore";
 
 const useGetUserProfileByUserId = (userId) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const showToast = useShowToast();
   const { userProfile, setUserProfile } = useUserProfileStore();
 
@@ -18,7 +18,6 @@ const useGetUserProfileByUserId = (userId) => {
           where("uid", "==", userId)
         );
         const querySnapshot = await getDocs(q);
-
         if (querySnapshot.empty) return setUserProfile(null);
 
         let userDoc;
@@ -30,6 +29,7 @@ const useGetUserProfileByUserId = (userId) => {
         showToast("Error", error.message, "error");
       } finally {
         setIsLoading(false);
+        console.log("getUserProfile", isLoading);
       }
     };
 
@@ -40,17 +40,3 @@ const useGetUserProfileByUserId = (userId) => {
 };
 
 export default useGetUserProfileByUserId;
-
-
-
-
-
-
-
-
-
-
-
-
-
-

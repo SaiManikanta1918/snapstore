@@ -17,17 +17,26 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={authUser ? <HomePage /> : <Navigate to="/auth" />}
+            element={authUser ? <HomePage /> : <Navigate to="/login" />}
           />
           <Route
-            path="/auth"
+            path="/login"
             element={!authUser ? <AuthPage /> : <Navigate to="/" />}
           />
           {/* <Route path="/search" element={<Search />} /> */}
-          <Route path="/explore/:selectedTab?" element={<Explore />} />
+          <Route
+            path="/explore/:selectedTab?"
+            element={!authUser ? <Navigate to="/login" /> : <Explore />}
+          />
           {/* <Route path="/notifications" element={<Notifications />} /> */}
-          <Route path="/user/:userId/:selectedTab?" element={<ProfilePage />} />
-          <Route path="/create-post" element={<CreatePost />} />
+          <Route
+            path="/user/:userId/:selectedTab?"
+            element={!authUser ? <Navigate to="/login" /> : <ProfilePage />}
+          />
+          <Route
+            path="/create-post"
+            element={!authUser ? <Navigate to="/login" /> : <CreatePost />}
+          />
         </Routes>
       </PageLayout>
     </main>

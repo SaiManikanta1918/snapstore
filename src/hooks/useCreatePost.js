@@ -63,8 +63,7 @@ const useCreatePost = () => {
       navigate("/");
       showToast("Success", "Post created successfully", "success");
     } catch (error) {
-      console.log("error", error);
-      // showToast("Error", error.message, "error");
+      showToast("Error", error.message, "error");
     } finally {
       setIsLoading(false);
     }
@@ -73,5 +72,5 @@ const useCreatePost = () => {
   return { isLoading, handleCreatePost };
 };
 
-export default useCreatePost;
 
+export default useCreatePost;

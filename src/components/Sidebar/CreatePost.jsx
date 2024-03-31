@@ -40,12 +40,16 @@ const CreatePost = ({ post }) => {
     }
   };
 
-  const renderTextOnly = true;
-  return renderTextOnly ? (
-    <Text fontSize={"5xl"} color={"blue.300"}>
-      This page is under construction
-    </Text>
-  ) : (
+  // const renderTextOnly = true;
+  // if (renderTextOnly) {
+  //   return (
+  //     <Text fontSize={"5xl"} color={"blue.300"}>
+  //       This page is under development
+  //     </Text>
+  //   );
+  // }
+
+  return (
     <Container py={{ base: 0, md: 10 }} maxW={"container.lg"}>
       <Box>
         <Text my={4} color={"white"} fontSize={"4xl"}>
@@ -108,6 +112,7 @@ const CreatePost = ({ post }) => {
 };
 
 export default CreatePost;
+
 
 
 

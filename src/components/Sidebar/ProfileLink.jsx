@@ -3,9 +3,9 @@ import { Link as RouterLink, useLocation } from "react-router-dom";
 import useAuthStore from "../../store/authStore";
 
 const ProfileLink = () => {
-  const { pathname} = useLocation()
-  const isProfileTabActive = pathname.split('/').includes('user')
+  const { pathname } = useLocation();
   const authUser = useAuthStore((state) => state.user);
+  const isProfileTabActive = pathname.split("/").includes(authUser.uid);
 
   return (
     <Link
@@ -14,7 +14,7 @@ const ProfileLink = () => {
       as={RouterLink}
       alignItems={"center"}
       gap={4}
-      bg={isProfileTabActive?'whiteAlpha.400':''}
+      bg={isProfileTabActive ? "whiteAlpha.400" : ""}
       _hover={{ bg: "whiteAlpha.400" }}
       borderRadius={6}
       p={2}
@@ -34,4 +34,10 @@ const ProfileLink = () => {
 };
 
 export default ProfileLink;
+
+
+
+
+
+
 

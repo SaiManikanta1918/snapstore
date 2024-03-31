@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, Skeleton, VStack } from "@chakra-ui/react";
+import { Box, Grid, GridItem, Skeleton, Text, VStack } from "@chakra-ui/react";
 import useGetSuggestedUsers from "../../hooks/useGetSuggestedUsers";
 import SuggestedUser from "../SuggestedUsers/SuggestedUser";
 import { useEffect, useState } from "react";
@@ -14,6 +14,14 @@ const ExplorePeople = ({ searchText }) => {
       )
     );
   }, [searchText, suggestedUsers]);
+
+  if (!suggestedUsers.length) {
+    return (
+      <Text fontSize={"4xl"} color={"blue.300"}>
+        No users to display, Suggest your friends to create account
+      </Text>
+    );
+  }
 
   return (
     <Grid
