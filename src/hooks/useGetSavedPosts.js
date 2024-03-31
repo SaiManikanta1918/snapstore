@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import usePostStore from "../store/postStore";
-import useShowToast from "./useShowToast";
-import useUserProfileStore from "../store/userProfileStore";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { firestore } from "../firebase/firebase";
-import PostModel from "../models/PostModel";
+import { useEffect, useState } from 'react';
+import usePostStore from '../store/postStore';
+import useShowToast from './useShowToast';
+import useUserProfileStore from '../store/userProfileStore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { firestore } from '../firebase/firebase';
+import PostModel from '../models/PostModel';
 
 const useGetSavedPosts = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -20,8 +20,8 @@ const useGetSavedPosts = () => {
 
       try {
         const q = query(
-          collection(firestore, "posts"),
-          where("saves", "array-contains", userProfile.uid)
+          collection(firestore, 'posts'),
+          where('saves', 'array-contains', userProfile.uid)
         );
         const querySnapshot = await getDocs(q);
 
@@ -33,7 +33,7 @@ const useGetSavedPosts = () => {
         posts.sort((a, b) => b.createdAt - a.createdAt);
         setSavedPosts(posts);
       } catch (error) {
-        showToast("Error", error.message, "error");
+        showToast('Error', error.message, 'error');
         setSavedPosts([]);
       } finally {
         setIsLoading(false);
@@ -47,5 +47,3 @@ const useGetSavedPosts = () => {
 };
 
 export default useGetSavedPosts;
-
-

@@ -1,5 +1,5 @@
-import useGetLikedPosts from "../../hooks/useGetLikedPosts";
-import GridPosts from "./GridPosts";
+import useGetLikedPosts from '../../hooks/useGetLikedPosts';
+import GridPosts from './GridPosts';
 
 const LikedPosts = () => {
   const { isLoading, likedPosts } = useGetLikedPosts();
@@ -8,4 +8,3 @@ const LikedPosts = () => {
 };
 
 export default LikedPosts;
-

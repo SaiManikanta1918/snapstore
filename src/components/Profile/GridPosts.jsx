@@ -1,6 +1,6 @@
-import { Box, Grid, Skeleton, Spinner, VStack } from "@chakra-ui/react";
-import Post from "./Post";
-import NoPosts from "./NoPosts";
+import { Box, Grid, Skeleton, Spinner, VStack } from '@chakra-ui/react';
+import Post from './Post';
+import NoPosts from './NoPosts';
 
 const GridPosts = ({ isLoading, posts }) => {
   const noPostsFound = !isLoading && posts.length === 0;
@@ -17,16 +17,16 @@ const GridPosts = ({ isLoading, posts }) => {
   return (
     <Grid
       templateColumns={{
-        sm: "repeat(1, 1fr)",
-        md: "repeat(3, 1fr)",
+        sm: 'repeat(1, 1fr)',
+        md: 'repeat(3, 1fr)',
       }}
       gap={10}
       columnGap={10}
     >
       {isLoading
         ? [0, 1, 2].map((_, idx) => (
-            <VStack key={idx} alignItems={"flex-start"} gap={4}>
-              <Skeleton w={"full"}>
+            <VStack key={idx} alignItems={'flex-start'} gap={4}>
+              <Skeleton w={'full'}>
                 <Box h="300px">contents wrapped</Box>
               </Skeleton>
             </VStack>
@@ -37,4 +37,3 @@ const GridPosts = ({ isLoading, posts }) => {
 };
 
 export default GridPosts;
-

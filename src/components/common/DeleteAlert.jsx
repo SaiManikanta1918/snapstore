@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   AlertDialog,
   AlertDialogBody,
@@ -8,8 +8,8 @@ import {
   AlertDialogOverlay,
   Button,
   useDisclosure,
-} from "@chakra-ui/react";
-import { MdDelete } from "react-icons/md";
+} from '@chakra-ui/react';
+import { MdDelete } from 'react-icons/md';
 
 const DeleteAlert = ({ deleteItem, isDeleting }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -18,8 +18,8 @@ const DeleteAlert = ({ deleteItem, isDeleting }) => {
   return (
     <>
       <Button
-        size={"sm"}
-        color={"red.600"}
+        size={'sm'}
+        color={'red.600'}
         // _hover={{ bg: "whiteAlpha.300", color: "red.600" }}
         borderRadius={4}
         p={1}
@@ -28,31 +28,20 @@ const DeleteAlert = ({ deleteItem, isDeleting }) => {
       >
         <MdDelete size={20} cursor="pointer" />
       </Button>
-      <AlertDialog
-        isOpen={isOpen}
-        leastDestructiveRef={cancelRef}
-        onClose={onClose}
-      >
+      <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose}>
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
               Delete Post
             </AlertDialogHeader>
 
-            <AlertDialogBody>
-              Are you sure you want to delete this post?
-            </AlertDialogBody>
+            <AlertDialogBody>Are you sure you want to delete this post?</AlertDialogBody>
 
             <AlertDialogFooter>
               <Button ref={cancelRef} onClick={onClose}>
                 Cancel
               </Button>
-              <Button
-                colorScheme="red"
-                onClick={deleteItem}
-                ml={3}
-                isLoading={isDeleting}
-              >
+              <Button colorScheme="red" onClick={deleteItem} ml={3} isLoading={isDeleting}>
                 Delete
               </Button>
             </AlertDialogFooter>
@@ -64,7 +53,3 @@ const DeleteAlert = ({ deleteItem, isDeleting }) => {
 };
 
 export default DeleteAlert;
-
-
-
-

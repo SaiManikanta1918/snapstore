@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import usePostStore from "../store/postStore";
-import useAuthStore from "../store/authStore";
-import useShowToast from "./useShowToast";
-import useUserProfileStore from "../store/userProfileStore";
-import { collection, getDocs, query } from "firebase/firestore";
-import { firestore } from "../firebase/firebase";
-import PostModel from "../models/PostModel";
+import { useEffect, useState } from 'react';
+import usePostStore from '../store/postStore';
+import useAuthStore from '../store/authStore';
+import useShowToast from './useShowToast';
+import useUserProfileStore from '../store/userProfileStore';
+import { collection, getDocs, query } from 'firebase/firestore';
+import { firestore } from '../firebase/firebase';
+import PostModel from '../models/PostModel';
 
 const useGetFeedPosts = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,7 +23,7 @@ const useGetFeedPosts = () => {
       //   return;
       // }
       // const q = query(collection(firestore, "posts"), where("createdBy", "in", authUser.following));
-      const q = query(collection(firestore, "posts"));
+      const q = query(collection(firestore, 'posts'));
 
       try {
         const querySnapshot = await getDocs(q);
@@ -36,7 +36,7 @@ const useGetFeedPosts = () => {
         feedPosts.sort((a, b) => b.createdAt - a.createdAt);
         setPosts(feedPosts);
       } catch (error) {
-        showToast("Error", error.message, "error");
+        showToast('Error', error.message, 'error');
       } finally {
         setIsLoading(false);
       }
@@ -49,10 +49,3 @@ const useGetFeedPosts = () => {
 };
 
 export default useGetFeedPosts;
-
-
-
-
-
-
-

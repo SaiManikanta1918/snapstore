@@ -1,41 +1,34 @@
-import { Box, Flex, Spinner } from "@chakra-ui/react";
-import Sidebar from "../../components/Sidebar/Sidebar";
-import { useLocation } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../../firebase/firebase";
-import Navbar from "../../components/Navbar/Navbar";
-import Bottombar from "../../components/Bottombar/Bottombar";
-import Topbar from "../../components/Topbar/Topbar";
+import { Box, Flex, Spinner } from '@chakra-ui/react';
+import Sidebar from '../../components/Sidebar/Sidebar';
+import { useLocation } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../../firebase/firebase';
+import Navbar from '../../components/Navbar/Navbar';
+import Bottombar from '../../components/Bottombar/Bottombar';
+import Topbar from '../../components/Topbar/Topbar';
 
 const PageLayout = ({ children }) => {
   const { pathname } = useLocation();
   const [user, loading] = useAuthState(auth);
-  const canRenderSidebar = pathname !== "/login" && user;
-  const canRenderNavbar = !user && !loading && pathname !== "/login";
+  const canRenderSidebar = pathname !== '/login' && user;
+  const canRenderNavbar = !user && !loading && pathname !== '/login';
 
   const checkingUserIsAuth = !user && loading;
   if (checkingUserIsAuth) return <PageLayoutSpinner />;
 
   return (
-    <div style={{ width: "100%", height: "inherit" }}>
+    <div style={{ width: '100%', height: 'inherit' }}>
       {user && <Topbar />}
       <section>
-        <Flex flexDir={canRenderNavbar ? "column" : "row"}>
+        <Flex flexDir={canRenderNavbar ? 'column' : 'row'}>
           {canRenderSidebar ? (
-            <Box
-              w={{ base: "70px", md: "240px" }}
-              display={{ base: "none", md: "block" }}
-            >
+            <Box w={{ base: '70px', md: '240px' }} display={{ base: 'none', md: 'block' }}>
               <Sidebar />
             </Box>
           ) : null}
           {/* Navbar */}
           {canRenderNavbar ? <Navbar /> : null}
-          <Box
-            flex={1}
-            w={{ base: "calc(100% - 70px)", md: "calc(100% - 240px)" }}
-            mx={"auto"}
-          >
+          <Box flex={1} w={{ base: 'calc(100% - 70px)', md: 'calc(100% - 240px)' }} mx={'auto'}>
             {children}
           </Box>
         </Flex>
@@ -49,14 +42,8 @@ export default PageLayout;
 
 const PageLayoutSpinner = () => {
   return (
-    <Flex
-      flexDir="column"
-      h="100vh"
-      alignItems="center"
-      justifyContent="center"
-    >
+    <Flex flexDir="column" h="100vh" alignItems="center" justifyContent="center">
       <Spinner size="xl" />
     </Flex>
   );
-
 };

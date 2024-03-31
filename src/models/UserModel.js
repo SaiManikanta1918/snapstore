@@ -1,4 +1,4 @@
-import BaseModel from "./BaseModel";
+import BaseModel from './BaseModel';
 
 export default class UserModel extends BaseModel {
   /**
@@ -63,13 +63,12 @@ export default class UserModel extends BaseModel {
     this.bio = model.bio;
     this.createdAt = model.createdAt;
     this.email = model.email;
-    this.followers = model.followers;
-    this.following = model.following;
+    this.followers = model.followers || [];
+    this.following = model.following || [];
     this.fullName = model.fullName;
-    this.posts = model.posts;
+    this.posts = model.posts || [];
     this.profilePicURL = model.profilePicURL;
     this.uid = model.uid;
     this.username = model.username;
   }
-
 }

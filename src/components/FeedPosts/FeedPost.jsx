@@ -1,7 +1,7 @@
-import { Box, Flex, Image } from "@chakra-ui/react";
-import PostFooter from "./PostFooter";
-import PostHeader from "./PostHeader";
-import useGetUserProfileById from "../../hooks/useGetUserProfileById";
+import { Box, Flex, Image } from '@chakra-ui/react';
+import PostFooter from './PostFooter';
+import PostHeader from './PostHeader';
+import useGetUserProfileById from '../../hooks/useGetUserProfileById';
 
 const FeedPost = ({ post }) => {
   const { userProfile } = useGetUserProfileById(post.createdBy);
@@ -9,14 +9,14 @@ const FeedPost = ({ post }) => {
   return (
     <Flex flexDirection="column">
       <PostHeader post={post} creatorProfile={userProfile} />
-      <Box my={2} borderRadius={4} overflow={"hidden"}>
+      <Box my={2} borderRadius={4} overflow={'hidden'}>
         <Image
-          borderRadius={"2%"}
-          height={{ base: "400px", sm: "450px" }}
-          width={"100%"}
+          borderRadius={'2%'}
+          height={{ base: '400px', sm: '450px' }}
+          width={'100%'}
           src={post.imageURL}
-          alt={"FEED POST IMG"}
-          objectFit={"cover"}
+          alt={'FEED POST IMG'}
+          objectFit={'cover'}
         />
       </Box>
       <PostFooter post={post} creatorProfile={userProfile} />
@@ -25,4 +25,3 @@ const FeedPost = ({ post }) => {
 };
 
 export default FeedPost;
-

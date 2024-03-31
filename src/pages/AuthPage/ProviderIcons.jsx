@@ -1,7 +1,7 @@
-import { createIcon } from "@chakra-ui/react";
+import { createIcon } from '@chakra-ui/react';
 
 export const GoogleIcon = createIcon({
-  displayName: "GoogleIcon",
+  displayName: 'GoogleIcon',
   path: (
     <g transform="matrix(1, 0, 0, 1, 27.009001, -39.238998)">
       <path
@@ -25,7 +25,7 @@ export const GoogleIcon = createIcon({
 });
 
 export const GitHubIcon = createIcon({
-  displayName: "GitHubIcon",
+  displayName: 'GitHubIcon',
   path: (
     <path
       fill="currentColor"
@@ -35,7 +35,7 @@ export const GitHubIcon = createIcon({
 });
 
 export const TwitterIcon = createIcon({
-  displayName: "TwitterIcon",
+  displayName: 'TwitterIcon',
   path: (
     <path
       fill="#03A9F4"

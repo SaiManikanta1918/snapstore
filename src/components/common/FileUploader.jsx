@@ -1,5 +1,5 @@
-import { useCallback, useState } from "react";
-import { useDropzone } from "react-dropzone";
+import { useCallback, useState } from 'react';
+import { useDropzone } from 'react-dropzone';
 
 const FileUploader = ({ fieldChange, mediaUrl }) => {
   const [file, setFile] = useState([]);
@@ -16,7 +16,7 @@ const FileUploader = ({ fieldChange, mediaUrl }) => {
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: {
-      "image/*": [".jpeg", ".png", ".jpg", ".svg"],
+      'image/*': ['.jpeg', '.png', '.jpg', '.svg'],
     },
     maxFiles: 1,
   });
@@ -45,5 +45,3 @@ const FileUploader = ({ fieldChange, mediaUrl }) => {
 };
 
 export default FileUploader;
-
-

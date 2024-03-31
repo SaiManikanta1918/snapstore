@@ -1,92 +1,81 @@
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { Alert, AlertIcon, Button, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
-import { useState } from "react";
-import useSignUpWithEmailAndPassword from "../../hooks/useSignUpWithEmailAndPassword";
+import { Button, Input } from '@chakra-ui/react';
+import useSignUpWithEmailAndPassword from '../../hooks/useSignUpWithEmailAndPassword';
+import { FormControl, FormErrorMessage, VStack } from '@chakra-ui/react';
+import { Field, Form, Formik } from 'formik';
+import { SingUpSchema } from '../Schema';
+import { USER_ACTION } from '../../constants';
 
 const Signup = () => {
-  const [inputs, setInputs] = useState({
-    fullName: "",
-    username: "",
-    email: "",
-    password: "",
-  });
-  const [showPassword, setShowPassword] = useState(false);
-  const { loading, error, signup } = useSignUpWithEmailAndPassword();
+  const { loading, signup } = useSignUpWithEmailAndPassword();
 
   return (
-    <>
-      <Input
-        placeholder="Email"
-        type="email"
-        size={"lg"}
-        value={inputs.email}
-        variant="flushed"
-        onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
-      />
-      <Input
-        placeholder="Username"
-        type="text"
-        size={"lg"}
-        value={inputs.username}
-        variant="flushed"
-        onChange={(e) => setInputs({ ...inputs, username: e.target.value })}
-      />
-      <Input
-        placeholder="Full Name"
-        type="text"
-        size={"lg"}
-        value={inputs.fullName}
-        variant="flushed"
-        onChange={(e) => setInputs({ ...inputs, fullName: e.target.value })}
-      />
-      <InputGroup>
-        <Input
-          placeholder="Password"
-          type={showPassword ? "text" : "password"}
-          value={inputs.password}
-          size={"lg"}
-          variant="flushed"
-          onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
-        />
-        <InputRightElement h="full">
-          <Button
-            variant={"ghost"}
-            size={"md"}
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-          </Button>
-        </InputRightElement>
-      </InputGroup>
-
-      {error && (
-        <Alert status="error" fontSize={13} p={2} borderRadius={4}>
-          <AlertIcon fontSize={12} />
-          {error.message}
-        </Alert>
+    <Formik
+      initialValues={{
+        email: '',
+        password: '',
+        username: '',
+        fullName: '',
+      }}
+      onSubmit={(values) => signup(values)}
+      validationSchema={SingUpSchema}
+    >
+      {() => (
+        <Form style={{ width: '100%' }}>
+          <VStack spacing={4} align="flex-start">
+            <Field name="email">
+              {({ field, form }) => (
+                <FormControl isInvalid={form.errors.email && form.touched.email}>
+                  <Input {...field} size={'lg'} placeholder="Email" variant="flushed" />
+                  <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+            <Field name="username">
+              {({ field, form }) => (
+                <FormControl isInvalid={form.errors.username && form.touched.username}>
+                  <Input {...field} size={'lg'} placeholder="Username" variant="flushed" />
+                  <FormErrorMessage>{form.errors.username}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+            <Field name="fullName">
+              {({ field, form }) => (
+                <FormControl isInvalid={form.errors.fullName && form.touched.fullName}>
+                  <Input {...field} size={'lg'} placeholder="FullName" variant="flushed" />
+                  <FormErrorMessage>{form.errors.fullName}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+            <Field name="password">
+              {({ field, form }) => (
+                <FormControl isInvalid={form.errors.password && form.touched.password}>
+                  <Input
+                    {...field}
+                    size={'lg'}
+                    type="password"
+                    variant="flushed"
+                    placeholder="Password"
+                  />
+                  <FormErrorMessage>{form.errors.password}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+            <Button
+              justifyContent={'center'}
+              width={'100%'}
+              gap={4}
+              mt={10}
+              type="submit"
+              colorScheme="purple"
+              disabled={loading}
+            >
+              {USER_ACTION.SIGN_UP}
+            </Button>
+          </VStack>
+        </Form>
       )}
-
-      <Button
-        w={"full"}
-        colorScheme="blue"
-        size={"sm"}
-        fontSize={14}
-        mt={4}
-        isLoading={loading}
-        onClick={() => signup(inputs)}
-      >
-        Sign Up
-      </Button>
-    </>
+    </Formik>
   );
 };
 
 export default Signup;
-
-
-
-
-
-
-
-

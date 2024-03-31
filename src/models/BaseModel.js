@@ -15,4 +15,3 @@ export default class BaseModel {
     Object.assign(this, model);
   }
 }
-

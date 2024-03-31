@@ -1,19 +1,15 @@
-import { Box, Container, Stack } from "@chakra-ui/react";
-import AuthForm from "../../components/AuthForm/AuthForm";
+import { Box, Container, Stack } from '@chakra-ui/react';
+import AuthForm from '../../components/AuthForm/AuthForm';
 
 const AuthPage = () => (
-  <Container
-    maxW="lg"
-    py={{ base: "12", md: "24" }}
-    px={{ base: "0", sm: "8" }}
-  >
+  <Container maxW="lg" py={{ base: '12', md: '24' }} px={{ base: '0', sm: '8' }}>
     <Stack spacing="8">
       <Stack spacing="6"></Stack>
       <Box
-        py={{ base: "0", sm: "8" }}
-        bg={{ base: "transparent", sm: "bg.surface" }}
-        boxShadow={{ base: "none", sm: "md" }}
-        borderRadius={{ base: "none", sm: "xl" }}
+        py={{ base: '0', sm: '8' }}
+        bg={{ base: 'transparent', sm: 'bg.surface' }}
+        boxShadow={{ base: 'none', sm: 'md' }}
+        borderRadius={{ base: 'none', sm: 'xl' }}
       >
         <Stack spacing="6">
           <Stack spacing="5">
@@ -26,6 +22,3 @@ const AuthPage = () => (
 );
 
 export default AuthPage;
-
-
-

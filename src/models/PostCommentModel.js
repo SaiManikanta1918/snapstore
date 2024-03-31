@@ -1,4 +1,4 @@
-import BaseModel from "./BaseModel";
+import BaseModel from './BaseModel';
 
 export default class PostCommentModel extends BaseModel {
   /**
@@ -29,4 +29,3 @@ export default class PostCommentModel extends BaseModel {
     this.postId = model.postId;
   }
 }
-

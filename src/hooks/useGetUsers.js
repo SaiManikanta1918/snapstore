@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import useShowToast from "./useShowToast";
-import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
-import { firestore } from "../firebase/firebase";
-import UserModel from "../models/UserModel";
+import { useEffect, useState } from 'react';
+import useShowToast from './useShowToast';
+import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
+import { firestore } from '../firebase/firebase';
+import UserModel from '../models/UserModel';
 
 const useGetUsers = (userIds = []) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -16,8 +16,8 @@ const useGetUsers = (userIds = []) => {
         if (!userIds.length) {
           return;
         }
-        const usersRef = collection(firestore, "users");
-        const q = query(usersRef, where("uid", "in", userIds), orderBy("uid"));
+        const usersRef = collection(firestore, 'users');
+        const q = query(usersRef, where('uid', 'in', userIds), orderBy('uid'));
 
         const querySnapshot = await getDocs(q);
         const users = [];
@@ -28,7 +28,7 @@ const useGetUsers = (userIds = []) => {
 
         setUsers(users);
       } catch (error) {
-        showToast("Error", error.message, "error");
+        showToast('Error', error.message, 'error');
       } finally {
         setIsLoading(false);
       }
@@ -40,8 +40,3 @@ const useGetUsers = (userIds = []) => {
 };
 
 export default useGetUsers;
-
-
-
-
-

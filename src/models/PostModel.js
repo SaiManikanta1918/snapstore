@@ -1,5 +1,5 @@
-import BaseModel from "./BaseModel";
-import PostCommentModel from "./PostCommentModel";
+import BaseModel from './BaseModel';
+import PostCommentModel from './PostCommentModel';
 
 export default class PostModel extends BaseModel {
   /**
@@ -11,6 +11,11 @@ export default class PostModel extends BaseModel {
    * @var {String}
    */
   caption;
+
+  /**
+   * @var {[String]}
+   */
+  tags;
 
   /**
    * @var {[PostCommentModel]}
@@ -46,6 +51,7 @@ export default class PostModel extends BaseModel {
     super();
     this.id = model.id;
     this.caption = model.caption;
+    this.tags = model.tags || [];
     this.comments = PostCommentModel.mapModels(model.comments);
     this.createdAt = model.createdAt;
     this.createdBy = model.createdBy;
@@ -77,5 +83,4 @@ export default class PostModel extends BaseModel {
   savesExceptUser(user) {
     return this.saves.filter((userId) => userId !== user);
   }
-
 }

@@ -1,7 +1,7 @@
-import { Avatar, Flex, Text } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
-import { timeAgo } from "../../utils/timeAgo";
-import useUserProfileStore from "../../store/userProfileStore";
+import { Avatar, Flex, Text } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+import { timeAgo } from '../../utils/timeAgo';
+import useUserProfileStore from '../../store/userProfileStore';
 
 const Caption = ({ post }) => {
   const userProfile = useUserProfileStore((state) => state.userProfile);
@@ -9,22 +9,18 @@ const Caption = ({ post }) => {
   return (
     <Flex gap={4}>
       <Link to={`/user/${userProfile.uid}`}>
-        <Avatar
-          src={userProfile.profilePicURL}
-          name={userProfile.fullName}
-          size={"sm"}
-        />
+        <Avatar src={userProfile.profilePicURL} name={userProfile.fullName} size={'sm'} />
       </Link>
-      <Flex direction={"column"}>
-        <Flex gap={2} alignItems={"center"}>
+      <Flex direction={'column'}>
+        <Flex gap={2} alignItems={'center'}>
           <Link to={`/user/${userProfile.uid}`}>
-            <Text fontWeight={"bold"} fontSize={12}>
+            <Text fontWeight={'bold'} fontSize={12}>
               {userProfile.username}
             </Text>
           </Link>
           <Text fontSize={14}>{post.caption}</Text>
         </Flex>
-        <Text fontSize={12} color={"gray"}>
+        <Text fontSize={12} color={'gray'}>
           {timeAgo(post.createdAt)}
         </Text>
       </Flex>
@@ -33,9 +29,3 @@ const Caption = ({ post }) => {
 };
 
 export default Caption;
-
-
-
-
-
-

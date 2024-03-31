@@ -1,60 +1,62 @@
-import { Alert, AlertIcon, Button, Input } from "@chakra-ui/react";
-import { useState } from "react";
-import useLogin from "../../hooks/useLogin";
+import { Button, FormControl, FormErrorMessage, Input, VStack } from '@chakra-ui/react';
+import useLogin from '../../hooks/useLogin';
+import { Field, Form, Formik } from 'formik';
+import { LoginSchema } from '../Schema';
+import { USER_ACTION } from '../../constants';
 
 const Login = () => {
-  const [inputs, setInputs] = useState({
-    email: "",
-    password: "",
-  });
-  const { loading, error, login } = useLogin();
+  const { loading, login } = useLogin();
+
   return (
-    <>
-      <Input
-        placeholder="Email"
-        type="email"
-        size={"lg"}
-        variant="flushed"
-        value={inputs.email}
-        onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
-      />
-      <Input
-        placeholder="Password"
-        size={"lg"}
-        type="password"
-        variant="flushed"
-        value={inputs.password}
-        onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
-      />
-      {error && (
-        <Alert status="error" fontSize={13} p={2} borderRadius={4}>
-          <AlertIcon fontSize={12} />
-          {error.message}
-        </Alert>
+    <Formik
+      initialValues={{
+        email: '',
+        password: '',
+      }}
+      onSubmit={(values) => login(values)}
+      validationSchema={LoginSchema}
+    >
+      {() => (
+        <Form style={{ width: '100%' }}>
+          <VStack spacing={4} align="flex-start">
+            <Field name="email">
+              {({ field, form }) => (
+                <FormControl isInvalid={form.errors.email && form.touched.email}>
+                  <Input {...field} size={'lg'} placeholder="Email" variant="flushed" />
+                  <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+            <Field name="password">
+              {({ field, form }) => (
+                <FormControl isInvalid={form.errors.password && form.touched.password}>
+                  <Input
+                    {...field}
+                    size={'lg'}
+                    type="password"
+                    variant="flushed"
+                    placeholder="Password"
+                  />
+                  <FormErrorMessage>{form.errors.password}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+            <Button
+              justifyContent={'center'}
+              width={'100%'}
+              gap={4}
+              mt={10}
+              type="submit"
+              colorScheme="purple"
+              disabled={loading}
+            >
+              {USER_ACTION.LOG_IN}
+            </Button>
+          </VStack>
+        </Form>
       )}
-      <Button
-        w={"full"}
-        colorScheme="blue"
-        size={"sm"}
-        fontSize={14}
-        mt={4}
-        isLoading={loading}
-        onClick={() => login(inputs)}
-      >
-        Log in
-      </Button>
-    </>
+    </Formik>
   );
 };
 
 export default Login;
-
-
-
-
-
-
-
-
-
-

@@ -1,5 +1,5 @@
-import useGetSavedPosts from "../../hooks/useGetSavedPosts";
-import GridPosts from "./GridPosts";
+import useGetSavedPosts from '../../hooks/useGetSavedPosts';
+import GridPosts from './GridPosts';
 
 const SavedPosts = () => {
   const { isLoading, savedPosts } = useGetSavedPosts();
@@ -8,4 +8,3 @@ const SavedPosts = () => {
 };
 
 export default SavedPosts;
-

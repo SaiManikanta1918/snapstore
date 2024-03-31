@@ -1,9 +1,9 @@
-import { Container, Flex, Link, Skeleton, SkeletonCircle, Text, VStack } from "@chakra-ui/react";
-import ProfileHeader from "../../components/Profile/ProfileHeader";
-import ProfileTabs from "../../components/Profile/ProfileTabs";
-import useGetUserProfileByUserId from "../../hooks/useGetUserProfileByUserId";
-import { useParams } from "react-router-dom";
-import { Link as RouterLink } from "react-router-dom";
+import { Container, Flex, Link, Skeleton, SkeletonCircle, Text, VStack } from '@chakra-ui/react';
+import ProfileHeader from '../../components/Profile/ProfileHeader';
+import ProfileTabs from '../../components/Profile/ProfileTabs';
+import useGetUserProfileByUserId from '../../hooks/useGetUserProfileByUserId';
+import { useParams } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 const ProfilePage = () => {
   const { userId } = useParams();
@@ -12,7 +12,7 @@ const ProfilePage = () => {
   const renderTextOnly = true;
   if (renderTextOnly) {
     return (
-      <Text fontSize={"5xl"} color={"blue.300"}>
+      <Text fontSize={'5xl'} color={'blue.300'}>
         This page is under development
       </Text>
     );
@@ -23,17 +23,11 @@ const ProfilePage = () => {
 
   return (
     <Container maxW="container.lg" py={{ base: 0, md: 5 }}>
-      <Flex
-        p={{ base: 0, md: 4 }}
-        my={4}
-        w={"full"}
-        mx={"auto"}
-        flexDirection={"column"}
-      >
+      <Flex p={{ base: 0, md: 4 }} my={4} w={'full'} mx={'auto'} flexDirection={'column'}>
         {!isLoading && userProfile && <ProfileHeader />}
         {isLoading && <ProfileHeaderSkeleton />}
       </Flex>
-      <Flex px={{ base: 2, sm: 4 }} maxW={"full"} mx={"auto"}>
+      <Flex px={{ base: 2, sm: 4 }} maxW={'full'} mx={'auto'}>
         <ProfileTabs />
       </Flex>
     </Container>
@@ -48,18 +42,13 @@ const ProfileHeaderSkeleton = () => {
     <Flex
       gap={{ base: 4, sm: 10 }}
       py={10}
-      direction={{ base: "column", sm: "row" }}
-      justifyContent={"center"}
-      alignItems={"center"}
+      direction={{ base: 'column', sm: 'row' }}
+      justifyContent={'center'}
+      alignItems={'center'}
     >
       <SkeletonCircle size="24" />
 
-      <VStack
-        alignItems={{ base: "center", sm: "flex-start" }}
-        gap={2}
-        mx={"auto"}
-        flex={1}
-      >
+      <VStack alignItems={{ base: 'center', sm: 'flex-start' }} gap={2} mx={'auto'} flex={1}>
         <Skeleton height="12px" width="150px" />
         <Skeleton height="12px" width="100px" />
       </VStack>
@@ -69,36 +58,11 @@ const ProfileHeaderSkeleton = () => {
 
 const UserNotFound = () => {
   return (
-    <Flex flexDir="column" textAlign={"center"} mx={"auto"}>
-      <Text fontSize={"2xl"}>User Not Found</Text>
-      <Link
-        as={RouterLink}
-        to={"/"}
-        color={"blue.500"}
-        w={"max-content"}
-        mx={"auto"}
-      >
+    <Flex flexDir="column" textAlign={'center'} mx={'auto'}>
+      <Text fontSize={'2xl'}>User Not Found</Text>
+      <Link as={RouterLink} to={'/'} color={'blue.500'} w={'max-content'} mx={'auto'}>
         Go home
       </Link>
     </Flex>
   );
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

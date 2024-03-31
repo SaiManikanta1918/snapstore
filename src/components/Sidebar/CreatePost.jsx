@@ -9,55 +9,51 @@ import {
   Input,
   Text,
   VStack,
-} from "@chakra-ui/react";
-import useShowToast from "../../hooks/useShowToast";
-import useCreatePost from "../../hooks/useCreatePost";
-import { Field, Formik, useFormik } from "formik";
-import FileUploader from "../common/FileUploader";
-import usePreviewImg from "../../hooks/usePreviewImg";
-import { Link } from "react-router-dom";
+} from '@chakra-ui/react';
+import useShowToast from '../../hooks/useShowToast';
+import useCreatePost from '../../hooks/useCreatePost';
+import { Field, Formik } from 'formik';
+import FileUploader from '../common/FileUploader';
+import usePreviewImg from '../../hooks/usePreviewImg';
+import { Link } from 'react-router-dom';
 
 const CreatePost = ({ post }) => {
   const showToast = useShowToast();
   const { isLoading, handleCreatePost } = useCreatePost();
   const { handleImageChange, selectedFile } = usePreviewImg();
 
-  const formik = useFormik({
-    initialValues: {
-      caption: "",
-      tags: [],
-      location: "",
-      file: null,
-    },
-  });
-
   const handlePostCreation = async (values) => {
     try {
       values.file = selectedFile;
       await handleCreatePost(values);
     } catch (error) {
-      showToast("Error", error.message, "error");
+      showToast('Error', error.message, 'error');
     }
   };
 
   const renderTextOnly = true;
   if (renderTextOnly) {
     return (
-      <Text fontSize={"5xl"} color={"blue.300"}>
+      <Text fontSize={'5xl'} color={'blue.300'}>
         This page is under development
       </Text>
     );
   }
 
   return (
-    <Container py={{ base: 0, md: 10 }} maxW={"container.lg"}>
+    <Container py={{ base: 0, md: 10 }} maxW={'container.lg'}>
       <Box>
-        <Text my={4} color={"white"} fontSize={"4xl"}>
+        <Text my={4} color={'white'} fontSize={'4xl'}>
           Create Post
         </Text>
       </Box>
       <Formik
-        initialValues={formik.initialValues}
+        initialValues={{
+          caption: '',
+          tags: [],
+          location: '',
+          file: null,
+        }}
         onSubmit={(values) => handlePostCreation(values)}
       >
         {({ handleSubmit, errors, touched, setFieldValue }) => (
@@ -75,7 +71,7 @@ const CreatePost = ({ post }) => {
                   name="tags"
                   validate={(value) => {
                     let error;
-                    console.log("value", value);
+                    console.log('value', value);
 
                     return error;
                   }}
@@ -86,7 +82,7 @@ const CreatePost = ({ post }) => {
                 <FormLabel htmlFor="file">Photo</FormLabel>
                 <FileUploader
                   fieldChange={(files) => {
-                    setFieldValue("file", files[0]), handleImageChange(files);
+                    setFieldValue('file', files[0]), handleImageChange(files);
                   }}
                   mediaUrl={post?.imageURL}
                 />
@@ -95,12 +91,12 @@ const CreatePost = ({ post }) => {
                 <FormLabel htmlFor="location">Location</FormLabel>
                 <Field as={Input} id="location" name="location" />
               </FormControl>
-              <Flex justifyContent={"end"} width={"100%"} gap={4} mt={10}>
+              <Flex justifyContent={'end'} width={'100%'} gap={4} mt={10}>
                 <Button type="button" bg="whiteAlpha.300" disabled={isLoading}>
                   <Link to="/">Cancel</Link>
                 </Button>
                 <Button type="submit" colorScheme="purple" disabled={isLoading}>
-                  Submit
+                  Create
                 </Button>
               </Flex>
             </VStack>
@@ -112,32 +108,3 @@ const CreatePost = ({ post }) => {
 };
 
 export default CreatePost;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

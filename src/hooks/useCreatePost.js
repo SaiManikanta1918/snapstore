@@ -1,18 +1,12 @@
-import { useState } from "react";
-import useShowToast from "./useShowToast";
-import useAuthStore from "../store/authStore";
-import useUserProfileStore from "../store/userProfileStore";
-import { useLocation, useNavigate } from "react-router-dom";
-import {
-  addDoc,
-  arrayUnion,
-  collection,
-  doc,
-  updateDoc,
-} from "firebase/firestore";
-import { firestore, storage } from "../firebase/firebase";
-import { getDownloadURL, ref, uploadString } from "firebase/storage";
-import usePostStore from "../store/postStore";
+import { useState } from 'react';
+import useShowToast from './useShowToast';
+import useAuthStore from '../store/authStore';
+import useUserProfileStore from '../store/userProfileStore';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { addDoc, arrayUnion, collection, doc, updateDoc } from 'firebase/firestore';
+import { firestore, storage } from '../firebase/firebase';
+import { getDownloadURL, ref, uploadString } from 'firebase/storage';
+import usePostStore from '../store/postStore';
 
 const useCreatePost = () => {
   const navigate = useNavigate();
@@ -26,12 +20,12 @@ const useCreatePost = () => {
 
   const handleCreatePost = async (post) => {
     if (isLoading) return;
-    if (!post.file) throw new Error("Please select an image");
+    if (!post.file) throw new Error('Please select an image');
     setIsLoading(true);
     const newPost = {
       caption: post.caption,
       location: post.location,
-      tags: post.tags.split(","),
+      tags: post.tags.split(','),
       likes: [],
       comments: [],
       createdAt: Date.now(),
@@ -39,13 +33,13 @@ const useCreatePost = () => {
     };
 
     try {
-      const postDocRef = await addDoc(collection(firestore, "posts"), newPost);
-      const userDocRef = doc(firestore, "users", authUser.uid);
+      const postDocRef = await addDoc(collection(firestore, 'posts'), newPost);
+      const userDocRef = doc(firestore, 'users', authUser.uid);
       const imageRef = ref(storage, `posts/${postDocRef.id}`);
 
       await updateDoc(userDocRef, { posts: arrayUnion(postDocRef.id) });
 
-      await uploadString(imageRef, post.file, "data_url");
+      await uploadString(imageRef, post.file, 'data_url');
 
       // getting error above because 2nd parameter shpuld be string not the object
 
@@ -55,15 +49,14 @@ const useCreatePost = () => {
 
       newPost.imageURL = downloadURL;
 
-      if (userProfile.uid === authUser.uid)
-        createPost({ ...newPost, id: postDocRef.id });
+      if (userProfile.uid === authUser.uid) createPost({ ...newPost, id: postDocRef.id });
 
-      if (pathname !== "/" && userProfile.uid === authUser.uid)
+      if (pathname !== '/' && userProfile.uid === authUser.uid)
         addPost({ ...newPost, id: postDocRef.id });
-      navigate("/");
-      showToast("Success", "Post created successfully", "success");
+      navigate('/');
+      showToast('Success', 'Post created successfully', 'success');
     } catch (error) {
-      showToast("Error", error.message, "error");
+      showToast('Error', error.message, 'error');
     } finally {
       setIsLoading(false);
     }
@@ -71,6 +64,5 @@ const useCreatePost = () => {
 
   return { isLoading, handleCreatePost };
 };
-
 
 export default useCreatePost;

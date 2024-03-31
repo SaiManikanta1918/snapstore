@@ -17,10 +17,10 @@ import {
   TabPanels,
   Tabs,
   VStack,
-} from "@chakra-ui/react";
-import useGetUsers from "../../hooks/useGetUsers";
-import { Link } from "react-router-dom";
-import { PROFILE_STAT_TABS } from "../../constants";
+} from '@chakra-ui/react';
+import useGetUsers from '../../hooks/useGetUsers';
+import { Link } from 'react-router-dom';
+import { PROFILE_STAT_TABS } from '../../constants';
 
 const FollowersList = ({ user }) => {
   const { isLoading, users } = useGetUsers(user.followers);
@@ -29,30 +29,26 @@ const FollowersList = ({ user }) => {
     return <Spinner />;
   }
   return (
-    <Flex flexDirection={"column"} gap={8}>
+    <Flex flexDirection={'column'} gap={8}>
       {users.map((user) => (
         <Flex
           gap={2}
           key={user.uid}
-          justifyContent={"space-between"}
-          alignItems={"center"}
-          w={"full"}
+          justifyContent={'space-between'}
+          alignItems={'center'}
+          w={'full'}
         >
-          <Flex alignItems={"center"} gap={2}>
+          <Flex alignItems={'center'} gap={2}>
             <Link to={`/user/${user.uid}`}>
-              <Avatar
-                src={user.profilePicURL}
-                name={user.fullName}
-                size={"md"}
-              />
+              <Avatar src={user.profilePicURL} name={user.fullName} size={'md'} />
             </Link>
-            <VStack spacing={1} alignItems={"flex-start"}>
+            <VStack spacing={1} alignItems={'flex-start'}>
               <Link to={`/user/${user.uid}`}>
-                <Box fontSize={12} fontWeight={"bold"}>
+                <Box fontSize={12} fontWeight={'bold'}>
                   {user.fullName}
                 </Box>
               </Link>
-              <Box fontSize={11} color={"gray.400"}>
+              <Box fontSize={11} color={'gray.400'}>
                 {user.username}
               </Box>
             </VStack>
@@ -83,30 +79,26 @@ const FollowingList = ({ user }) => {
     return <Spinner />;
   }
   return (
-    <Flex flexDirection={"column"} gap={8}>
+    <Flex flexDirection={'column'} gap={8}>
       {users.map((user) => (
         <Flex
           gap={2}
           key={user.uid}
-          justifyContent={"space-between"}
-          alignItems={"center"}
-          w={"full"}
+          justifyContent={'space-between'}
+          alignItems={'center'}
+          w={'full'}
         >
-          <Flex alignItems={"center"} gap={2}>
+          <Flex alignItems={'center'} gap={2}>
             <Link to={`/user/${user.uid}`}>
-              <Avatar
-                src={user.profilePicURL}
-                name={user.fullName}
-                size={"md"}
-              />
+              <Avatar src={user.profilePicURL} name={user.fullName} size={'md'} />
             </Link>
-            <VStack spacing={2} alignItems={"flex-start"}>
+            <VStack spacing={2} alignItems={'flex-start'}>
               <Link to={`/user/${user.uid}`}>
-                <Box fontSize={12} fontWeight={"bold"}>
+                <Box fontSize={12} fontWeight={'bold'}>
                   {user.fullName}
                 </Box>
               </Link>
-              <Box fontSize={11} color={"gray.500"}>
+              <Box fontSize={11} color={'gray.500'}>
                 {user.followers.length} followers
               </Box>
             </VStack>
@@ -131,21 +123,10 @@ const FollowingList = ({ user }) => {
   );
 };
 
-const ProfileStatsDrawer = ({
-  userProfile,
-  isDrawerOpen,
-  onClose,
-  selectedProfileStat,
-}) => {
-  const tabIndex = PROFILE_STAT_TABS.findIndex(
-    (tab) => tab.name === selectedProfileStat
-  );
+const ProfileStatsDrawer = ({ userProfile, isDrawerOpen, onClose, selectedProfileStat }) => {
+  const tabIndex = PROFILE_STAT_TABS.findIndex((tab) => tab.name === selectedProfileStat);
   return (
-    <Drawer
-      onClose={onClose}
-      isOpen={isDrawerOpen}
-      size={{ base: "xs", sm: "sm" }}
-    >
+    <Drawer onClose={onClose} isOpen={isDrawerOpen} size={{ base: 'xs', sm: 'sm' }}>
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
@@ -167,7 +148,7 @@ const ProfileStatsDrawer = ({
           </Tabs>
         </DrawerBody>
         <DrawerFooter borderTopWidth="1px">
-          <Button bg={"blue.300"} variant="outline" mr={3} onClick={onClose}>
+          <Button bg={'blue.300'} variant="outline" mr={3} onClick={onClose}>
             Close
           </Button>
         </DrawerFooter>
@@ -175,6 +156,5 @@ const ProfileStatsDrawer = ({
     </Drawer>
   );
 };
-
 
 export default ProfileStatsDrawer;

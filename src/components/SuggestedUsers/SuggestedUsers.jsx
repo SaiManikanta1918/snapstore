@@ -1,7 +1,7 @@
-import { Box, Flex, Link, Text, VStack } from "@chakra-ui/react";
-import SuggestedHeader from "./SuggestedHeader";
-import SuggestedUser from "./SuggestedUser";
-import useGetSuggestedUsers from "../../hooks/useGetSuggestedUsers";
+import { Box, Flex, Link, Text, VStack } from '@chakra-ui/react';
+import SuggestedHeader from './SuggestedHeader';
+import SuggestedUser from './SuggestedUser';
+import useGetSuggestedUsers from '../../hooks/useGetSuggestedUsers';
 
 const SuggestedUsers = () => {
   const { isLoading, suggestedUsers } = useGetSuggestedUsers();
@@ -14,8 +14,8 @@ const SuggestedUsers = () => {
       <SuggestedHeader />
 
       {suggestedUsers.length !== 0 && (
-        <Flex alignItems={"center"} justifyContent={"space-between"} w={"full"}>
-          <Text fontSize={12} fontWeight={"bold"} color={"gray.500"}>
+        <Flex alignItems={'center'} justifyContent={'space-between'} w={'full'}>
+          <Text fontSize={12} fontWeight={'bold'} color={'gray.500'}>
             Snappies for you
           </Text>
           {/* <Text
@@ -33,8 +33,8 @@ const SuggestedUsers = () => {
         <SuggestedUser user={user} key={user.id} />
       ))}
 
-      <Box fontSize={12} color={"gray.500"} mt={5} alignSelf={"start"}>
-        © 2023 Built By{" "}
+      <Box fontSize={12} color={'gray.500'} mt={5} alignSelf={'start'}>
+        © 2023 Built By{' '}
         <Link
           href="https://www.linkedin.com/in/sai-manikanta-karnati-9a62601b1"
           target="_blank"

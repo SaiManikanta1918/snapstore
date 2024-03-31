@@ -1,12 +1,11 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
 const usePostStore = create((set) => ({
   posts: [],
   likedPosts: [],
   savedPosts: [],
   createPost: (post) => set((state) => ({ posts: [post, ...state.posts] })),
-  deletePost: (id) =>
-    set((state) => ({ posts: state.posts.filter((post) => post.id !== id) })),
+  deletePost: (id) => set((state) => ({ posts: state.posts.filter((post) => post.id !== id) })),
   setPosts: (posts) => set({ posts }),
   setSavedPosts: (savedPosts) => set({ savedPosts }),
   setLikedPosts: (likedPosts) => set({ likedPosts }),
@@ -25,6 +24,3 @@ const usePostStore = create((set) => ({
 }));
 
 export default usePostStore;
-
-
-
