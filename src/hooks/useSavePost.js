@@ -3,12 +3,21 @@ import useAuthStore from '../store/authStore';
 import useShowToast from './useShowToast';
 import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { firestore } from '../firebase/firebase';
+import usePostStore from '../store/postStore';
 
 const useSavePost = (post) => {
   const [isUpdating, setIsUpdating] = useState(false);
   const authUser = useAuthStore((state) => state.user);
   const [isSaved, setIsSaved] = useState(post.saves?.includes(authUser?.uid));
   const showToast = useShowToast();
+  const { savedPosts, setSavedPosts } = usePostStore();
+
+  function updatedSavedPosts() {
+    const newSavedPosts = isSaved
+      ? savedPosts.filter((savedPost) => savedPost.id !== post.id)
+      : [...savedPosts, post];
+    setSavedPosts(newSavedPosts);
+  }
 
   const handleSavePost = async () => {
     if (isUpdating) return;
@@ -23,6 +32,7 @@ const useSavePost = (post) => {
       });
       post.setSaves(newSaves);
       setIsSaved(!isSaved);
+      updatedSavedPosts();
     } catch (error) {
       showToast('Error', error.message, 'error');
     } finally {

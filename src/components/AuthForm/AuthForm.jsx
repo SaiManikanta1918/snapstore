@@ -10,7 +10,7 @@ const AuthForm = () => {
 
   return (
     <>
-      <Box border={'1px solid gray'} borderRadius={4} padding={5}>
+      <Box border={{ md: '1px solid gray' }} borderRadius={4} padding={5}>
         <VStack spacing="8">
           <Image src="/snapstore.png" h={24} cursor={'pointer'} alt="Snapstore" />
 
@@ -27,7 +27,7 @@ const AuthForm = () => {
         </VStack>
       </Box>
 
-      <Box border={'1px solid gray'} borderRadius={4} padding={5}>
+      <Box border={{ md: '1px solid gray' }} borderRadius={4} padding={5}>
         <Flex alignItems={'center'} justifyContent={'center'}>
           <Box mx={2} fontSize={14}>
             {isLogin ? "Don't have an account?" : 'Already have an account?'}

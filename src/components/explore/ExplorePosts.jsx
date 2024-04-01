@@ -1,7 +1,8 @@
-import { Box, Grid, Skeleton, Text, VStack } from '@chakra-ui/react';
+import { Grid, Text } from '@chakra-ui/react';
 import useGetFeedPosts from '../../hooks/useGetFeedPosts';
 import { useEffect, useState } from 'react';
 import Post from '../Profile/Post';
+import { GridPostsSkeleton } from '../Loaders';
 
 const ExplorePosts = ({ searchText }) => {
   const { isLoading, posts } = useGetFeedPosts();
@@ -28,17 +29,13 @@ const ExplorePosts = ({ searchText }) => {
       gap={10}
       columnGap={10}
     >
-      {isLoading
-        ? [...new Array(6)].map((_, idx) => (
-            <VStack key={idx} alignItems={'flex-start'} gap={4}>
-              <Skeleton w={'full'}>
-                <Box h="300px">contents wrapped</Box>
-              </Skeleton>
-            </VStack>
-          ))
-        : filteredPosts.map((post) => {
-            return <Post key={post.id} post={post} />;
-          })}
+      {isLoading ? (
+        <GridPostsSkeleton />
+      ) : (
+        filteredPosts.map((post) => {
+          return <Post key={post.id} post={post} />;
+        })
+      )}
     </Grid>
   );
 };

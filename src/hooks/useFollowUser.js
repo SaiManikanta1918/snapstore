@@ -25,6 +25,9 @@ const useFollowUser = (userId) => {
       await updateDoc(userToFollowOrUnfollorRef, {
         followers: isFollowing ? arrayRemove(authUser.uid) : arrayUnion(authUser.uid),
       });
+      const newFollwingList = isFollowing
+        ? authUser.following.filter((uid) => uid !== userId)
+        : [...authUser.following, userId];
 
       if (isFollowing) {
         // unfollow
@@ -37,14 +40,6 @@ const useFollowUser = (userId) => {
             ...userProfile,
             followers: userProfile.followers.filter((uid) => uid !== authUser.uid),
           });
-
-        localStorage.setItem(
-          'user-info',
-          JSON.stringify({
-            ...authUser,
-            following: authUser.following.filter((uid) => uid !== userId),
-          })
-        );
         setIsFollowing(false);
       } else {
         // follow
@@ -58,16 +53,15 @@ const useFollowUser = (userId) => {
             ...userProfile,
             followers: [...userProfile.followers, authUser.uid],
           });
-
-        localStorage.setItem(
-          'user-info',
-          JSON.stringify({
-            ...authUser,
-            following: [...authUser.following, userId],
-          })
-        );
         setIsFollowing(true);
       }
+      localStorage.setItem(
+        'user-info',
+        JSON.stringify({
+          ...authUser,
+          following: newFollwingList,
+        })
+      );
     } catch (error) {
       showToast('Error', error.message, 'error');
     } finally {

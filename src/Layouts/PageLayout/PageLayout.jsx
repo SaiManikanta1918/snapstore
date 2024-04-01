@@ -1,49 +1,56 @@
-import { Box, Flex, Spinner } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import { useLocation } from 'react-router-dom';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../../firebase/firebase';
-import Navbar from '../../components/Navbar/Navbar';
 import Bottombar from '../../components/Bottombar/Bottombar';
 import Topbar from '../../components/Topbar/Topbar';
+import useGetLoggedInUser from '../../hooks/useGetLoggedInUser';
+import { PageLayoutSpinner } from '../../components/Loaders';
 
-const PageLayout = ({ children }) => {
+const PageLayout = ({ children, authUser }) => {
   const { pathname } = useLocation();
-  const [user, loading] = useAuthState(auth);
-  const canRenderSidebar = pathname !== '/login' && user;
-  const canRenderNavbar = !user && !loading && pathname !== '/login';
+  const canRenderSidebar = pathname !== '/login' && authUser;
+  const { isLoading } = useGetLoggedInUser(authUser);
 
-  const checkingUserIsAuth = !user && loading;
-  if (checkingUserIsAuth) return <PageLayoutSpinner />;
+  if (isLoading) return <PageLayoutSpinner />;
 
   return (
-    <div style={{ width: '100%', height: 'inherit' }}>
-      {user && <Topbar />}
-      <section>
-        <Flex flexDir={canRenderNavbar ? 'column' : 'row'}>
-          {canRenderSidebar ? (
-            <Box w={{ base: '70px', md: '240px' }} display={{ base: 'none', md: 'block' }}>
-              <Sidebar />
-            </Box>
-          ) : null}
-          {/* Navbar */}
-          {canRenderNavbar ? <Navbar /> : null}
-          <Box flex={1} w={{ base: 'calc(100% - 70px)', md: 'calc(100% - 240px)' }} mx={'auto'}>
+    <Box w={'100%'} display={{ md: 'flex' }}>
+      <section
+        style={{ position: 'sticky', top: '0px', backgroundColor: 'rgb(9 9 10 / 1)', zIndex: '50' }}
+      >
+        {authUser && <Topbar />}
+      </section>
+      <nav>
+        {canRenderSidebar ? (
+          <Box w={{ base: '70px', md: '240px' }} display={{ base: 'none', md: 'block' }}>
+            <Sidebar />
+          </Box>
+        ) : null}
+      </nav>
+      <section style={{ height: '100%', display: 'flex', flex: '1 1 0%' }}>
+        <Flex flexDir={'row'} flex={'1 1 0%'}>
+          <Box
+            flex={1}
+            w={{ base: 'calc(100% - 70px)', md: 'calc(100% - 240px)' }}
+            mx={'auto'}
+            overflowY={'scroll'}
+          >
             {children}
           </Box>
         </Flex>
       </section>
-      {user && <Bottombar />}
-    </div>
+      <section
+        style={{
+          position: 'sticky',
+          bottom: '0px',
+          backgroundColor: 'rgb(9 9 10 / 1)',
+          zIndex: '50',
+        }}
+      >
+        {authUser && <Bottombar />}
+      </section>
+    </Box>
   );
 };
 
 export default PageLayout;
-
-const PageLayoutSpinner = () => {
-  return (
-    <Flex flexDir="column" h="100vh" alignItems="center" justifyContent="center">
-      <Spinner size="xl" />
-    </Flex>
-  );
-};

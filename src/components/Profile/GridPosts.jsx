@@ -1,18 +1,10 @@
-import { Box, Grid, Skeleton, Spinner, VStack } from '@chakra-ui/react';
+import { Grid } from '@chakra-ui/react';
 import Post from './Post';
 import NoPosts from './NoPosts';
+import { GridPostsSkeleton } from '../Loaders';
 
 const GridPosts = ({ isLoading, posts }) => {
-  const noPostsFound = !isLoading && posts.length === 0;
-  if (noPostsFound) return <NoPosts />;
-
-  if (isLoading) {
-    return (
-      <Box textAlign="center">
-        <Spinner />
-      </Box>
-    );
-  }
+  if (!isLoading && !posts.length) return <NoPosts />;
 
   return (
     <Grid
@@ -23,15 +15,7 @@ const GridPosts = ({ isLoading, posts }) => {
       gap={10}
       columnGap={10}
     >
-      {isLoading
-        ? [0, 1, 2].map((_, idx) => (
-            <VStack key={idx} alignItems={'flex-start'} gap={4}>
-              <Skeleton w={'full'}>
-                <Box h="300px">contents wrapped</Box>
-              </Skeleton>
-            </VStack>
-          ))
-        : posts.map((post) => <Post post={post} key={post.id} />)}
+      {isLoading ? <GridPostsSkeleton /> : posts.map((post) => <Post post={post} key={post.id} />)}
     </Grid>
   );
 };

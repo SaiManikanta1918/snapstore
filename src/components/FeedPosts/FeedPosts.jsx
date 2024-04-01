@@ -1,40 +1,28 @@
-import { Box, Container, Flex, Skeleton, SkeletonCircle, Text, VStack } from '@chakra-ui/react';
+import { Container, Text } from '@chakra-ui/react';
 import FeedPost from './FeedPost';
 import useGetFeedPosts from '../../hooks/useGetFeedPosts';
+import { FeedPostsSkeleton } from '../Loaders';
 
 const FeedPosts = () => {
   const { isLoading, posts } = useGetFeedPosts();
 
-  return (
-    <Container maxW={'container.md'} px={{ base: 5, md: 2 }}>
-      {isLoading &&
-        [0, 1, 2].map((_, idx) => (
-          <VStack key={idx} gap={4} alignItems={'flex-start'} mb={10}>
-            <Flex gap="2">
-              <SkeletonCircle size="10" />
-              <VStack gap={2} alignItems={'flex-start'}>
-                <Skeleton height="10px" w={'200px'} />
-                <Skeleton height="10px" w={'200px'} />
-              </VStack>
-            </Flex>
-            <Skeleton w={'full'}>
-              <Box h={'400px'}>contents wrapped</Box>
-            </Skeleton>
-          </VStack>
-        ))}
+  if (!isLoading && !posts.length) {
+    return (
+      <Text fontSize={'md'} color={'white.400'}>
+        No Posts found, please stop coding and start by creating posts.
+      </Text>
+    );
+  }
 
-      {!isLoading &&
-        posts.length > 0 &&
-        posts.map((post) => <FeedPost key={post.id} post={post} />)}
-      {!isLoading && posts.length === 0 && (
-        <>
-          <Text fontSize={'md'} color={'white.400'}>
-            No Posts found, please stop coding and start by creating posts.
-          </Text>
-        </>
-      )}
-    </Container>
-  );
+    return (
+      <Container maxW={'container.md'} px={{ base: 5, md: 2 }}>
+        {isLoading ? (
+          <FeedPostsSkeleton />
+        ) : (
+          posts.map((post) => <FeedPost key={post.id} post={post} />)
+        )}
+      </Container>
+    );
 };
 
 export default FeedPosts;

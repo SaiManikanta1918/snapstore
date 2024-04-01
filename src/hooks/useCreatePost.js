@@ -53,7 +53,7 @@ const useCreatePost = () => {
 
       if (pathname !== '/' && userProfile.uid === authUser.uid)
         addPost({ ...newPost, id: postDocRef.id });
-      navigate('/');
+      navigate('/home');
       showToast('Success', 'Post created successfully', 'success');
     } catch (error) {
       showToast('Error', error.message, 'error');

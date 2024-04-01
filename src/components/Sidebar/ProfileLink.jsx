@@ -10,7 +10,7 @@ const ProfileLink = () => {
   return (
     <Link
       display={'flex'}
-      to={`/user/${authUser?.uid}`}
+      to={`/user/${authUser?.uid}/posts`}
       as={RouterLink}
       alignItems={'center'}
       gap={4}

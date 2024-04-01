@@ -31,19 +31,11 @@ const CreatePost = ({ post }) => {
     }
   };
 
-  const renderTextOnly = true;
-  if (renderTextOnly) {
-    return (
-      <Text fontSize={'5xl'} color={'blue.300'}>
-        This page is under development
-      </Text>
-    );
-  }
-
   return (
     <Container py={{ base: 0, md: 10 }} maxW={'container.lg'}>
-      <Box>
-        <Text my={4} color={'white'} fontSize={'4xl'}>
+      <Box display={'flex'}>
+        <img src="/add-post.svg" width={36} height={36} alt="add post" />
+        <Text my={4} color={'white'} fontSize={'4xl'} pl={4}>
           Create Post
         </Text>
       </Box>
@@ -56,25 +48,20 @@ const CreatePost = ({ post }) => {
         }}
         onSubmit={(values) => handlePostCreation(values)}
       >
-        {({ handleSubmit, errors, touched, setFieldValue }) => (
+        {({ handleSubmit, errors, setFieldValue }) => (
           <form onSubmit={handleSubmit}>
             <VStack spacing={4} align="flex-start">
               <FormControl>
                 <FormLabel htmlFor="caption">Caption</FormLabel>
                 <Field as={Input} id="caption" name="caption" />
               </FormControl>
-              <FormControl isInvalid={!!errors.password && touched.password}>
+              <FormControl>
                 <FormLabel htmlFor="tags">Tags (separated by comma) </FormLabel>
                 <Field
                   as={Input}
                   id="tags"
                   name="tags"
-                  validate={(value) => {
-                    let error;
-                    console.log('value', value);
-
-                    return error;
-                  }}
+                  placeholder="Cricket, Coding, Teaching, App development"
                 />
                 <FormErrorMessage>{errors.password}</FormErrorMessage>
               </FormControl>

@@ -4,7 +4,7 @@ import { CreatePostLogo, NotificationsLogo, SearchLogo } from '../../assets/cons
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { SIDEBAR_TABS } from '../../constants';
 import React from 'react';
-import { AiOutlineHome } from 'react-icons/ai';
+import { AiOutlineHome, AiOutlineWechat } from 'react-icons/ai';
 
 const Components = {
   home: AiOutlineHome,
@@ -12,6 +12,7 @@ const Components = {
   notifications: NotificationsLogo,
   create: CreatePostLogo,
   explore: SearchLogo,
+  chat: AiOutlineWechat,
 };
 
 const SidebarItems = () => {
@@ -27,7 +28,7 @@ const SidebarItems = () => {
           as={RouterLink}
           alignItems={'center'}
           gap={4}
-          bg={link.route === pathname ? 'whiteAlpha.400' : ''}
+          bg={pathname.startsWith(link.route) ? 'whiteAlpha.400' : ''}
           _hover={{ bg: 'whiteAlpha.400' }}
           borderRadius={6}
           p={2}

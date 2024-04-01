@@ -4,7 +4,7 @@ import PostHeader from './PostHeader';
 import useGetUserProfileById from '../../hooks/useGetUserProfileById';
 
 const FeedPost = ({ post }) => {
-  const { userProfile } = useGetUserProfileById(post.createdBy);
+  const { user: userProfile } = useGetUserProfileById(post.createdBy);
 
   return (
     <Flex flexDirection="column">

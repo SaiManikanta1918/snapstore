@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import usePostStore from '../store/postStore';
 import useAuthStore from '../store/authStore';
 import useShowToast from './useShowToast';
-import useUserProfileStore from '../store/userProfileStore';
 import { collection, getDocs, query } from 'firebase/firestore';
 import { firestore } from '../firebase/firebase';
 import PostModel from '../models/PostModel';
@@ -12,7 +11,6 @@ const useGetFeedPosts = () => {
   const { posts, setPosts } = usePostStore();
   const authUser = useAuthStore((state) => state.user);
   const showToast = useShowToast();
-  const { setUserProfile } = useUserProfileStore();
 
   useEffect(() => {
     const getFeedPosts = async () => {
@@ -43,7 +41,7 @@ const useGetFeedPosts = () => {
     };
 
     if (authUser) getFeedPosts();
-  }, [authUser, showToast, setPosts, setUserProfile]);
+  }, [authUser, showToast, setPosts]);
 
   return { isLoading, posts };
 };

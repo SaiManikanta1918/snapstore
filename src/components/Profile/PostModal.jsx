@@ -22,10 +22,12 @@ import { arrayRemove, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import useShowToast from '../../hooks/useShowToast';
 import { useState } from 'react';
 import usePostStore from '../../store/postStore';
+import { useParams } from 'react-router-dom';
 
 function PostModal({ isOpen, onClose, post }) {
   const authUser = useAuthStore((state) => state.user);
   const showToast = useShowToast();
+  const { userId } = useParams();
   const [isDeleting, setIsDeleting] = useState(false);
   const deletePost = usePostStore((state) => state.deletePost);
   const decrementPostsCount = useUserProfileStore((state) => state.deletePost);
@@ -86,16 +88,15 @@ function PostModal({ isOpen, onClose, post }) {
                   </Text>
                 </Flex>
 
-                {authUser.uid === post.createdBy && (
+                {userId && authUser.uid === post.createdBy && (
                   <DeleteAlert deleteItem={handleDeletePost} isDeleting={isDeleting} />
                 )}
               </Flex>
               <Divider my={4} bg={'gray.500'} />
 
               <VStack w="full" alignItems={'start'} maxH={'350px'} overflowY={'auto'}>
-                {/* {post.caption && <Caption post={post} />} */}
-                {post.comments.map((comment) => (
-                  <Comment key={comment.id} comment={comment} />
+                {post.comments.map((comment, idx) => (
+                  <Comment key={idx} comment={comment} />
                 ))}
               </VStack>
               <Divider my={4} bg={'gray.8000'} />

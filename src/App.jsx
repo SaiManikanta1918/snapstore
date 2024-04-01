@@ -7,22 +7,24 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './firebase/firebase';
 import CreatePost from './components/Sidebar/CreatePost';
 import { Explore } from './components/Sidebar/Explore';
+import Chat from './components/Sidebar/Chat';
+import { Spinner } from '@chakra-ui/react';
 
 function App() {
-  const [authUser] = useAuthState(auth);
+  const [authUser, isLoading] = useAuthState(auth);
+
+  if (isLoading) return <Spinner />;
 
   return (
-    <main className="flex" style={{ height: '100vh' }}>
-      <PageLayout>
+    <main style={{ height: '100vh', display: 'flex' }}>
+      <PageLayout authUser={authUser} loading={isLoading}>
         <Routes>
-          <Route path="/" element={authUser ? <HomePage /> : <Navigate to="/login" />} />
-          <Route path="/login" element={!authUser ? <AuthPage /> : <Navigate to="/" />} />
-          {/* <Route path="/search" element={<Search />} /> */}
+          <Route path="/login" element={!authUser ? <AuthPage /> : <Navigate to="/home" />} />
+          <Route path="/home" element={!authUser ? <Navigate to="/login" /> : <HomePage />} />
           <Route
             path="/explore/:selectedTab?"
             element={!authUser ? <Navigate to="/login" /> : <Explore />}
           />
-          {/* <Route path="/notifications" element={<Notifications />} /> */}
           <Route
             path="/user/:userId/:selectedTab?"
             element={!authUser ? <Navigate to="/login" /> : <ProfilePage />}
@@ -30,6 +32,10 @@ function App() {
           <Route
             path="/create-post"
             element={!authUser ? <Navigate to="/login" /> : <CreatePost />}
+          />
+          <Route
+            path="/chat/:selectedUser?"
+            element={!authUser ? <Navigate to="/login" /> : <Chat />}
           />
         </Routes>
       </PageLayout>

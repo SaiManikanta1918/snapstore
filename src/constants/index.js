@@ -18,7 +18,7 @@ export const SIDEBAR_TABS = [
   {
     label: 'Home',
     name: 'home',
-    route: '/',
+    route: '/home',
   },
   {
     label: 'Explore',
@@ -29,6 +29,11 @@ export const SIDEBAR_TABS = [
     label: 'Create',
     name: 'create',
     route: '/create-post',
+  },
+  {
+    label: 'Chat',
+    name: 'chat',
+    route: '/chat',
   },
 ];
 

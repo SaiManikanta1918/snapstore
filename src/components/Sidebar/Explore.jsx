@@ -1,14 +1,4 @@
-import {
-  Container,
-  Flex,
-  Input,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  Text,
-} from '@chakra-ui/react';
+import { Container, Flex, Input, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import ExplorePeople from '../explore/ExplorePeople';
 import ExplorePosts from '../explore/ExplorePosts';
 import { useState } from 'react';
@@ -25,15 +15,6 @@ export const Explore = () => {
   function onTabChage(index) {
     navigate(`/explore/${EXPLORE_TABS[index].name}`);
     setSelectedTabIndex(index);
-  }
-
-  const renderTextOnly = true;
-  if (renderTextOnly) {
-    return (
-      <Text fontSize={'5xl'} color={'blue.300'}>
-        This page is under development
-      </Text>
-    );
   }
 
   return (

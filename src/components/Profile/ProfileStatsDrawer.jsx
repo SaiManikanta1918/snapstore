@@ -39,11 +39,11 @@ const FollowersList = ({ user }) => {
           w={'full'}
         >
           <Flex alignItems={'center'} gap={2}>
-            <Link to={`/user/${user.uid}`}>
+            <Link to={`/user/${user.uid}/posts`}>
               <Avatar src={user.profilePicURL} name={user.fullName} size={'md'} />
             </Link>
             <VStack spacing={1} alignItems={'flex-start'}>
-              <Link to={`/user/${user.uid}`}>
+              <Link to={`/user/${user.uid}/posts`}>
                 <Box fontSize={12} fontWeight={'bold'}>
                   {user.fullName}
                 </Box>
@@ -89,11 +89,11 @@ const FollowingList = ({ user }) => {
           w={'full'}
         >
           <Flex alignItems={'center'} gap={2}>
-            <Link to={`/user/${user.uid}`}>
+            <Link to={`/user/${user.uid}/posts`}>
               <Avatar src={user.profilePicURL} name={user.fullName} size={'md'} />
             </Link>
             <VStack spacing={2} alignItems={'flex-start'}>
-              <Link to={`/user/${user.uid}`}>
+              <Link to={`/user/${user.uid}/posts`}>
                 <Box fontSize={12} fontWeight={'bold'}>
                   {user.fullName}
                 </Box>

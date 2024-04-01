@@ -10,7 +10,7 @@ import { PROFILE_STAT_TABS } from '../../constants';
 const ProfileHeader = () => {
   const [selectedProfileStat, setSelectedProfileStat] = useState(null);
   const authUser = useAuthStore((state) => state.user);
-  const { userProfile } = useUserProfileStore();
+  const userProfile = useUserProfileStore((state) => state.userProfile);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: isDrawerOpen, onOpen: onDrawerOpen, onClose: onDrawerClose } = useDisclosure();
   const { isFollowing, isUpdating, handleFollowUser } = useFollowUser(userProfile?.uid);

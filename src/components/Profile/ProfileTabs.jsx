@@ -14,10 +14,12 @@ const ProfileTabs = () => {
   const { selectedTab, userId } = useParams();
   const tabIndex = PROFILE_TABS.findIndex((tab) => tab.name === selectedTab);
   const [selectedTabIndex, setSelectedTabIndex] = useState(tabIndex > -1 ? tabIndex : 0);
+
   function onTabChage(index) {
     navigate(`/user/${userId}/${PROFILE_TABS[index].name}`);
     setSelectedTabIndex(index);
   }
+
   const userProfile = useUserProfileStore((state) => state.userProfile);
   const authUser = useAuthStore((state) => state.user);
   const PostsTab = () => (
@@ -51,7 +53,7 @@ const ProfileTabs = () => {
     </Flex>
   );
   return (
-    <Tabs defaultIndex={selectedTabIndex} onChange={(index) => onTabChage(index)} isLazy>
+    <Tabs flex={1} defaultIndex={selectedTabIndex} onChange={(index) => onTabChage(index)} isLazy>
       <TabList>
         <Tab>
           <PostsTab />

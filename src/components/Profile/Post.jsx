@@ -11,7 +11,7 @@ const Post = ({ post }) => {
       <GridItem
         key={post.id}
         cursor={'pointer'}
-        borderRadius={4}
+        borderRadius={20}
         overflow={'hidden'}
         border={'1px solid'}
         borderColor={'whiteAlpha.500'}

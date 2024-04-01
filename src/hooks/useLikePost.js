@@ -3,6 +3,7 @@ import useAuthStore from '../store/authStore';
 import useShowToast from './useShowToast';
 import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { firestore } from '../firebase/firebase';
+import usePostStore from '../store/postStore';
 
 const useLikePost = (post) => {
   const [isUpdating, setIsUpdating] = useState(false);
@@ -10,6 +11,14 @@ const useLikePost = (post) => {
   const [likes, setLikes] = useState(post.noOfLikes);
   const [isLiked, setIsLiked] = useState(post.isUserLiked(authUser?.uid));
   const showToast = useShowToast();
+  const { likedPosts, setLikedPosts } = usePostStore();
+
+  function updatedLikedPosts() {
+    const newSavedPosts = isLiked
+      ? likedPosts.filter((savedPost) => savedPost.id !== post.id)
+      : [...likedPosts, post];
+    setLikedPosts(newSavedPosts);
+  }
 
   const handleLikePost = async () => {
     if (isUpdating) return;
@@ -25,6 +34,7 @@ const useLikePost = (post) => {
       post.setLikes(newLikes);
       setIsLiked(!isLiked);
       isLiked ? setLikes(likes - 1) : setLikes(likes + 1);
+      updatedLikedPosts();
     } catch (error) {
       showToast('Error', error.message, 'error');
     } finally {
