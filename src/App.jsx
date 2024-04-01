@@ -20,6 +20,10 @@ function App() {
       <PageLayout authUser={authUser} loading={isLoading}>
         <Routes>
           <Route path="/login" element={!authUser ? <AuthPage /> : <Navigate to="/home" />} />
+          <Route
+            path="/"
+            element={!authUser ? <Navigate to="/login" /> : <Navigate to="/home" />}
+          />
           <Route path="/home" element={!authUser ? <Navigate to="/login" /> : <HomePage />} />
           <Route
             path="/explore/:selectedTab?"
