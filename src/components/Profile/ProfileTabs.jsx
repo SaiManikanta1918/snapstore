@@ -1,5 +1,4 @@
-import { Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react';
-import { BsBookmark, BsGrid3X3, BsSuitHeart } from 'react-icons/bs';
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import ProfilePosts from './ProfilePosts';
 import LikedPosts from './LikedPosts';
 import SavedPosts from './SavedPosts';
@@ -8,6 +7,7 @@ import useAuthStore from '../../store/authStore';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { PROFILE_TABS } from '../../constants';
+import { LikesTab, PostsTab, SavesTab } from '../Tabs';
 
 const ProfileTabs = () => {
   const navigate = useNavigate();
@@ -22,36 +22,7 @@ const ProfileTabs = () => {
 
   const userProfile = useUserProfileStore((state) => state.userProfile);
   const authUser = useAuthStore((state) => state.user);
-  const PostsTab = () => (
-    <Flex alignItems={'center'} p="3" gap={4} cursor={'pointer'}>
-      <Box fontSize={20}>
-        <BsGrid3X3 />
-      </Box>
-      <Text fontSize={12} display={{ base: 'none', sm: 'block' }}>
-        Posts
-      </Text>
-    </Flex>
-  );
-  const SavesTab = () => (
-    <Flex alignItems={'center'} p="3" gap={4} cursor={'pointer'}>
-      <Box fontSize={20}>
-        <BsBookmark />
-      </Box>
-      <Text fontSize={12} display={{ base: 'none', sm: 'block' }}>
-        Saved
-      </Text>
-    </Flex>
-  );
-  const LikesTab = () => (
-    <Flex alignItems={'center'} p="3" gap={4} cursor={'pointer'}>
-      <Box fontSize={20}>
-        <BsSuitHeart fontWeight={'bold'} />
-      </Box>
-      <Text fontSize={12} display={{ base: 'none', sm: 'block' }}>
-        Likes
-      </Text>
-    </Flex>
-  );
+
   return (
     <Tabs flex={1} defaultIndex={selectedTabIndex} onChange={(index) => onTabChage(index)} isLazy>
       <TabList>

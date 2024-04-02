@@ -5,7 +5,6 @@ export const ProfileHeaderSkeleton = () => {
   return (
     <Flex
       gap={{ base: 4, sm: 10 }}
-      py={10}
       direction={{ base: 'column', sm: 'row' }}
       justifyContent={'center'}
       alignItems={'center'}

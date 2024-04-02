@@ -1,4 +1,6 @@
 import { create } from 'zustand';
+import PostCommentModel from '../models/PostCommentModel';
+import PostModel from '../models/PostModel';
 
 const usePostStore = create((set) => ({
   posts: [],
@@ -13,10 +15,10 @@ const usePostStore = create((set) => ({
     set((state) => ({
       posts: state.posts.map((post) => {
         if (post.id === postId) {
-          return {
+          return PostModel.mapModel({
             ...post,
-            comments: [...post.comments, comment],
-          };
+            comments: [...post.comments, PostCommentModel.mapModel(comment)],
+          });
         }
         return post;
       }),

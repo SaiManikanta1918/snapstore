@@ -7,6 +7,7 @@ import { addDoc, arrayUnion, collection, doc, updateDoc } from 'firebase/firesto
 import { firestore, storage } from '../firebase/firebase';
 import { getDownloadURL, ref, uploadString } from 'firebase/storage';
 import usePostStore from '../store/postStore';
+import PostModel from '../models/PostModel';
 
 const useCreatePost = () => {
   const navigate = useNavigate();
@@ -49,7 +50,8 @@ const useCreatePost = () => {
 
       newPost.imageURL = downloadURL;
 
-      if (userProfile.uid === authUser.uid) createPost({ ...newPost, id: postDocRef.id });
+      if (userProfile.uid === authUser.uid)
+        createPost(PostModel.mapModel({ ...newPost, id: postDocRef.id }));
 
       if (pathname !== '/' && userProfile.uid === authUser.uid)
         addPost({ ...newPost, id: postDocRef.id });

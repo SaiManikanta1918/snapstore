@@ -1,4 +1,4 @@
-import { Container, Flex, Link, Spinner, Text } from '@chakra-ui/react';
+import { Container, Flex, Link, Text } from '@chakra-ui/react';
 import ProfileHeader from '../../components/Profile/ProfileHeader';
 import ProfileTabs from '../../components/Profile/ProfileTabs';
 import { useParams } from 'react-router-dom';
@@ -21,7 +21,6 @@ const ProfilePage = () => {
 
   const userNotFound = !isLoading && !userProfile;
   if (userNotFound) return <UserNotFound />;
-  if (isLoading) return <Spinner />;
 
   return (
     <Container maxW="container.lg" py={{ base: 0, md: 5 }}>
