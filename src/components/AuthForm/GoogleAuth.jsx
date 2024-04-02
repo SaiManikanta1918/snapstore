@@ -34,6 +34,7 @@ const GoogleAuth = ({ prefix }) => {
           fullName: newUser.user.displayName,
           username: newUser.user.email.split('@')[0],
           profilePicURL: newUser.user.photoURL,
+          isPrivate: false,
         };
         await setDoc(doc(firestore, 'users', newUser.user.uid), userDoc);
       }

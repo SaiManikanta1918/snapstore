@@ -34,7 +34,7 @@ const useEditProfile = () => {
         fullName: inputs.fullName || authUser.fullName,
         username: inputs.username || authUser.username,
         bio: inputs.bio || authUser.bio,
-        isPrivate: inputs.isPrivate,
+        isPrivate: inputs.isPrivate || false,
         profilePicURL: URL || authUser.profilePicURL,
       };
 

@@ -13,7 +13,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Stack,
-  Switch,
+  // Switch,
 } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
 import useAuthStore from '../../store/authStore';
@@ -101,7 +101,7 @@ const EditProfile = ({ isOpen, onClose }) => {
                 onChange={(e) => setInputs({ ...inputs, bio: e.target.value })}
               />
             </FormControl>
-            <FormControl display="flex" alignItems="center" mt={8}>
+            {/* <FormControl display="flex" alignItems="center" mt={8}>
               <FormLabel htmlFor="email-alerts" mb="0">
                 Private Account
               </FormLabel>
@@ -112,7 +112,7 @@ const EditProfile = ({ isOpen, onClose }) => {
                 isChecked={inputs.isPrivate}
                 onChange={(e) => setInputs({ ...inputs, isPrivate: e.target.checked })}
               />
-            </FormControl>
+            </FormControl> */}
           </ModalBody>
           <ModalFooter>
             <Button bg={'red.400'} color={'white'} mr={3} onClick={onClose}>
