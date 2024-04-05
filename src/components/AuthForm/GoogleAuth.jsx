@@ -16,6 +16,7 @@ const GoogleAuth = ({ prefix }) => {
       const newUser = await signInWithGoogle();
       if (!newUser && error) {
         showToast('Error', error.message, 'error');
+        console.error(error);
         return;
       }
       const userRef = doc(firestore, 'users', newUser.user.uid);
@@ -42,6 +43,7 @@ const GoogleAuth = ({ prefix }) => {
       loginUser(userDoc);
     } catch (error) {
       showToast('Error', error.message, 'error');
+      console.error(error);
     }
   };
 

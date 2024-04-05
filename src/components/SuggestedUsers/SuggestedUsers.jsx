@@ -21,7 +21,7 @@ const SuggestedUsers = () => {
         suggestedUsers.map((user) => <SuggestedUser user={user} key={user.id} />)
       )}
 
-      <Box fontSize={12} color={'gray.500'} mt={5} alignSelf={'start'}>
+      {/* <Box fontSize={12} color={'gray.500'} mt={5} alignSelf={'start'}>
         © 2024 Built By{' '}
         <Link
           href="https://www.linkedin.com/in/sai-manikanta-karnati-9a62601b1"
@@ -31,7 +31,7 @@ const SuggestedUsers = () => {
         >
           Sai Manikanta
         </Link>
-      </Box>
+      </Box> */}
     </VStack>
   );
 };

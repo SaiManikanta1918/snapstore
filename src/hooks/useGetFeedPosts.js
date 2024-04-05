@@ -35,6 +35,7 @@ const useGetFeedPosts = () => {
         setPosts(feedPosts);
       } catch (error) {
         showToast('Error', error.message, 'error');
+        console.error(error);
       } finally {
         setIsLoading(false);
       }

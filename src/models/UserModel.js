@@ -63,7 +63,7 @@ export default class UserModel extends BaseModel {
     this.bio = model.bio;
     this.createdAt = model.createdAt;
     this.email = model.email;
-    this.isPrivate = model.isPrivate || false; 
+    this.isPrivate = model.isPrivate || false;
     this.followers = model.followers || [];
     this.following = model.following || [];
     this.fullName = model.fullName;

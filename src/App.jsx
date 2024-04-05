@@ -9,6 +9,7 @@ import CreatePost from './components/Sidebar/CreatePost';
 import { Explore } from './components/Sidebar/Explore';
 import Chat from './components/Sidebar/Chat';
 import { Spinner } from '@chakra-ui/react';
+import SettingsPage from './pages/SettingsPage/SettingsPage';
 
 function App() {
   const [authUser, isLoading] = useAuthState(auth);
@@ -38,8 +39,12 @@ function App() {
             element={!authUser ? <Navigate to="/login" /> : <CreatePost />}
           />
           <Route
-            path="/chat/:selectedUser?"
+            path="/chat/:selectedUserId?"
             element={!authUser ? <Navigate to="/login" /> : <Chat />}
+          />
+          <Route
+            path="/settings"
+            element={!authUser ? <Navigate to="/login" /> : <SettingsPage />}
           />
         </Routes>
       </PageLayout>

@@ -14,15 +14,15 @@ const FeedPosts = () => {
     );
   }
 
-    return (
-      <Container maxW={'container.md'} px={{ base: 5, md: 2 }}>
-        {isLoading ? (
-          <FeedPostsSkeleton />
-        ) : (
-          posts.map((post) => <FeedPost key={post.id} post={post} />)
-        )}
-      </Container>
-    );
+  return (
+    <Container maxW={'container.md'} px={{ base: 5, md: 2 }}>
+      {isLoading ? (
+        <FeedPostsSkeleton />
+      ) : (
+        posts.map((post) => <FeedPost key={post.id} post={post} />)
+      )}
+    </Container>
+  );
 };
 
 export default FeedPosts;

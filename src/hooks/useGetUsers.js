@@ -29,6 +29,7 @@ const useGetUsers = (userIds = []) => {
         setUsers(users);
       } catch (error) {
         showToast('Error', error.message, 'error');
+        console.error(error);
       } finally {
         setIsLoading(false);
       }

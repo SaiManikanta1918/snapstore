@@ -6,15 +6,18 @@ import useFollowUser from '../../hooks/useFollowUser';
 import ProfileStatsDrawer from './ProfileStatsDrawer';
 import { useState } from 'react';
 import { PROFILE_STAT_TABS } from '../../constants';
+import { useNavigate } from 'react-router-dom';
+import { SettingsIcon } from '@chakra-ui/icons';
 
 const ProfileHeader = () => {
+  const navigate = useNavigate();
   const [selectedProfileStat, setSelectedProfileStat] = useState(null);
   const authUser = useAuthStore((state) => state.user);
   const userProfile = useUserProfileStore((state) => state.userProfile);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: isDrawerOpen, onOpen: onDrawerOpen, onClose: onDrawerClose } = useDisclosure();
   const { isFollowing, isUpdating, handleFollowUser } = useFollowUser(userProfile?.uid);
-  const visitingOwnProfileAndAuth = authUser && authUser.username === userProfile.username;
+  const visitingOwnProfileAndAuth = authUser && authUser.uid === userProfile.uid;
   const visitingAnotherProfileAndAuth = authUser && authUser.username !== userProfile.username;
 
   function showFollowersList() {
@@ -82,12 +85,17 @@ const ProfileHeader = () => {
               </Text>
             </Text>
           </Flex>
-          {/* <Flex alignItems={"center"} gap={4}>
-            <Text fontSize={"sm"}>{userProfile.bio}</Text>
-          </Flex> */}
         </VStack>
         {visitingOwnProfileAndAuth && (
-          <Flex gap={4} justifyContent={'center'}>
+          <Flex gap={4} justifyContent={'center'} alignItems={'center'}>
+            <Button
+              leftIcon={<SettingsIcon />}
+              colorScheme="teal"
+              variant="solid"
+              onClick={() => navigate('/settings')}
+            >
+              Settings
+            </Button>
             <Button
               bg={'blue.300'}
               color={'black'}
