@@ -72,23 +72,20 @@ const PostFooter = ({ post, isProfilePage }) => {
         </Text>
       )}
 
-      {!isProfilePage && (
-        <>
-          {/* <Text fontSize='sm' fontWeight={700}>
+      <>
+        {/* <Text fontSize='sm' fontWeight={700}>
 						{creatorProfile?.username}{" "}
 						<Text as='span' fontWeight={400}>
 							{post.caption}
 						</Text>
 					</Text> */}
-          {post.comments.length > 0 && (
-            <Text fontSize="sm" color={'gray'} cursor={'pointer'} onClick={onOpen}>
-              View all {post.comments.length} comments
-            </Text>
-          )}
-          {/* COMMENTS MODAL ONLY IN THE HOME PAGE */}
-          {isOpen ? <CommentsModal isOpen={isOpen} onClose={onClose} post={post} /> : null}
-        </>
-      )}
+        {post.comments.length > 0 && (
+          <Text fontSize="sm" color={'gray'} cursor={'pointer'} onClick={onOpen}>
+            View all {post.comments.length} comments
+          </Text>
+        )}
+        {isOpen ? <CommentsModal isOpen={isOpen} onClose={onClose} post={post} /> : null}
+      </>
 
       {authUser && (
         <Flex alignItems={'center'} gap={2} justifyContent={'space-between'} w={'full'}>

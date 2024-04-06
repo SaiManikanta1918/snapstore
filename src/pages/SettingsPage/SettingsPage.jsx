@@ -7,9 +7,11 @@ function SettingsPage() {
 
   return (
     <Box p={4}>
-      <Breadcrumb separator={<ArrowForwardIcon/>}>
+      <Breadcrumb separator={<ArrowForwardIcon />}>
         <BreadcrumbItem>
-          <BreadcrumbLink href={`/user/${authUser.uid}`} color={'blue.300'}>Profile</BreadcrumbLink>
+          <BreadcrumbLink href={`/user/${authUser.uid}`} color={'blue.300'}>
+            Profile
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbItem isCurrentPage>
           <BreadcrumbLink>Settings</BreadcrumbLink>

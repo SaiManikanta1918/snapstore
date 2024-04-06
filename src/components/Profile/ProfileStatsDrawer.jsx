@@ -53,20 +53,6 @@ const FollowersList = ({ user }) => {
               </Box>
             </VStack>
           </Flex>
-          {/* {authUser.uid === user.uid && (
-            <Button
-              fontSize={13}
-              bg={"transparent"}
-              p={0}
-              h={"max-content"}
-              fontWeight={"medium"}
-              color={"blue.300"}
-              cursor={"pointer"}
-              _hover={{ color: "white" }}
-            >
-              {authUser.followers.includes(user.uid) ? "Unfollow" : "Follow"}
-            </Button>
-          )} */}
         </Flex>
       ))}
     </Flex>

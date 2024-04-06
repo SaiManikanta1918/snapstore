@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 const useGetLoggedInUser = async (authUser) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState();
 
   const showToast = useShowToast();
 

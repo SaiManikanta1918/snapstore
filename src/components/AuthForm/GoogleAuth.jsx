@@ -7,6 +7,7 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 const GoogleAuth = ({ prefix }) => {
   const [signInWithGoogle, error] = useSignInWithGoogle(auth);
+  const setIsLoading = useAuthStore((state) => state.setIsLoading);
 
   const showToast = useShowToast();
   const loginUser = useAuthStore((state) => state.login);
@@ -14,7 +15,11 @@ const GoogleAuth = ({ prefix }) => {
   const handleGoogleAuth = async () => {
     try {
       const newUser = await signInWithGoogle();
-      if (!newUser && error) {
+      setIsLoading(true);
+      if (!newUser) {
+        return;
+      }
+      if (error) {
         showToast('Error', error.message, 'error');
         console.error(error);
         return;
@@ -39,6 +44,7 @@ const GoogleAuth = ({ prefix }) => {
         };
         await setDoc(doc(firestore, 'users', newUser.user.uid), userDoc);
       }
+      setIsLoading(false);
       localStorage.setItem('user-info', JSON.stringify(userDoc));
       loginUser(userDoc);
     } catch (error) {

@@ -1,4 +1,4 @@
-import { Box, Flex, Link, Spinner, Text, VStack } from '@chakra-ui/react';
+import { Flex, Spinner, Text, VStack } from '@chakra-ui/react';
 import SuggestedHeader from './SuggestedHeader';
 import SuggestedUser from './SuggestedUser';
 import useGetSuggestedUsers from '../../hooks/useGetSuggestedUsers';

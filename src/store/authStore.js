@@ -5,6 +5,8 @@ const useAuthStore = create((set) => ({
   login: (user) => set({ user }),
   logout: () => set({ user: null }),
   setUser: (user) => set({ user }),
+  isLoading: false,
+  setIsLoading: (value) => set({ isLoading: value }),
 }));
 
 export default useAuthStore;

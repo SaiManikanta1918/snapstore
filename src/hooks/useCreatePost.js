@@ -53,8 +53,9 @@ const useCreatePost = () => {
       if (userProfile.uid === authUser.uid)
         createPost(PostModel.mapModel({ ...newPost, id: postDocRef.id }));
 
-      if (pathname !== '/' && userProfile.uid === authUser.uid)
+      if (pathname !== '/' && userProfile.uid === authUser.uid) {
         addPost({ ...newPost, id: postDocRef.id });
+      }
       navigate('/home');
       showToast('Success', 'Post created successfully', 'success');
     } catch (error) {

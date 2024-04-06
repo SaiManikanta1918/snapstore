@@ -57,6 +57,11 @@ export default class UserModel extends BaseModel {
    */
   username;
 
+  /**
+   * @var {[String]}
+   */
+  conversations;
+
   constructor(model = {}) {
     super();
     this.id = model.id;

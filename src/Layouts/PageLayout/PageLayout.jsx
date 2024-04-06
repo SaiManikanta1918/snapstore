@@ -5,13 +5,14 @@ import Bottombar from '../../components/Bottombar/Bottombar';
 import Topbar from '../../components/Topbar/Topbar';
 import useGetLoggedInUser from '../../hooks/useGetLoggedInUser';
 import { PageLayoutSpinner } from '../../components/Loaders';
+import useAuthStore from '../../store/authStore.js';
 
 const PageLayout = ({ children, authUser }) => {
   const { pathname } = useLocation();
   const canRenderSidebar = pathname !== '/login' && authUser;
   const { isLoading } = useGetLoggedInUser(authUser);
-
-  if (isLoading) return <PageLayoutSpinner />;
+  const isAuthUserLoading = useAuthStore((state) => state.isLoading);
+  if (isLoading || isAuthUserLoading) return <PageLayoutSpinner />;
 
   return (
     <Box w={'100%'} display={{ md: 'flex' }}>
