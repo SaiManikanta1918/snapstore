@@ -79,10 +79,10 @@ const CreatePost = ({ post }) => {
                 <Field as={Input} id="location" name="location" />
               </FormControl>
               <Flex justifyContent={'end'} width={'100%'} gap={4} mt={10}>
-                <Button type="button" bg="whiteAlpha.300" disabled={isLoading}>
+                <Button type="button" bg="whiteAlpha.300" isDisabled={isLoading}>
                   <Link to="/">Cancel</Link>
                 </Button>
-                <Button type="submit" colorScheme="purple" disabled={isLoading}>
+                <Button type="submit" colorScheme="purple" isLoading={isLoading}>
                   Create
                 </Button>
               </Flex>

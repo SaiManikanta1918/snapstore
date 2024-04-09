@@ -19,7 +19,7 @@ const useGetUserProfileByUserId = (userId) => {
 
         let userDoc;
         querySnapshot.forEach((doc) => {
-          userDoc = doc.data();
+          userDoc = { ...doc.data(), id: doc.id };
         });
         setUserProfile(userDoc);
       } catch (error) {

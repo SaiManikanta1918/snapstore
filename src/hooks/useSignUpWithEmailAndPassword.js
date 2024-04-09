@@ -3,6 +3,7 @@ import { auth, firestore } from '../firebase/firebase';
 import { collection, doc, getDocs, query, setDoc, where } from 'firebase/firestore';
 import useShowToast from './useShowToast';
 import useAuthStore from '../store/authStore';
+import UserModel from '../models/UserModel';
 
 const useSignUpWithEmailAndPassword = () => {
   const [createUserWithEmailAndPassword, , loading, error] =
@@ -33,19 +34,15 @@ const useSignUpWithEmailAndPassword = () => {
         return;
       }
       if (newUser) {
-        const userDoc = {
+        const userDoc = UserModel.mapModel({
           uid: newUser.user.uid,
           email: inputs.email,
           username: inputs.username,
           fullName: inputs.fullName,
           bio: '',
           profilePicURL: '',
-          followers: [],
-          following: [],
-          posts: [],
           createdAt: Date.now(),
-          isPrivate: false,
-        };
+        });
         await setDoc(doc(firestore, 'users', newUser.user.uid), userDoc);
         localStorage.setItem('user-info', JSON.stringify(userDoc));
         loginUser(userDoc);

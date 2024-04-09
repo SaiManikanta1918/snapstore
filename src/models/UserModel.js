@@ -76,5 +76,6 @@ export default class UserModel extends BaseModel {
     this.profilePicURL = model.profilePicURL;
     this.uid = model.uid;
     this.username = model.username;
+    this.conversations = model.conversations || [];
   }
 }

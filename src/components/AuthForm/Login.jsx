@@ -1,8 +1,8 @@
-import { Button, FormControl, FormErrorMessage, Input, VStack } from '@chakra-ui/react';
+import { FormControl, FormErrorMessage, Input, VStack } from '@chakra-ui/react';
 import useLogin from '../../hooks/useLogin';
 import { Field, Form, Formik } from 'formik';
 import { LoginSchema } from '../Schema';
-import { USER_ACTION } from '../../constants';
+import LoginButton from '../Buttons/LoginButton';
 
 const Login = () => {
   const { loading, login } = useLogin();
@@ -41,17 +41,7 @@ const Login = () => {
                 </FormControl>
               )}
             </Field>
-            <Button
-              justifyContent={'center'}
-              width={'100%'}
-              gap={4}
-              mt={10}
-              type="submit"
-              colorScheme="purple"
-              disabled={loading}
-            >
-              {USER_ACTION.LOG_IN}
-            </Button>
+            <LoginButton isLoading={loading} />
           </VStack>
         </Form>
       )}

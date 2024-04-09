@@ -58,6 +58,7 @@ const ConversationContainer = ({ chatId }) => {
           <Input
             pr="4.5rem"
             size={'lg'}
+            type="text"
             value={inputMessage}
             bg={'grey.300'}
             placeholder="Enter text here"
@@ -68,11 +69,10 @@ const ConversationContainer = ({ chatId }) => {
               leftIcon={<AiOutlineSend size={'20px'} />}
               size="sm"
               h={'inherit'}
-              disabled={isSending}
               isLoading={isSending}
               _hover={{ bg: 'blue.400' }}
               bg={'blue.300'}
-              onClick={() => sendMessage(inputMessage)}
+              onClick={() => inputMessage && sendMessage(inputMessage)}
             >
               send
             </Button>

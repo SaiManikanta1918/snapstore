@@ -21,7 +21,7 @@ const useCreatePost = () => {
 
   const handleCreatePost = async (post) => {
     if (isLoading) return;
-    if (!post.file) throw new Error('Please select an image');
+    if (!post.file) throw new Error('Please upload an image');
     setIsLoading(true);
     const newPost = {
       caption: post.caption,

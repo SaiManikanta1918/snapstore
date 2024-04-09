@@ -4,6 +4,7 @@ import { auth, firestore } from '../../firebase/firebase';
 import useShowToast from '../../hooks/useShowToast';
 import useAuthStore from '../../store/authStore';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
+import UserModel from '../../models/UserModel';
 
 const GoogleAuth = ({ prefix }) => {
   const [signInWithGoogle, error] = useSignInWithGoogle(auth);
@@ -32,7 +33,7 @@ const GoogleAuth = ({ prefix }) => {
         userDoc = userSnap.data();
       } else {
         // signup
-        userDoc = {
+        userDoc = UserModel.mapModel({
           bio: '',
           createdAt: Date.now(),
           uid: newUser.user.uid,
@@ -41,7 +42,7 @@ const GoogleAuth = ({ prefix }) => {
           username: newUser.user.email.split('@')[0],
           profilePicURL: newUser.user.photoURL,
           isPrivate: false,
-        };
+        });
         await setDoc(doc(firestore, 'users', newUser.user.uid), userDoc);
       }
       setIsLoading(false);

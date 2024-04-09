@@ -20,7 +20,6 @@ const DeleteAlert = ({ deleteItem, isDeleting }) => {
       <Button
         size={'sm'}
         color={'red.600'}
-        // _hover={{ bg: "whiteAlpha.300", color: "red.600" }}
         borderRadius={4}
         p={1}
         onClick={onOpen}

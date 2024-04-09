@@ -22,22 +22,17 @@ const SuggestedUser = ({ user }) => {
           </Box>
         </VStack>
       </Flex>
-      {/* {authUser.uid !== user.uid && ( */}
       <Button
         fontSize={13}
-        bg={'transparent'}
         p={0}
-        h={'max-content'}
-        fontWeight={'medium'}
         color={'blue.300'}
         cursor={'pointer'}
-        _hover={{ color: 'white' }}
+        _hover={{ color: 'blue.200' }}
         onClick={handleFollowUser}
         isLoading={isUpdating}
       >
         {isFollowing ? 'Unfollow' : 'Follow'}
       </Button>
-      {/* )} */}
     </Flex>
   );
 };

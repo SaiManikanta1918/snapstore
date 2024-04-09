@@ -1,9 +1,9 @@
-import { Button, Input } from '@chakra-ui/react';
+import { Input } from '@chakra-ui/react';
 import useSignUpWithEmailAndPassword from '../../hooks/useSignUpWithEmailAndPassword';
 import { FormControl, FormErrorMessage, VStack } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import { SingUpSchema } from '../Schema';
-import { USER_ACTION } from '../../constants';
+import SignUpButton from '../Buttons/SignUpButton';
 
 const Signup = () => {
   const { loading, signup } = useSignUpWithEmailAndPassword();
@@ -60,17 +60,7 @@ const Signup = () => {
                 </FormControl>
               )}
             </Field>
-            <Button
-              justifyContent={'center'}
-              width={'100%'}
-              gap={4}
-              mt={10}
-              type="submit"
-              colorScheme="purple"
-              disabled={loading}
-            >
-              {USER_ACTION.SIGN_UP}
-            </Button>
+            <SignUpButton isLoading={loading} />
           </VStack>
         </Form>
       )}

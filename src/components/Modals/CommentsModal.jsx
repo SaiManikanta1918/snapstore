@@ -8,20 +8,21 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
+  ModalFooter,
 } from '@chakra-ui/react';
 import Comment from '../Comment/Comment';
 import usePostComment from '../../hooks/usePostComment';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const CommentsModal = ({ isOpen, onClose, post }) => {
   const { handlePostComment, isCommenting } = usePostComment();
-  const commentRef = useRef(null);
+  const [comment, setComment] = useState('');
   const commentsContainerRef = useRef(null);
+
   const handleSubmitComment = async (e) => {
-    // do not refresh the page, prevent it
     e.preventDefault();
-    await handlePostComment(post.id, commentRef.current.value);
-    commentRef.current.value = '';
+    await handlePostComment(post.id, comment);
+    setComment('');
   };
 
   useEffect(() => {
@@ -40,8 +41,8 @@ const CommentsModal = ({ isOpen, onClose, post }) => {
       <ModalOverlay />
       <ModalContent bg={'black'} border={'1px solid gray'} maxW={'400px'}>
         <ModalHeader>Comments</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody pb={6}>
+        <ModalCloseButton disabled={isCommenting} />
+        <ModalBody>
           <Flex
             mb={4}
             gap={4}
@@ -54,15 +55,29 @@ const CommentsModal = ({ isOpen, onClose, post }) => {
               <Comment key={idx} comment={comment} />
             ))}
           </Flex>
-          <form onSubmit={handleSubmitComment} style={{ marginTop: '2rem' }}>
-            <Input placeholder="Comment" size={'sm'} ref={commentRef} />
-            <Flex w={'full'} justifyContent={'flex-end'}>
-              <Button type="submit" ml={'auto'} size={'sm'} my={4} isLoading={isCommenting}>
-                Post
-              </Button>
-            </Flex>
-          </form>
+          <Input
+            value={comment}
+            placeholder="Comment"
+            size={'sm'}
+            onChange={(e) => setComment(e.target.value)}
+          />
         </ModalBody>
+        <ModalFooter>
+          <Flex w={'full'} justifyContent={'flex-end'}>
+            <Button size={'sm'} isDisabled={isCommenting}>
+              Cancel
+            </Button>
+            <Button
+              size={'sm'}
+              ml={4}
+              isLoading={isCommenting}
+              isDisabled={!comment}
+              onClick={handleSubmitComment}
+            >
+              Post
+            </Button>
+          </Flex>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   );
