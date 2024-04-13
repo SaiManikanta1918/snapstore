@@ -10,7 +10,6 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Flex,
-  Spinner,
   Tab,
   TabList,
   TabPanel,
@@ -18,15 +17,16 @@ import {
   Tabs,
   VStack,
 } from '@chakra-ui/react';
-import useGetUsers from '../../hooks/useGetUsers';
+import useGetUsers from '../../hooks/gethooks/useGetUsers';
 import { Link } from 'react-router-dom';
 import { PROFILE_STAT_TABS } from '../../constants';
+import { SnapStoreLoader } from '../Loaders';
 
 const FollowersList = ({ user }) => {
   const { isLoading, users } = useGetUsers(user.followers);
 
   if (isLoading) {
-    return <Spinner />;
+    return <SnapStoreLoader />;
   }
   return (
     <Flex flexDirection={'column'} gap={8}>
@@ -62,7 +62,7 @@ const FollowersList = ({ user }) => {
 const FollowingList = ({ user }) => {
   const { isLoading, users } = useGetUsers(user.following);
   if (isLoading) {
-    return <Spinner />;
+    return <SnapStoreLoader />;
   }
   return (
     <Flex flexDirection={'column'} gap={8}>

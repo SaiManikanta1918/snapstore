@@ -1,5 +1,5 @@
 import { Grid, GridItem, Text } from '@chakra-ui/react';
-import useGetSuggestedUsers from '../../hooks/useGetSuggestedUsers';
+import useGetSuggestedUsers from '../../hooks/gethooks/useGetSuggestedUsers';
 import SuggestedUser from '../SuggestedUsers/SuggestedUser';
 import { useEffect, useState } from 'react';
 import { ExplorePeopleSkeleton } from '../Loaders';

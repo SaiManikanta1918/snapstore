@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import usePostStore from '../store/postStore';
-import useShowToast from './useShowToast';
-import useUserProfileStore from '../store/userProfileStore';
+import usePostStore from '../../store/postStore';
+import useShowToast from '../useShowToast';
+import useUserProfileStore from '../../store/userProfileStore';
 import { collection, getDocs, query, where } from 'firebase/firestore';
-import { firestore } from '../firebase/firebase';
-import PostModel from '../models/PostModel';
+import { firestore } from '../../firebase/firebase';
+import PostModel from '../../models/PostModel';
 
-const useGetSavedPosts = () => {
+const useGetUserPosts = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const { savedPosts, setSavedPosts } = usePostStore();
+  const { posts, setPosts } = usePostStore();
   const showToast = useShowToast();
   const userProfile = useUserProfileStore((state) => state.userProfile);
 
@@ -16,13 +16,10 @@ const useGetSavedPosts = () => {
     const getPosts = async () => {
       if (!userProfile) return;
       setIsLoading(true);
-      setSavedPosts([]);
+      setPosts([]);
 
       try {
-        const q = query(
-          collection(firestore, 'posts'),
-          where('saves', 'array-contains', userProfile.uid)
-        );
+        const q = query(collection(firestore, 'posts'), where('createdBy', '==', userProfile.uid));
         const querySnapshot = await getDocs(q);
 
         const posts = [];
@@ -31,19 +28,19 @@ const useGetSavedPosts = () => {
         });
 
         posts.sort((a, b) => b.createdAt - a.createdAt);
-        setSavedPosts(posts);
+        setPosts(posts);
       } catch (error) {
         showToast('Error', error.message, 'error');
-        setSavedPosts([]);
+        setPosts([]);
       } finally {
         setIsLoading(false);
       }
     };
 
     getPosts();
-  }, [setSavedPosts, userProfile, showToast]);
+  }, [setPosts, userProfile, showToast]);
 
-  return { isLoading, savedPosts };
+  return { isLoading, posts };
 };
 
-export default useGetSavedPosts;
+export default useGetUserPosts;

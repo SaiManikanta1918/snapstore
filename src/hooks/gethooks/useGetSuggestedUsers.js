@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import useAuthStore from '../store/authStore';
-import useShowToast from './useShowToast';
+import useAuthStore from '../../store/authStore';
+import useShowToast from '../useShowToast';
 import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
-import { firestore } from '../firebase/firebase';
-import UserModel from '../models/UserModel';
+import { firestore } from '../../firebase/firebase';
+import UserModel from '../../models/UserModel';
 
 const useGetSuggestedUsers = () => {
   const [isLoading, setIsLoading] = useState(true);

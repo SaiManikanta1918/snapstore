@@ -7,14 +7,14 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './firebase/firebase';
 import CreatePost from './components/Sidebar/CreatePost';
 import { Explore } from './components/Sidebar/Explore';
-import Chat from './components/Sidebar/Chat';
-import { Spinner } from '@chakra-ui/react';
+import Chat from './components/Chat/Chat';
+import { SnapStoreLoader } from './components/Loaders';
 import SettingsPage from './pages/SettingsPage/SettingsPage';
 
 function App() {
   const [authUser, isLoading] = useAuthState(auth);
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <SnapStoreLoader />;
 
   return (
     <main style={{ height: '100vh', display: 'flex' }}>

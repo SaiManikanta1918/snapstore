@@ -3,24 +3,35 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 import { useLocation } from 'react-router-dom';
 import Bottombar from '../../components/Bottombar/Bottombar';
 import Topbar from '../../components/Topbar/Topbar';
-import useGetLoggedInUser from '../../hooks/useGetLoggedInUser';
-import { PageLayoutSpinner } from '../../components/Loaders';
+import useGetLoggedInUser from '../../hooks/gethooks/useGetLoggedInUser';
+import { SnapStoreLoader } from '../../components/Loaders';
 import useAuthStore from '../../store/authStore.js';
 
 const PageLayout = ({ children, authUser }) => {
   const { pathname } = useLocation();
   const canRenderSidebar = pathname !== '/login' && authUser;
+  const canRenderBottombar =
+    authUser && pathname.split('/').includes('chat') ? pathname.split('/').length < 3 : true;
   const { isLoading } = useGetLoggedInUser(authUser);
+  const canRenderTopbar =
+    authUser && pathname.split('/').includes('chat') ? pathname.split('/').length < 3 : true;
   const isAuthUserLoading = useAuthStore((state) => state.isLoading);
-  if (isLoading || isAuthUserLoading) return <PageLayoutSpinner />;
+  if (isLoading || isAuthUserLoading) return <SnapStoreLoader />;
 
   return (
     <Box w={'100%'} display={{ md: 'flex' }}>
-      <section
-        style={{ position: 'sticky', top: '0px', backgroundColor: 'rgb(9 9 10 / 1)', zIndex: '50' }}
-      >
-        {authUser && <Topbar />}
-      </section>
+      {canRenderTopbar && (
+        <section
+          style={{
+            position: 'sticky',
+            top: '0px',
+            backgroundColor: 'rgb(9 9 10 / 1)',
+            zIndex: '50',
+          }}
+        >
+          <Topbar />
+        </section>
+      )}
       <nav>
         {canRenderSidebar ? (
           <Box w={{ base: '70px', md: '240px' }} display={{ base: 'none', md: 'block' }}>
@@ -34,22 +45,24 @@ const PageLayout = ({ children, authUser }) => {
             flex={1}
             w={{ base: 'calc(100% - 70px)', md: 'calc(100% - 240px)' }}
             mx={'auto'}
-            overflowY={'scroll'}
+            overflowY={'auto'}
           >
             {children}
           </Box>
         </Flex>
       </section>
-      <section
-        style={{
-          position: 'sticky',
-          bottom: '0px',
-          backgroundColor: 'rgb(9 9 10 / 1)',
-          zIndex: '50',
-        }}
-      >
-        {authUser && <Bottombar />}
-      </section>
+      {canRenderBottombar && (
+        <section
+          style={{
+            position: 'sticky',
+            bottom: '0px',
+            backgroundColor: 'rgb(9 9 10 / 1)',
+            zIndex: '50',
+          }}
+        >
+          <Bottombar />
+        </section>
+      )}
     </Box>
   );
 };

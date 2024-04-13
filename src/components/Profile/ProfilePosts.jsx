@@ -1,4 +1,4 @@
-import useGetUserPosts from '../../hooks/useGetUserPosts';
+import useGetUserPosts from '../../hooks/gethooks/useGetUserPosts';
 import GridPosts from './GridPosts';
 
 const ProfilePosts = () => {

@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import useShowToast from './useShowToast';
-import useAuthStore from '../store/authStore';
-import useUserProfileStore from '../store/userProfileStore';
+import useShowToast from '../useShowToast';
+import useAuthStore from '../../store/authStore';
+import useUserProfileStore from '../../store/userProfileStore';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { addDoc, arrayUnion, collection, doc, updateDoc } from 'firebase/firestore';
-import { firestore, storage } from '../firebase/firebase';
+import { firestore, storage } from '../../firebase/firebase';
 import { getDownloadURL, ref, uploadString } from 'firebase/storage';
-import usePostStore from '../store/postStore';
-import PostModel from '../models/PostModel';
+import usePostStore from '../../store/postStore';
+import PostModel from '../../models/PostModel';
 
 const useCreatePost = () => {
   const navigate = useNavigate();

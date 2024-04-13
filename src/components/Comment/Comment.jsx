@@ -1,5 +1,5 @@
 import { Avatar, Flex, Text } from '@chakra-ui/react';
-import useGetUserProfileById from '../../hooks/useGetUserProfileById';
+import useGetUserProfileById from '../../hooks/gethooks/useGetUserProfileById';
 import { Link } from 'react-router-dom';
 import { timeAgo } from '../../utils/timeAgo';
 import { CommentSkeleton } from '../Loaders';

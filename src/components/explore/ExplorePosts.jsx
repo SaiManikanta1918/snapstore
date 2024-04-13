@@ -1,5 +1,5 @@
 import { Grid, Text } from '@chakra-ui/react';
-import useGetFeedPosts from '../../hooks/useGetFeedPosts';
+import useGetFeedPosts from '../../hooks/gethooks/useGetFeedPosts';
 import { useEffect, useState } from 'react';
 import Post from '../Profile/Post';
 import { GridPostsSkeleton } from '../Loaders';

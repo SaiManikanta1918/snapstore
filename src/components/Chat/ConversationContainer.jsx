@@ -1,84 +1,32 @@
-import { Timestamp, arrayUnion, doc, onSnapshot, updateDoc } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
-import { firestore } from '../../firebase/firebase';
-import { Text, Spinner, Input, Button, InputGroup, InputRightElement, Box } from '@chakra-ui/react';
-import useAuthStore from '../../store/authStore';
-import { AiOutlineSend } from 'react-icons/ai';
+import { SnapStoreLoader } from '../Loaders';
+import useGetChat from '../../hooks/createhooks/useGetChat';
+import ChatHeader from './ChatHeader';
+import ChatBody from './ChatBody';
+import ChatFooter from './ChatFooter';
+import { Box } from '@chakra-ui/react';
+import { useRef } from 'react';
+
+// const style = {
+//   message: `flex items-center shadow-xl m-4 py-2 px-3 rounded-tl-full rounded-tr-full`,
+//   name: `fixed mt-[-4rem] text-gray-600 text-xs`,
+//   sent: `bg-[#395dff] text-white flex-row-reverse text-end float-right rounded-bl-full`,
+//   received: `bg-[#e5e5ea] text-black float-left rounded-br-full `,
+// };
 
 const ConversationContainer = ({ chatId }) => {
-  const authUser = useAuthStore((state) => state.user);
-  const [inputMessage, setInputMessage] = useState('');
-  const [messages, setMessages] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSending, setIsSending] = useState(false);
-
-  async function sendMessage(text) {
-    setIsSending(true);
-    const chatsRef = doc(firestore, 'chats', chatId);
-    const newMessage = {
-      message: text,
-      createdAt: Timestamp.now(),
-      senderId: authUser.uid,
-    };
-    await updateDoc(chatsRef, {
-      messages: arrayUnion(newMessage),
-    });
-    setInputMessage('');
-    setIsSending(false);
-  }
-
-  useEffect(() => {
-    setIsLoading(true);
-    const unsubscribe = onSnapshot(doc(firestore, 'chats', chatId), (doc) => {
-      console.log('doc', doc.data());
-      let messages = doc.data().messages;
-      console.log('messages', messages);
-      setMessages(messages);
-      setIsLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
+  const scrollRef = useRef();
+  const { isLoading, messages } = useGetChat(chatId);
 
   if (isLoading) {
-    return <Spinner />;
+    return <SnapStoreLoader />;
   }
 
   return (
-    <Box flex={3} p={4} display={'flex'} flexDirection={'column'}>
-      <Box height={'100%'} overflow={'auto'}>
-        {messages.map((message) => (
-          <Text py={1} textAlign={message.senderId === authUser.uid ? 'end' : ''} key={message.id}>
-            {message.message}
-          </Text>
-        ))}
-      </Box>
-      <Box>
-        <InputGroup size={'md'}>
-          <Input
-            pr="4.5rem"
-            size={'lg'}
-            type="text"
-            value={inputMessage}
-            bg={'grey.300'}
-            placeholder="Enter text here"
-            onChange={(e) => setInputMessage(e.target.value)}
-          />
-          <InputRightElement width="4.5rem" h={'100%'}>
-            <Button
-              leftIcon={<AiOutlineSend size={'20px'} />}
-              size="sm"
-              h={'inherit'}
-              isLoading={isSending}
-              _hover={{ bg: 'blue.400' }}
-              bg={'blue.300'}
-              onClick={() => inputMessage && sendMessage(inputMessage)}
-            >
-              send
-            </Button>
-          </InputRightElement>
-        </InputGroup>
-      </Box>
+    <Box flex={1} display={'flex'} flexDirection={'column'} position={'relative'}>
+      <ChatHeader />
+      <ChatBody messages={messages} />
+      {/* <span id="scroll-chat" ref={scrollRef}></span> */}
+      <ChatFooter chatId={chatId} scrollRef={scrollRef} />
     </Box>
   );
 };

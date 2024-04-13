@@ -3,7 +3,7 @@ import ProfileHeader from '../../components/Profile/ProfileHeader';
 import ProfileTabs from '../../components/Profile/ProfileTabs';
 import { useParams } from 'react-router-dom';
 import { Link as RouterLink } from 'react-router-dom';
-import useGetUserProfileByUserId from '../../hooks/useGetUserProfileByUserId';
+import useGetUserProfileByUserId from '../../hooks/gethooks/useGetUserProfileByUserId';
 import { ProfileHeaderSkeleton } from '../../components/Loaders';
 
 const ProfilePage = () => {

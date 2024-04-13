@@ -1,6 +1,6 @@
 import { Container, Text } from '@chakra-ui/react';
 import FeedPost from './FeedPost';
-import useGetFeedPosts from '../../hooks/useGetFeedPosts';
+import useGetFeedPosts from '../../hooks/gethooks/useGetFeedPosts';
 import { FeedPostsSkeleton } from '../Loaders';
 
 const FeedPosts = () => {

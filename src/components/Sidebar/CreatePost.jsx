@@ -11,7 +11,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import useShowToast from '../../hooks/useShowToast';
-import useCreatePost from '../../hooks/useCreatePost';
+import useCreatePost from '../../hooks/createhooks/useCreatePost';
 import { Field, Formik } from 'formik';
 import FileUploader from '../common/FileUploader';
 import usePreviewImg from '../../hooks/usePreviewImg';

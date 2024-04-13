@@ -1,4 +1,4 @@
-import useGetSavedPosts from '../../hooks/useGetSavedPosts';
+import useGetSavedPosts from '../../hooks/gethooks/useGetSavedPosts';
 import GridPosts from './GridPosts';
 
 const SavedPosts = () => {

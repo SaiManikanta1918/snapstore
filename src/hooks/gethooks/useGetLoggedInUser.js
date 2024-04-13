@@ -1,6 +1,6 @@
 import { doc, getDoc } from 'firebase/firestore';
-import { firestore } from '../firebase/firebase';
-import useShowToast from './useShowToast';
+import { firestore } from '../../firebase/firebase';
+import useShowToast from '../useShowToast';
 import { useEffect, useState } from 'react';
 
 const useGetLoggedInUser = async (authUser) => {

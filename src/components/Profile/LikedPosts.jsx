@@ -1,4 +1,4 @@
-import useGetLikedPosts from '../../hooks/useGetLikedPosts';
+import useGetLikedPosts from '../../hooks/gethooks/useGetLikedPosts';
 import GridPosts from './GridPosts';
 
 const LikedPosts = () => {

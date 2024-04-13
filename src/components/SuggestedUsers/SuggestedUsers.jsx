@@ -1,7 +1,7 @@
 import { Flex, Spinner, Text, VStack } from '@chakra-ui/react';
 import SuggestedHeader from './SuggestedHeader';
 import SuggestedUser from './SuggestedUser';
-import useGetSuggestedUsers from '../../hooks/useGetSuggestedUsers';
+import useGetSuggestedUsers from '../../hooks/gethooks/useGetSuggestedUsers';
 
 const SuggestedUsers = () => {
   const { isLoading, suggestedUsers } = useGetSuggestedUsers();
@@ -16,7 +16,7 @@ const SuggestedUsers = () => {
       </Flex>
 
       {isLoading ? (
-        <Spinner />
+        <Spinner size={'lg'} />
       ) : (
         suggestedUsers.map((user) => <SuggestedUser user={user} key={user.id} />)
       )}

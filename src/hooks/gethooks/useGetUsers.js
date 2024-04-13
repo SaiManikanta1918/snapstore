@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import useShowToast from './useShowToast';
+import useShowToast from '../useShowToast';
 import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
-import { firestore } from '../firebase/firebase';
-import UserModel from '../models/UserModel';
+import { firestore } from '../../firebase/firebase';
+import UserModel from '../../models/UserModel';
 
 const useGetUsers = (userIds = []) => {
   const [isLoading, setIsLoading] = useState(true);

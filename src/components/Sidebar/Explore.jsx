@@ -25,7 +25,7 @@ export const Explore = () => {
         gap={4}
         bg={'whiteAlpha.400'}
         borderRadius={6}
-        p={{ base: 0, md: 4 }}
+        p={{ base: 2, md: 4 }}
         w={'full'}
         justifyContent={'flex-start'}
       >

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import usePostStore from '../store/postStore';
-import useShowToast from './useShowToast';
-import useUserProfileStore from '../store/userProfileStore';
+import usePostStore from '../../store/postStore';
+import useShowToast from '../useShowToast';
+import useUserProfileStore from '../../store/userProfileStore';
 import { collection, getDocs, query, where } from 'firebase/firestore';
-import { firestore } from '../firebase/firebase';
-import PostModel from '../models/PostModel';
+import { firestore } from '../../firebase/firebase';
+import PostModel from '../../models/PostModel';
 
 const useGetLikedPosts = () => {
   const [isLoading, setIsLoading] = useState(true);
