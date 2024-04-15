@@ -24,7 +24,6 @@ const useGetLoggedInUser = async (userId) => {
         localStorage.setItem('user-info', JSON.stringify(userData));
         setAuthUser(userData);
       }
-      console.log('userdoc', userdoc);
     } catch (error) {
       console.log('error', error);
       showToast('Error use get logged in user', error.message, 'error');
