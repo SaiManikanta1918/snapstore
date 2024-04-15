@@ -16,29 +16,27 @@ const useFollowUser = (userId) => {
   const handleFollowUser = async () => {
     setIsUpdating(true);
     try {
-      const currentUserRef = doc(firestore, 'users', authUser.uid);
-      const userToFollowOrUnfollorRef = doc(firestore, 'users', userId);
-      await updateDoc(currentUserRef, {
+      await updateDoc(doc(firestore, 'users', authUser.id), {
         following: isFollowing ? arrayRemove(userId) : arrayUnion(userId),
       });
 
-      await updateDoc(userToFollowOrUnfollorRef, {
-        followers: isFollowing ? arrayRemove(authUser.uid) : arrayUnion(authUser.uid),
+      await updateDoc(doc(firestore, 'users', userId), {
+        followers: isFollowing ? arrayRemove(authUser.id) : arrayUnion(authUser.id),
       });
       const newFollwingList = isFollowing
-        ? authUser.following.filter((uid) => uid !== userId)
+        ? authUser.following.filter((id) => id !== userId)
         : [...authUser.following, userId];
 
       if (isFollowing) {
         // unfollow
         setAuthUser({
           ...authUser,
-          following: authUser.following.filter((uid) => uid !== userId),
+          following: authUser.following.filter((id) => id !== userId),
         });
         if (userProfile)
           setUserProfile({
             ...userProfile,
-            followers: userProfile.followers.filter((uid) => uid !== authUser.uid),
+            followers: userProfile.followers.filter((id) => id !== authUser.id),
           });
         setIsFollowing(false);
       } else {
@@ -51,7 +49,7 @@ const useFollowUser = (userId) => {
         if (userProfile)
           setUserProfile({
             ...userProfile,
-            followers: [...userProfile.followers, authUser.uid],
+            followers: [...userProfile.followers, authUser.id],
           });
         setIsFollowing(true);
       }

@@ -33,17 +33,17 @@ const FollowersList = ({ user }) => {
       {users.map((user) => (
         <Flex
           gap={2}
-          key={user.uid}
+          key={user.id}
           justifyContent={'space-between'}
           alignItems={'center'}
           w={'full'}
         >
           <Flex alignItems={'center'} gap={2}>
-            <Link to={`/user/${user.uid}/posts`}>
+            <Link to={`/user/${user.id}/posts`}>
               <Avatar src={user.profilePicURL} name={user.fullName} size={'md'} />
             </Link>
             <VStack spacing={1} alignItems={'flex-start'}>
-              <Link to={`/user/${user.uid}/posts`}>
+              <Link to={`/user/${user.id}/posts`}>
                 <Box fontSize={12} fontWeight={'bold'}>
                   {user.fullName}
                 </Box>
@@ -69,17 +69,17 @@ const FollowingList = ({ user }) => {
       {users.map((user) => (
         <Flex
           gap={2}
-          key={user.uid}
+          key={user.id}
           justifyContent={'space-between'}
           alignItems={'center'}
           w={'full'}
         >
           <Flex alignItems={'center'} gap={2}>
-            <Link to={`/user/${user.uid}/posts`}>
+            <Link to={`/user/${user.id}/posts`}>
               <Avatar src={user.profilePicURL} name={user.fullName} size={'md'} />
             </Link>
             <VStack spacing={2} alignItems={'flex-start'}>
-              <Link to={`/user/${user.uid}/posts`}>
+              <Link to={`/user/${user.id}/posts`}>
                 <Box fontSize={12} fontWeight={'bold'}>
                   {user.fullName}
                 </Box>

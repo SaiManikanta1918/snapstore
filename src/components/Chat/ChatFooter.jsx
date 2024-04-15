@@ -20,14 +20,13 @@ const ChatFooter = ({ chatId, scrollRef }) => {
     const newMessage = {
       message: inputMessage,
       createdAt: Timestamp.now(),
-      senderId: authUser.uid,
+      senderId: authUser.id,
     };
     await updateDoc(chatsRef, {
       messages: arrayUnion(newMessage),
     });
     setInputMessage('');
     setIsSending(false);
-    console.log('scrollRef.current', scrollRef.current, scrollRef.current.scrollIntoView);
     scrollRef.current.scrollIntoView({ behaviour: 'smooth' });
   }
 

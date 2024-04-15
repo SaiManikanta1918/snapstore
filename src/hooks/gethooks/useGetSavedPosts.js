@@ -21,7 +21,7 @@ const useGetSavedPosts = () => {
       try {
         const q = query(
           collection(firestore, 'posts'),
-          where('saves', 'array-contains', userProfile.uid)
+          where('saves', 'array-contains', userProfile.id)
         );
         const querySnapshot = await getDocs(q);
 

@@ -12,7 +12,7 @@ const PageLayout = ({ children, authUser }) => {
   const canRenderSidebar = pathname !== '/login' && authUser;
   const canRenderBottombar =
     authUser && pathname.split('/').includes('chat') ? pathname.split('/').length < 3 : true;
-  const { isLoading } = useGetLoggedInUser(authUser);
+  const { isLoading } = useGetLoggedInUser(authUser && authUser.uid);
   const canRenderTopbar =
     authUser && pathname.split('/').includes('chat') ? pathname.split('/').length < 3 : true;
   const isAuthUserLoading = useAuthStore((state) => state.isLoading);

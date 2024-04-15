@@ -9,7 +9,7 @@ function SettingsPage() {
     <Box p={4}>
       <Breadcrumb separator={<ArrowForwardIcon />}>
         <BreadcrumbItem>
-          <BreadcrumbLink href={`/user/${authUser.uid}`} color={'blue.300'}>
+          <BreadcrumbLink href={`/user/${authUser.id}`} color={'blue.300'}>
             Profile
           </BreadcrumbLink>
         </BreadcrumbItem>

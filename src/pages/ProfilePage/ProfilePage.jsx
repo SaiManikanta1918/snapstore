@@ -10,15 +10,6 @@ const ProfilePage = () => {
   const { userId } = useParams();
   const { isLoading, userProfile } = useGetUserProfileByUserId(userId);
 
-  // const renderTextOnly = true;
-  // if (renderTextOnly) {
-  //   return (
-  //     <Text fontSize={'5xl'} color={'blue.300'}>
-  //       This page is under development
-  //     </Text>
-  //   );
-  // }
-
   const userNotFound = !isLoading && !userProfile;
   if (userNotFound) return <UserNotFound />;
 

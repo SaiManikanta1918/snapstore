@@ -3,6 +3,7 @@ import useShowToast from './useShowToast';
 import { auth, firestore } from '../firebase/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import useAuthStore from '../store/authStore';
+import UserModel from '../models/UserModel';
 
 const useLogin = () => {
   const showToast = useShowToast();
@@ -19,12 +20,12 @@ const useLogin = () => {
         showToast('Error', 'Invalid Credentials', 'error');
         return;
       }
-      const docRef = doc(firestore, 'users', userCred.user.uid);
-      const docSnap = await getDoc(docRef);
-      localStorage.setItem('user-info', JSON.stringify(docSnap.data()));
-      loginUser(docSnap.data());
+      const userdoc = await getDoc(doc(firestore, 'users', userCred.user.id));
+      const userData = UserModel.mapModel({ ...userdoc.data(), id: userdoc.id });
+      localStorage.setItem('user-info', JSON.stringify(userData));
+      loginUser(userData);
     } catch (error) {
-      showToast('Error', error.message, 'error');
+      showToast('Error use login', error.message, 'error');
     }
   };
 

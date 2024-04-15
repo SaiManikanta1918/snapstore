@@ -18,7 +18,7 @@ const usePostComment = () => {
     const newComment = {
       comment,
       createdAt: Date.now(),
-      createdBy: authUser.uid,
+      createdBy: authUser.id,
       postId,
     };
     try {

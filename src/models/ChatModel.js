@@ -1,31 +1,26 @@
 import BaseModel from './BaseModel';
+import ChatMessageModel from './ChatMessageModel';
 
 export default class ChatModel extends BaseModel {
   /**
    * @var {String}
    */
-  message;
+  id;
+
+  /**
+   * @var {Array}
+   */
+  users;
 
   /**
    * @var {String}
    */
-  senderId;
-
-  /**
-   * @var {String}
-   */
-  createdAt;
+  messages;
 
   constructor(model = {}) {
     super();
-    this.message = model.message;
-    this.senderId = model.senderId;
-    this.createdAt = model.createdAt;
-  }
-
-  get isUrl() {
-    return !!this.message.match(
-      /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)/g
-    );
+    this.id = model.id;
+    this.users = model.users || [];
+    this.messages = ChatMessageModel.mapModels(model.messages);
   }
 }

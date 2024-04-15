@@ -18,7 +18,7 @@ const useGetSuggestedUsers = () => {
         const usersRef = collection(firestore, 'users');
         const q = query(
           usersRef,
-          where('uid', 'not-in', [authUser.uid, ...authUser.following]),
+          where('uid', 'not-in', [authUser.id, ...authUser.following]),
           orderBy('uid')
         );
 

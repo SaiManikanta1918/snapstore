@@ -19,14 +19,13 @@ const useEditProfile = () => {
     if (isUpdating || !authUser) return;
     setIsUpdating(true);
 
-    const storageRef = ref(storage, `profilePics/${authUser.uid}`);
-    const userDocRef = doc(firestore, 'users', authUser.uid);
+    const storageRef = ref(storage, `profilePics/${authUser.id}`);
 
     let URL = '';
     try {
       if (selectedFile) {
         await uploadString(storageRef, selectedFile, 'data_url');
-        URL = await getDownloadURL(ref(storage, `profilePics/${authUser.uid}`));
+        URL = await getDownloadURL(ref(storage, `profilePics/${authUser.id}`));
       }
 
       const updatedUser = {
@@ -37,8 +36,7 @@ const useEditProfile = () => {
         isPrivate: inputs.isPrivate || false,
         profilePicURL: URL || authUser.profilePicURL,
       };
-
-      await updateDoc(userDocRef, updatedUser);
+      await updateDoc(doc(firestore, 'users', authUser.id), updatedUser);
       localStorage.setItem('user-info', JSON.stringify(updatedUser));
       setAuthUser(updatedUser);
       setUserProfile(updatedUser);

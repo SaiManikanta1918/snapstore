@@ -15,7 +15,7 @@ const ChatBody = ({ messages }) => {
       flexDirection={'column'}
     >
       {messages.map((message, index) => (
-        <ChatMessage key={index} message={message} isSent={message.senderId === authUser.uid} />
+        <ChatMessage key={index} message={message} isSent={message.senderId === authUser.id} />
       ))}
     </Box>
   );

@@ -1,4 +1,5 @@
 import BaseModel from './BaseModel';
+import ConversationModel from './ConversationModel';
 
 export default class UserModel extends BaseModel {
   /**
@@ -50,11 +51,6 @@ export default class UserModel extends BaseModel {
   /**
    * @var {String}
    */
-  uid;
-
-  /**
-   * @var {String}
-   */
   username;
 
   /**
@@ -74,8 +70,15 @@ export default class UserModel extends BaseModel {
     this.fullName = model.fullName;
     this.posts = model.posts || [];
     this.profilePicURL = model.profilePicURL;
-    this.uid = model.uid;
     this.username = model.username;
-    this.conversations = model.conversations || [];
+    this.conversations = ConversationModel.mapModels(model.conversations);
+  }
+
+  get conversationUserIds() {
+    return this.conversations.map((conversation) => conversation.userId);
+  }
+
+  conversationByUserId(userId) {
+    return this.conversations.find((conversation) => conversation.userId === userId);
   }
 }

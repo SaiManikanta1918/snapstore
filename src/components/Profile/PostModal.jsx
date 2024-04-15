@@ -35,10 +35,9 @@ function PostModal({ isOpen, onClose, post }) {
     try {
       const imageRef = ref(storage, `posts/${post.id}`);
       await deleteObject(imageRef);
-      const userRef = doc(firestore, 'users', authUser.uid);
       await deleteDoc(doc(firestore, 'posts', post.id));
 
-      await updateDoc(userRef, {
+      await updateDoc(doc(firestore, 'users', authUser.id), {
         posts: arrayRemove(post.id),
       });
 
@@ -66,7 +65,7 @@ function PostModal({ isOpen, onClose, post }) {
                   {authUser.username}
                 </Text>
               </Flex>
-              {userId && authUser.uid === post.createdBy && (
+              {userId && authUser.id === post.createdBy && (
                 <DeleteAlert deleteItem={handleDeletePost} isDeleting={isDeleting} />
               )}
             </Flex>

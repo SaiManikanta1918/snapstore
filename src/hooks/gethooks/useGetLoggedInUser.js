@@ -2,36 +2,42 @@ import { doc, getDoc } from 'firebase/firestore';
 import { firestore } from '../../firebase/firebase';
 import useShowToast from '../useShowToast';
 import { useEffect, useState } from 'react';
+import UserModel from '../../models/UserModel';
+import useAuthStore from '../../store/authStore';
 
-const useGetLoggedInUser = async (authUser) => {
+const useGetLoggedInUser = async (userId) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [user, setUser] = useState();
+  const setAuthUser = useAuthStore((state) => state.setUser);
 
   const showToast = useShowToast();
 
-  useEffect(() => {
-    if (!authUser) {
+  const getUserProfile = async () => {
+    if (!userId) {
       localStorage.setItem('user-info', JSON.stringify({}));
       return;
     }
-    const getUserProfile = async () => {
-      setIsLoading(true);
-      try {
-        const user = await getDoc(doc(firestore, 'users', authUser.uid));
-        if (user.exists()) {
-          setUser(user.data());
-          localStorage.setItem('user-info', JSON.stringify(user.data()));
-        }
-      } catch (error) {
-        showToast('Error', error.message, 'error');
-      } finally {
-        setIsLoading(false);
+    setIsLoading(true);
+    try {
+      const userdoc = await getDoc(doc(firestore, 'users', userId));
+      if (userdoc.exists()) {
+        const userData = UserModel.mapModel({ ...userdoc.data(), id: userdoc.id });
+        localStorage.setItem('user-info', JSON.stringify(userData));
+        setAuthUser(userData);
       }
-    };
-    getUserProfile();
-  }, [authUser, showToast]);
+      console.log('userdoc', userdoc);
+    } catch (error) {
+      console.log('error', error);
+      showToast('Error use get logged in user', error.message, 'error');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-  return { isLoading, user };
+  useEffect(() => {
+    getUserProfile();
+  }, []);
+
+  return { isLoading };
 };
 
 export default useGetLoggedInUser;

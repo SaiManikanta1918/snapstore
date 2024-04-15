@@ -1,15 +1,17 @@
 import { Link, Text, Tooltip, Avatar } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 
-function ChatListItem({ user, isActive }) {
+function ChatListItem({ user, isActive = false }) {
   return (
     <Link
       display={'flex'}
-      to={`/chat/${user.id}`}
+      to={`/chat/${user.chatId}`}
       as={RouterLink}
       alignItems={'center'}
       bg={isActive ? 'whiteAlpha.400' : ''}
       _hover={{ bg: 'whiteAlpha.400' }}
+      borderBottom={'1px solid'}
+      borderBottomColor={'whiteAlpha.400'}
       borderRadius={6}
       p={{ base: 2, md: 4 }}
       gap={4}

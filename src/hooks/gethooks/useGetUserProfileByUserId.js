@@ -3,6 +3,7 @@ import useShowToast from '../useShowToast';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { firestore } from '../../firebase/firebase';
 import useUserProfileStore from '../../store/userProfileStore';
+import UserModel from '../../models/UserModel';
 
 const useGetUserProfileByUserId = (userId) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +22,7 @@ const useGetUserProfileByUserId = (userId) => {
         querySnapshot.forEach((doc) => {
           userDoc = { ...doc.data(), id: doc.id };
         });
-        setUserProfile(userDoc);
+        setUserProfile(UserModel.mapModel(userDoc));
       } catch (error) {
         showToast('Error', error.message, 'error');
       } finally {

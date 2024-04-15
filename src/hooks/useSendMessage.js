@@ -20,7 +20,7 @@ const useSendMessage = () => {
     const chatsRef = await addDoc(collection(firestore, 'chats'), newChat);
 
     await updateDoc(doc(firestore, 'users', userId), {
-      chats: arrayUnion({ userId: authUser.uid, chatId: chatsRef.id, createdAt: Date.now() }),
+      chats: arrayUnion({ userId: authUser.id, chatId: chatsRef.id, createdAt: Date.now() }),
     });
     await updateDoc(doc(firestore, 'users', authUser.id), {
       chats: arrayUnion({ userId, chatId: chatsRef.id, createdAt: Date.now() }),
@@ -43,9 +43,9 @@ const useSendMessage = () => {
         setChatId(conversation.chatId);
       } else {
         const chatId = await createChat(userId);
-        const chatUserRef = await getDoc(doc(firestore, 'users', userId));
-        if (chatUserRef.exists()) {
-          setConversationUser(chatUserRef.data());
+        const userdoc = await getDoc(doc(firestore, 'users', userId));
+        if (userdoc.exists()) {
+          setConversationUser(userdoc.data());
         }
         setChatId(chatId);
       }

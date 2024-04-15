@@ -29,12 +29,12 @@ const ProfileTabs = () => {
         <Tab>
           <PostsTab />
         </Tab>
-        {authUser?.uid === userProfile?.uid && (
+        {authUser?.id === userProfile?.id && (
           <Tab>
             <LikesTab />
           </Tab>
         )}
-        {authUser?.uid === userProfile?.uid && (
+        {authUser?.id === userProfile?.id && (
           <Tab>
             <SavesTab />
           </Tab>

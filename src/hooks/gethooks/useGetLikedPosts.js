@@ -21,7 +21,7 @@ const useGetLikedPosts = () => {
       try {
         const q = query(
           collection(firestore, 'posts'),
-          where('likes', 'array-contains', userProfile.uid)
+          where('likes', 'array-contains', userProfile.id)
         );
         const querySnapshot = await getDocs(q);
 

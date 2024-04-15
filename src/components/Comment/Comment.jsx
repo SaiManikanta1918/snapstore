@@ -10,12 +10,12 @@ const Comment = ({ comment }) => {
   if (isLoading) return <CommentSkeleton />;
   return (
     <Flex gap={4}>
-      <Link to={`/user/${userProfile.uid}/posts`}>
+      <Link to={`/user/${userProfile.id}/posts`}>
         <Avatar src={userProfile.profilePicURL} name={userProfile.fullName} size={'sm'} />
       </Link>
       <Flex direction={'column'}>
         <Flex gap={2} alignItems={'center'}>
-          <Link to={`/user/${userProfile.uid}/posts`}>
+          <Link to={`/user/${userProfile.id}/posts`}>
             <Text fontWeight={'bold'} fontSize={12}>
               {userProfile.username}
             </Text>

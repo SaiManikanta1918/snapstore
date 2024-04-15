@@ -35,7 +35,7 @@ const useSignUpWithEmailAndPassword = () => {
       }
       if (newUser) {
         const userDoc = UserModel.mapModel({
-          uid: newUser.user.uid,
+          id: newUser.user.uid,
           email: inputs.email,
           username: inputs.username,
           fullName: inputs.fullName,
@@ -43,7 +43,7 @@ const useSignUpWithEmailAndPassword = () => {
           profilePicURL: '',
           createdAt: Date.now(),
         });
-        await setDoc(doc(firestore, 'users', newUser.user.uid), userDoc);
+        await setDoc(doc(firestore, 'users', newUser.user.id), userDoc);
         localStorage.setItem('user-info', JSON.stringify(userDoc));
         loginUser(userDoc);
       }

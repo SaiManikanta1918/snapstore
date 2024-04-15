@@ -8,7 +8,7 @@ import usePostStore from '../store/postStore';
 const useSavePost = (post) => {
   const [isUpdating, setIsUpdating] = useState(false);
   const authUser = useAuthStore((state) => state.user);
-  const [isSaved, setIsSaved] = useState(post.saves?.includes(authUser?.uid));
+  const [isSaved, setIsSaved] = useState(post.saves?.includes(authUser?.id));
   const showToast = useShowToast();
   const { savedPosts, setSavedPosts } = usePostStore();
 
@@ -25,10 +25,9 @@ const useSavePost = (post) => {
     setIsUpdating(true);
 
     try {
-      const postRef = doc(firestore, 'posts', post.id);
-      const newSaves = isSaved ? post.savesExceptUser(authUser.uid) : [...post.saves, authUser.uid];
-      await updateDoc(postRef, {
-        saves: isSaved ? arrayRemove(authUser.uid) : arrayUnion(authUser.uid),
+      const newSaves = isSaved ? post.savesExceptUser(authUser.id) : [...post.saves, authUser.id];
+      await updateDoc(doc(firestore, 'posts', post.id), {
+        saves: isSaved ? arrayRemove(authUser.id) : arrayUnion(authUser.id),
       });
       post.setSaves(newSaves);
       setIsSaved(!isSaved);

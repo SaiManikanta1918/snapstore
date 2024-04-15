@@ -39,7 +39,7 @@ function App() {
             element={!authUser ? <Navigate to="/login" /> : <CreatePost />}
           />
           <Route
-            path="/chat/:selectedUserId?"
+            path="/chat/:selectedChat?"
             element={!authUser ? <Navigate to="/login" /> : <Chat />}
           />
           <Route

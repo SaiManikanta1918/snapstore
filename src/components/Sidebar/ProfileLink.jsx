@@ -5,12 +5,12 @@ import useAuthStore from '../../store/authStore';
 const ProfileLink = () => {
   const { pathname } = useLocation();
   const authUser = useAuthStore((state) => state.user);
-  const isProfileTabActive = pathname.split('/').includes(authUser?.uid);
+  const isProfileTabActive = pathname.split('/').includes(authUser?.id);
 
   return (
     <Link
       display={'flex'}
-      to={`/user/${authUser?.uid}/posts`}
+      to={`/user/${authUser?.id}/posts`}
       as={RouterLink}
       alignItems={'center'}
       gap={4}

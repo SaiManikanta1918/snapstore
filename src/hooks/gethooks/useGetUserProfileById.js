@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import useShowToast from '../useShowToast';
 import { doc, getDoc } from 'firebase/firestore';
 import { firestore } from '../../firebase/firebase';
+import UserModel from '../../models/UserModel';
 
 const useGetUserProfileById = (userId) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -13,9 +14,9 @@ const useGetUserProfileById = (userId) => {
     const getUserProfile = async () => {
       setIsLoading(true);
       try {
-        const userRef = await getDoc(doc(firestore, 'users', userId));
-        if (userRef.exists()) {
-          setUser(userRef.data());
+        const userdoc = await getDoc(doc(firestore, 'users', userId));
+        if (userdoc.exists()) {
+          setUser(UserModel.mapModel({ ...userdoc.data(), id: userdoc.uid }));
         }
       } catch (error) {
         showToast('Error', error.message, 'error');

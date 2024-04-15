@@ -9,7 +9,7 @@ const useLikePost = (post) => {
   const [isUpdating, setIsUpdating] = useState(false);
   const authUser = useAuthStore((state) => state.user);
   const [likes, setLikes] = useState(post.noOfLikes);
-  const [isLiked, setIsLiked] = useState(post.isUserLiked(authUser?.uid));
+  const [isLiked, setIsLiked] = useState(post.isUserLiked(authUser?.id));
   const showToast = useShowToast();
   const { likedPosts, setLikedPosts } = usePostStore();
 
@@ -26,10 +26,9 @@ const useLikePost = (post) => {
     setIsUpdating(true);
 
     try {
-      const postRef = doc(firestore, 'posts', post.id);
-      const newLikes = isLiked ? post.likesExceptUser(authUser.uid) : [...post.likes, authUser.uid];
-      await updateDoc(postRef, {
-        likes: isLiked ? arrayRemove(authUser.uid) : arrayUnion(authUser.uid),
+      const newLikes = isLiked ? post.likesExceptUser(authUser.id) : [...post.likes, authUser.id];
+      await updateDoc(doc(firestore, 'posts', post.id), {
+        likes: isLiked ? arrayRemove(authUser.id) : arrayUnion(authUser.id),
       });
       post.setLikes(newLikes);
       setIsLiked(!isLiked);

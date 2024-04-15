@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { PROFILE_STAT_TABS } from '../../constants';
 import { EditIcon } from '@chakra-ui/icons';
 import SettingsButton from '../Buttons/SettingsButton';
+import useCreateChat from '../../hooks/createhooks/useCreateChat';
 
 const ProfileHeader = () => {
   const [selectedProfileStat, setSelectedProfileStat] = useState(null);
@@ -16,8 +17,9 @@ const ProfileHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: isDrawerOpen, onOpen: onDrawerOpen, onClose: onDrawerClose } = useDisclosure();
   const { isFollowing, isUpdating, handleFollowUser } = useFollowUser(userProfile?.id);
-  const visitingOwnProfileAndAuth = authUser && authUser.uid === userProfile.id;
+  const visitingOwnProfileAndAuth = authUser && authUser.id === userProfile.id;
   const visitingAnotherProfileAndAuth = authUser && authUser.username !== userProfile.username;
+  const { isLoading: isCreatingChat, sendMessageFromProfile } = useCreateChat();
 
   function showFollowersList() {
     setSelectedProfileStat(PROFILE_STAT_TABS[0].name);
@@ -118,13 +120,15 @@ const ProfileHeader = () => {
             >
               {isFollowing ? 'Unfollow' : 'Follow'}
             </Button>
-            {authUser.uid !== userProfile.id &&
+            {authUser.id !== userProfile.id &&
               (!userProfile.isPrivate || authUser.following.includes(userProfile.id)) && (
                 <Button
                   bg={'blue.300'}
                   color={'black'}
                   _hover={{ bg: 'blue.200' }}
                   size={{ base: 'xs', md: 'md' }}
+                  isLoading={isCreatingChat}
+                  onClick={sendMessageFromProfile}
                 >
                   Message
                 </Button>

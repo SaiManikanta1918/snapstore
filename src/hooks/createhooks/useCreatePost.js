@@ -30,15 +30,14 @@ const useCreatePost = () => {
       likes: [],
       comments: [],
       createdAt: Date.now(),
-      createdBy: authUser.uid,
+      createdBy: authUser.id,
     };
 
     try {
       const postDocRef = await addDoc(collection(firestore, 'posts'), newPost);
-      const userDocRef = doc(firestore, 'users', authUser.uid);
       const imageRef = ref(storage, `posts/${postDocRef.id}`);
 
-      await updateDoc(userDocRef, { posts: arrayUnion(postDocRef.id) });
+      await updateDoc(doc(firestore, 'users', authUser.id), { posts: arrayUnion(postDocRef.id) });
 
       await uploadString(imageRef, post.file, 'data_url');
 
@@ -50,10 +49,10 @@ const useCreatePost = () => {
 
       newPost.imageURL = downloadURL;
 
-      if (userProfile.uid === authUser.uid)
+      if (userProfile.id === authUser.id)
         createPost(PostModel.mapModel({ ...newPost, id: postDocRef.id }));
 
-      if (pathname !== '/' && userProfile.uid === authUser.uid) {
+      if (pathname !== '/' && userProfile.id === authUser.id) {
         addPost({ ...newPost, id: postDocRef.id });
       }
       navigate('/home');

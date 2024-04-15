@@ -25,25 +25,24 @@ const GoogleAuth = ({ prefix }) => {
         console.error(error);
         return;
       }
-      const userRef = doc(firestore, 'users', newUser.user.uid);
-      const userSnap = await getDoc(userRef);
+      const id = newUser.user.uid;
+      const userdoc = await getDoc(doc(firestore, 'users', id));
       let userDoc;
-      if (userSnap.exists()) {
+      if (userdoc.exists()) {
         // login
-        userDoc = userSnap.data();
+        userDoc = UserModel.mapModel({ ...userdoc.data(), id: userdoc.id });
       } else {
         // signup
         userDoc = UserModel.mapModel({
-          bio: '',
           createdAt: Date.now(),
-          uid: newUser.user.uid,
+          id,
           email: newUser.user.email,
           fullName: newUser.user.displayName,
           username: newUser.user.email.split('@')[0],
           profilePicURL: newUser.user.photoURL,
           isPrivate: false,
         });
-        await setDoc(doc(firestore, 'users', newUser.user.uid), userDoc);
+        await setDoc(doc(firestore, 'users', id), userDoc);
       }
       setIsLoading(false);
       localStorage.setItem('user-info', JSON.stringify(userDoc));
