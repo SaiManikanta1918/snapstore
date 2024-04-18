@@ -9,12 +9,17 @@ import useAuthStore from '../../store/authStore.js';
 
 const PageLayout = ({ children, authUser }) => {
   const { pathname } = useLocation();
-  const canRenderSidebar = pathname !== '/login' && authUser;
+  const isLoginPath = pathname === '/login';
+  const canRenderSidebar = !isLoginPath && authUser;
   const canRenderBottombar =
-    authUser && pathname.split('/').includes('chat') ? pathname.split('/').length < 3 : true;
+    authUser && pathname.split('/').includes('chat')
+      ? pathname.split('/').length < 3
+      : !isLoginPath;
   const { isLoading } = useGetLoggedInUser(authUser && authUser.uid);
   const canRenderTopbar =
-    authUser && pathname.split('/').includes('chat') ? pathname.split('/').length < 3 : true;
+    authUser && pathname.split('/').includes('chat')
+      ? pathname.split('/').length < 3
+      : !isLoginPath;
   const isAuthUserLoading = useAuthStore((state) => state.isLoading);
   if (isLoading || isAuthUserLoading) return <SnapStoreLoader />;
 
