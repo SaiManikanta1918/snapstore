@@ -78,22 +78,6 @@ function SettingsPage() {
                   click here
                 </Text>
               </Box>
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                  Overview
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                  Check out the overview of your clients.
-                </Text>
-              </Box>
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                  Analysis
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                  See a detailed analysis of all your business clients.
-                </Text>
-              </Box>
             </Stack>
           </CardBody>
         </Card>
