@@ -13,3 +13,9 @@ export const LoginSchema = Yup.object().shape({
   password: Yup.string().required('Password Required'),
   email: Yup.string().email('Invalid email').required('Email Required'),
 });
+
+export const IssueSchema = Yup.object().shape({
+  fullName: Yup.string().min(5, 'FullName Too Short!').required('FullName Required'),
+  email: Yup.string().email('Invalid email').required('Email Required'),
+  problem: Yup.string().min(8,'Text too short!').required('This field is mandatory'),
+});
