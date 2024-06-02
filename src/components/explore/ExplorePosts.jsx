@@ -24,7 +24,7 @@ const ExplorePosts = ({ searchText }) => {
     <Grid
       templateColumns={{
         sm: 'repeat(1, 1fr)',
-        md: 'repeat(3, 1fr)',
+        md: 'repeat(4, 1fr)',
       }}
       gap={10}
       columnGap={10}
