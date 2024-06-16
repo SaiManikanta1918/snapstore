@@ -17,7 +17,7 @@ const useGetUsers = (userIds = []) => {
           return;
         }
         const usersRef = collection(firestore, 'users');
-        const q = query(usersRef, where('uid', 'in', userIds), orderBy('uid'));
+        const q = query(usersRef, where('id', 'in', userIds), orderBy('id'));
 
         const querySnapshot = await getDocs(q);
         const users = [];

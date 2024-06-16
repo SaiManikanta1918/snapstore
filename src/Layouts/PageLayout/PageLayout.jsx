@@ -15,7 +15,7 @@ const PageLayout = ({ children, authUser }) => {
     authUser && pathname.split('/').includes('chat')
       ? pathname.split('/').length < 3
       : !isLoginPath;
-  const { isLoading } = useGetLoggedInUser(authUser && authUser.uid);
+  const { isLoading } = useGetLoggedInUser(authUser && authUser.id);
   const canRenderTopbar =
     authUser && pathname.split('/').includes('chat')
       ? pathname.split('/').length < 3

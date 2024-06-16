@@ -14,7 +14,7 @@ const useGetUserProfileByUserId = (userId) => {
     const getUserProfile = async () => {
       setIsLoading(true);
       try {
-        const q = query(collection(firestore, 'users'), where('uid', '==', userId));
+        const q = query(collection(firestore, 'users'), where('id', '==', userId));
         const querySnapshot = await getDocs(q);
         if (querySnapshot.empty) return setUserProfile(null);
 

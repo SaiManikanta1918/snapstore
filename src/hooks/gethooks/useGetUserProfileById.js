@@ -16,7 +16,7 @@ const useGetUserProfileById = (userId) => {
       try {
         const userdoc = await getDoc(doc(firestore, 'users', userId));
         if (userdoc.exists()) {
-          setUser(UserModel.mapModel({ ...userdoc.data(), id: userdoc.uid }));
+          setUser(UserModel.mapModel({ ...userdoc.data(), id: userdoc.id }));
         }
       } catch (error) {
         showToast('Error', error.message, 'error');

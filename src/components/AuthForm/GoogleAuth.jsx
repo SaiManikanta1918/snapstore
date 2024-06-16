@@ -42,7 +42,7 @@ const GoogleAuth = ({ prefix }) => {
           profilePicURL: newUser.user.photoURL,
           isPrivate: false,
         });
-        await setDoc(doc(firestore, 'users', id), userDoc);
+        await setDoc(doc(firestore, 'users', id), JSON.parse(JSON.stringify(userDoc)));
       }
       setIsLoading(false);
       localStorage.setItem('user-info', JSON.stringify(userDoc));

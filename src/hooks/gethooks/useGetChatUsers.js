@@ -18,19 +18,19 @@ const useGetChatUsers = () => {
         return;
       }
       const usersRef = collection(firestore, 'users');
-      const q = query(usersRef, where('uid', 'in', userIds), orderBy('uid'));
+      const q = query(usersRef, where('id', 'in', userIds), orderBy('id'));
 
       const querySnapshot = await getDocs(q);
       const users = [];
 
       querySnapshot.forEach((doc) => {
-        const { uid, profilePicURL, fullName } = doc.data();
+        const { id, profilePicURL, fullName } = doc.data();
         const conversation = authUser.conversations.find(
-          (conversation) => conversation.userId === uid
+          (conversation) => conversation.userId === id
         );
         if (conversation && conversation.chatId) {
           users.push({
-            id: uid,
+            id: id,
             profilePicURL,
             fullName,
             chatId: conversation.chatId,
