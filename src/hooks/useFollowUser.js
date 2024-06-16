@@ -69,7 +69,7 @@ const useFollowUser = (userId) => {
 
   useEffect(() => {
     if (authUser) {
-      const isFollowing = authUser.following.includes(userId);
+      const isFollowing = (authUser.following || []).includes(userId);
       setIsFollowing(isFollowing);
     }
   }, [authUser, userId]);

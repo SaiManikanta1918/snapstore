@@ -6,7 +6,7 @@ import useAuthStore from '../store/authStore';
 import UserModel from '../models/UserModel';
 
 const useSignUpWithEmailAndPassword = () => {
-  const [createUserWithEmailAndPassword, , loading, error] =
+  const [createUserWithEmailAndPassword, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
   const showToast = useShowToast();
   const loginUser = useAuthStore((state) => state.login);
@@ -43,7 +43,7 @@ const useSignUpWithEmailAndPassword = () => {
           profilePicURL: '',
           createdAt: Date.now(),
         });
-        await setDoc(doc(firestore, 'users', newUser.user.id), userDoc);
+        await setDoc(doc(firestore, 'users', newUser.user.uid), JSON.parse(JSON.stringify(userDoc)));
         localStorage.setItem('user-info', JSON.stringify(userDoc));
         loginUser(userDoc);
       }
